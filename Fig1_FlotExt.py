@@ -27,11 +27,11 @@ dataTypePlotParams = [
 nrow = 1;
 ncol = 1;
 xlimits = {0:(-1.4,4.5)};
-ylimits = {0:(0.903,0.99)};
-rlimits = [(0.985,1.015)];
+ylimits = {0:(1.15,1.3)};
+rlimits = [(0.99,1.01)];
 
 
-histnames = ["Signal_","Fit_","LM_","v22_","v33_" ];
+histnames = ["signal","LM","fit","v22","v33" ];
 
 # add here the histogram names for each pad
 # add labels for each pad
@@ -80,10 +80,10 @@ plotMatrix = np.empty((nrow,ncol),dtype=int);
 for d in range(0,5):
 	plot.GetAxes(0).xaxis.set_ticks_position('both');
 	plot.GetAxes(0).yaxis.set_ticks_position('both');
-	gr = f.Get("{}6_0_0_2_11".format(histnames[d]));
+	gr = f.Get("{}".format(histnames[d]));
 	data = plot.Add(0,gr,**dataTypePlotParams[d],label=TypeName[d]);
 	if(d==0):
-		grFit = f.Get("{}6_0_0_2_11".format(histnames[1]));
+		grFit = f.Get("{}".format(histnames[1]));
 		fit = plot.Add(0,grFit,**dataTypePlotParams[1],label=TypeName[1]);
 		plot.Ratio(data, fit );
 
@@ -100,7 +100,7 @@ plot.GetRatioAxes(0).yaxis.set_ticks_position('both');
 plot.Plot();
 
 
-plot.Save("figs/Fig14_FlowExt.pdf");
-plot.Save("figs/Fig14_FlowExt.png");
+plot.Save("figs/Fig1_FlowExt.pdf");
+plot.Save("figs/Fig1_FlowExt.png");
 plot.Show();
 
