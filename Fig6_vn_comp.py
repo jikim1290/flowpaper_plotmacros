@@ -65,7 +65,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	disableRatio=[0],
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel=0,
-	legendLoc=(0.25,0.75),legendSize=12,xlabel=xtitle[0],ylabel=ytitle[0]);
+	legendLoc=(0.3,0.75),legendSize=12,xlabel=xtitle[0],ylabel=ytitle[0]);
 
 plot.EnableLatex(True);
 
@@ -84,7 +84,7 @@ _,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
 plot.AddSyst(data,syst);
 
 gr1 = f.Get("pPb_stat");
-data1 = plot.Add(0,gr1,**dataTypePlotParams[1],labelLegendId=0,label="pp $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV");
+data1 = plot.Add(0,gr1,**dataTypePlotParams[1],labelLegendId=0,label="p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV");
 grsyst1 = f.Get("pPb_syst");
 _,_,_,syst1 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst1));
 plot.AddSyst(data1,syst1);
