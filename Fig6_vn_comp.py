@@ -28,7 +28,7 @@ dataTypePlotParams = [
 nrow = 1;
 ncol = 1;
 xlimits = [(0,4)];
-ylimits = [(-0.005,0.17)];
+ylimits = [(-0.005,0.175)];
 rlimits = [(0.,4.5),(0.,4.5)];
 
 
