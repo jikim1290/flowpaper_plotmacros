@@ -96,7 +96,7 @@ for iobs in range(0,1):
 #	plot.GetPlot().text(0.14,0.60,dataDetail[1],fontsize=10);
 	plot.GetPlot().text(0.46,0.75,PanelName[0],fontsize=12);
 	plot.GetPlot().text(0.84,0.75,PanelName[1],fontsize=12);
-	plot.GetPlot().text(0.54,0.75,"ALICE Preliminary",fontsize=13);
+	plot.GetPlot().text(0.54,0.75,"ALICE Work in progress",fontsize=11);
 
 	# this is need because of the input histo label setting..
 	plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","3","5","7","9","13","20"]);

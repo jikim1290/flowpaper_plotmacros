@@ -110,7 +110,7 @@ dataMC = plot.Add(1,grMC,**dataTypePlotParams[5],labelLegendId=1,label="PYTHIA 8
 
 f.Close();
 
-plot.GetPlot().text(0.16,0.826,"ALICE Preliminary",fontsize=12);
+plot.GetPlot().text(0.16,0.826,"ALICE Work in progress",fontsize=12);
 plot.GetPlot().text(0.16,0.78,toptitle,fontsize=11);
 plot.GetPlot().text(0.16,0.14,dataDetail[0],fontsize=11);
 

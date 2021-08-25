@@ -87,7 +87,7 @@ for i in range(0,nrow):
 
 f.Close();
 
-plot.GetPlot().text(0.55,0.77,"ALICE Preliminary",fontsize=12);
+plot.GetPlot().text(0.54,0.77,"ALICE Work in progress",fontsize=12);
 plot.GetPlot().text(0.54,0.62,toptitle,fontsize=11);
 plot.GetPlot().text(0.17,0.24,dataDetail[0],fontsize=11);
 

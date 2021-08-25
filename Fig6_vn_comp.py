@@ -93,7 +93,7 @@ plot.AddSyst(data1,syst1);
 
 f.Close();
 
-plot.GetPlot().text(0.19,0.8,"ALICE Preliminary",fontsize=14);
+plot.GetPlot().text(0.19,0.8,"ALICE Work in progress",fontsize=14);
 plot.GetPlot().text(0.55,0.27,toptitle,fontsize=12);
 #plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);
 
