@@ -14,21 +14,21 @@ import JPyPlotRatio
 data = {
 	"vn_pp":ROOT.TFile("data/Final_Items.root","read"),
 	"vn_pPb":ROOT.TFile("data/Final_Items.root","read"),
-	#"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
-	#"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
+	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
+	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
 	#"vn_PbPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_PbPb.root","read"),
-    	#"vn_pp_atl":ROOT.TFile("ATLAS-figs/output-figure18a.root","read"),
-	#"vn_pPb_atl":ROOT.TFile("ATLAS-figs/output-figure18a.root","read")
+    	"vn_pp_atl":ROOT.TFile("ATLAS-figs/output-figure18a.root","read"),
+	"vn_pPb_atl":ROOT.TFile("ATLAS-figs/output-figure18a.root","read")
 }
 
 plotParams = {
 	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"2PC: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":0},
 	"vn_pPb":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":0},
-	#"vn_pp_pub":{"color":"r","fmt":"*","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":1},
-	#"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
+	"vn_pp_pub":{"color":"r","fmt":"*","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":1},
+	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
-	#"vn_pp_atl":{"color":"green","fmt":"o","markersize":5.0,"label":"ATLAS: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":2},
-	#"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2}
+	"vn_pp_atl":{"color":"green","fmt":"o","markersize":5.0,"label":"ATLAS: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":2},
+	"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2}
 }	
 
 histNames = ["pp","pPb"];
@@ -71,10 +71,10 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	disableRatio=[0],
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
-	#legendPanel={0:0,1:0,2:0},
-	legendPanel={0:0},
-	#legendLoc={0:(0.30,0.15),1:(0.72,0.45),2:(0.75,0.12)},
-	legendLoc={0:(0.60,0.15)},
+	legendPanel={0:0,1:0,2:0},
+	#legendPanel={0:0},
+	legendLoc={0:(0.30,0.15),1:(0.72,0.45),2:(0.75,0.12)},
+	#legendLoc={0:(0.60,0.15)},
 	legendSize=7,xlabel=xtitle[0],ylabel=ytitle[0]);
 
 #plot.EnableLatex(True);
@@ -118,23 +118,20 @@ for i,s in enumerate(data):
 
 
 
-plot.GetPlot().text(0.19,0.8,"ALICE Work in progress",fontsize=14);
-plot.GetPlot().text(0.46,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
-plot.GetPlot().text(0.46,0.34,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
-#plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
-#plot.GetPlot().text(0.55,0.57,"PRL. 123, 142301 (2019)",fontsize=8);
+plot.GetPlot().text(0.21,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
+plot.GetPlot().text(0.21,0.34,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
+plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.65,"$|\Delta\eta|<1.4$",fontsize=8);
-#plot.GetPlot().text(0.55,0.35,"PRC. 96, 024908 (2017)",fontsize=8);
-#plot.GetPlot().text(0.55,0.32,"$2.0<|\Delta\eta|<5.0$",fontsize=8);
-#plot.GetPlot().text(0.55,0.28,"$1.0 < p_\\mathrm{T}^{a,b} < 5 \\,\\mathrm{GeV}/c, N_{ch}^*$",fontsize=8);
+plot.GetPlot().text(0.55,0.32,"$2.0<|\Delta\eta|<5.0$",fontsize=8);
+plot.GetPlot().text(0.55,0.28,"$1.0 < p_\\mathrm{T} < 5 \\,\\mathrm{GeV}/c, N_{ch}^*$",fontsize=8);
 #plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);
 
 
 plot.Plot();
 
-#plot.Save("figs/Fig6_v2Mult_allSystemsComp.pdf");
-plot.Save("figs/Fig6_v2Mult_ourresult.pdf");
-#plot.Save("figs/Fig6_v2Mult_allSystemsComp.png");
-plot.Save("figs/Fig6_v2Mult_ourresult.png");
+plot.Save("figs/Fig6_v2Mult_allSystemsComp.pdf");
+#plot.Save("figs/Fig6_v2Mult_ourresult.pdf");
+plot.Save("figs/Fig6_v2Mult_allSystemsComp.png");
+#plot.Save("figs/Fig6_v2Mult_ourresult.png");
 plot.Show();
 
