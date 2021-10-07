@@ -52,7 +52,7 @@ plables = [ "", ""
 	#		"$1.0 < p_\\mathrm{T,trigg(assoc)} < 2.0$","$2.0 < p_\\mathrm{T,trigg(assoc)} < 3.0$","$3.0 < p_\\mathrm{T,trigg(assoc)} < 4.0$"
 		 ];
 
-xtitle = ["$N_\\mathrm{ch}$",""];
+xtitle = ["$N_\\mathrm{ch} |\eta|<0.5$",""];
 ytitle = ["$V_{2}$","$V_{2}\\{4\\}$"];
 #labelList = ["pp $\\sqrt{s}$ = 13 TeV our","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV our","pp $\\sqrt{s}$ = 13 TeV","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV"]
 
@@ -122,8 +122,9 @@ plot.GetPlot().text(0.21,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",font
 plot.GetPlot().text(0.21,0.34,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
 plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.65,"$|\Delta\eta|<1.4$",fontsize=8);
-plot.GetPlot().text(0.55,0.32,"$2.0<|\Delta\eta|<5.0$",fontsize=8);
-plot.GetPlot().text(0.55,0.28,"$1.0 < p_\\mathrm{T} < 5 \\,\\mathrm{GeV}/c, N_{ch}^*$",fontsize=8);
+plot.GetPlot().text(0.55,0.36,"$2.0<|\Delta\eta|<5.0$",fontsize=8);
+plot.GetPlot().text(0.55,0.32,"$1.0 < p_\\mathrm{T} < 5 \\,\\mathrm{GeV}/c$",fontsize=8);
+plot.GetPlot().text(0.55,0.28,"$N_{ch}^* = |\eta|<2.5 and p_\\mathrm{T}>0.4$",fontsize=8);
 #plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);
 
 
