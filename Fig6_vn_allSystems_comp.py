@@ -14,8 +14,8 @@ import JPyPlotRatio
 data = {
 	"vn_pp":ROOT.TFile("data/Final_Items.root","read"),
 	"vn_pPb":ROOT.TFile("data/Final_Items.root","read"),
-	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
-	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
+#	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
+#	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
 	#"vn_PbPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_PbPb.root","read"),
     	"vn_pp_atl":ROOT.TFile("ATLAS-figs/output-figure18a.root","read"),
 	"vn_pPb_atl":ROOT.TFile("ATLAS-figs/output-figure18a.root","read")
@@ -24,15 +24,15 @@ data = {
 plotParams = {
 	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"2PC: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":0},
 	"vn_pPb":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":0},
-	"vn_pp_pub":{"color":"r","fmt":"*","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":1},
-	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
+#	"vn_pp_pub":{"color":"r","fmt":"*","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":1},
+#	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	"vn_pp_atl":{"color":"green","fmt":"o","markersize":5.0,"label":"ATLAS: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":2},
 	"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2}
 }	
 
 histNames = ["pp","pPb"];
-histNamesPub = ["ppHM","pPb","PbPb"];
+#histNamesPub = ["ppHM","pPb","PbPb"];
 histNamesAtlas = ["pp13","pPb"];
 NremoveAtlas =[2,4]
 
@@ -97,13 +97,13 @@ for i,s in enumerate(data):
 		#plots[s] = plot.Add(0,gr,**plotParams[s],label=labelList[i]);
 		#plot.AddSyst(plots[s],grsyst);
 
-	if i >=2 and i < 4:
-		gr = data[s].Get("gv22Gap14Stat{}".format(histNamesPub[i-2]));
-		grsyst = data[s].Get("gv22Gap14Sys{}".format(histNamesPub[i-2]));
+#	if i >=2 and i < 4:
+#		gr = data[s].Get("gv22Gap14Stat{}".format(histNamesPub[i-2]));
+#		grsyst = data[s].Get("gv22Gap14Sys{}".format(histNamesPub[i-2]));
 
-	if i >= 4:
-		gr = data[s].Get("grAtlas_{}_stat".format(histNamesAtlas[i-4]));
-		grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-4]));
+	if i >= 2:
+		gr = data[s].Get("grAtlas_{}_stat".format(histNamesAtlas[i-2]));
+		grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-2]));
 	
 	
 	plots[s] = plot.Add(0,gr,**plotParams[s]);
@@ -120,11 +120,11 @@ for i,s in enumerate(data):
 
 plot.GetPlot().text(0.21,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 plot.GetPlot().text(0.21,0.34,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
-plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
+#plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.65,"$|\Delta\eta|<1.4$",fontsize=8);
-plot.GetPlot().text(0.55,0.36,"$2.0<|\Delta\eta|<5.0$",fontsize=8);
-plot.GetPlot().text(0.55,0.32,"$1.0 < p_\\mathrm{T} < 5 \\,\\mathrm{GeV}/c$",fontsize=8);
-plot.GetPlot().text(0.55,0.28,"$N_{ch}^* = |\eta|<2.5 and p_\\mathrm{T}>0.4$",fontsize=8);
+plot.GetPlot().text(0.5,0.36,"$2.0<|\Delta\eta|<5.0$",fontsize=8);
+plot.GetPlot().text(0.5,0.32,"$1.0 < p_\\mathrm{T} < 5 \\,\\mathrm{GeV}/c$",fontsize=8);
+plot.GetPlot().text(0.5,0.28,"$N_{ch}^* = |\eta|<2.5$ and $p_\\mathrm{T}>0.4\\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);
 
 
