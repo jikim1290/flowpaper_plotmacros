@@ -13,7 +13,7 @@ import JPyPlotRatio
 
 data = {
 	"vn_pp":ROOT.TFile("data/Final_Items.root","read"),
-	"vn_pPb_zna":ROOT.TFile("data/Final_Items.root","read"),
+#	"vn_pPb_zna":ROOT.TFile("data/Final_Items.root","read"),
 	"vn_pPb_v0a":ROOT.TFile("data/Final_Items.root","read"),
 #	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
 #	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
@@ -24,16 +24,17 @@ data = {
 
 plotParams = {
 	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"2PC: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":0},
-	"vn_pPb_zna":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, ZNA","labelLegendId":0},
+#	"vn_pPb_zna":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, ZNA","labelLegendId":0},
 #	"vn_pPb_v0a":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A","labelLegendId":0},
-	"vn_pPb_v0a":{"color":"r","fmt":"*","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A","labelLegendId":0},
+	"vn_pPb_v0a":{"color":"r","fmt":"*","mfc":"none","markersize":5.0,"label":"2PC: p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A","labelLegendId":0},
 #	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	"vn_pp_atl":{"color":"green","fmt":"o","markersize":5.0,"label":"ATLAS: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":2},
-	"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2}
+	"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2}
 }	
 
-histNames = ["pp","pPb_v2_zna","pPb_v2_v0a"];
+#histNames = ["pp","pPb_v2_zna","pPb_v2_v0a"];
+histNames = ["pp","pPb_v2_v0a"];
 #histNamesPub = ["ppHM","pPb","PbPb"];
 histNamesAtlas = ["pp13","pPb"];
 NremoveAtlas =[3,5]
@@ -54,7 +55,7 @@ plables = [ "", ""
 	#		"$1.0 < p_\\mathrm{T,trigg(assoc)} < 2.0$","$2.0 < p_\\mathrm{T,trigg(assoc)} < 3.0$","$3.0 < p_\\mathrm{T,trigg(assoc)} < 4.0$"
 		 ];
 
-xtitle = ["$N_\\mathrm{ch} |\eta|<0.5$",""];
+xtitle = ["$N_\\mathrm{ch} (|\eta|<0.5)$",""];
 ytitle = ["$V_{2}$","$V_{2}\\{4\\}$"];
 #labelList = ["pp $\\sqrt{s}$ = 13 TeV our","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV our","pp $\\sqrt{s}$ = 13 TeV","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV"]
 
@@ -90,10 +91,11 @@ plot.GetAxes(0).yaxis.set_ticks_position('both');
 
 plots = {};
 
+nmeas=2;
 for i,s in enumerate(data):
 	print(s)
 
-	if i<3:
+	if i<nmeas:
 		gr = data[s].Get("{}_stat".format(histNames[i]));
 		grsyst = data[s].Get("{}_syst".format(histNames[i]));
 		#plots[s] = plot.Add(0,gr,**plotParams[s],label=labelList[i]);
@@ -103,9 +105,9 @@ for i,s in enumerate(data):
 #		gr = data[s].Get("gv22Gap14Stat{}".format(histNamesPub[i-2]));
 #		grsyst = data[s].Get("gv22Gap14Sys{}".format(histNamesPub[i-2]));
 
-	if i >= 3:
-		gr = data[s].Get("grAtlas_{}_stat".format(histNamesAtlas[i-3]));
-		grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-3]));
+	if i >= nmeas:
+		gr = data[s].Get("grAtlas_{}_stat".format(histNamesAtlas[i-nmeas]));
+		grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-nmeas]));
 	
 	
 	plots[s] = plot.Add(0,gr,**plotParams[s]);
