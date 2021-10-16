@@ -28,7 +28,7 @@ dataTypePlotParams = [
 nrow = 1;
 ncol = 1;
 xlimits = [(0,4)];
-ylimits = [(-0.005,0.175)];
+ylimits = [(-0.005,0.195)];
 rlimits = [(0.,4.5),(0.,4.5)];
 
 
@@ -46,7 +46,8 @@ centrality =["ALICE near $|\\Delta\\eta|<$1.3","PYTHIA 8 Tune 4C near, $|\\Delta
 	"ALICE away $\\times$ 2, Template fit, $|\\Delta\\eta|<$1.3", "PYTHIA 8 Tune 4C away $\\times$ 2, $|\\Delta\\eta|<$1.3"];
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
-xtitle = ["$N_\\mathrm{ch}$",""];
+xtitle = ["$N_\\mathrm{ch} (|\eta|<0.5)$",""];
+#xtitle = ["$N_\\mathrm{ch}$",""];
 ytitle = ["$V_{2}$"," $2Y_\\mathrm{frag}^\\mathrm{away}/Y_\\mathrm{frag}^\\mathrm{near}$"];
 
 
@@ -65,7 +66,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	disableRatio=[0],
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel=0,
-	legendLoc=(0.3,0.75),legendSize=12,xlabel=xtitle[0],ylabel=ytitle[0]);
+	legendLoc=(0.4,0.75),legendSize=12,xlabel=xtitle[0],ylabel=ytitle[0]);
 
 plot.EnableLatex(True);
 
@@ -83,11 +84,25 @@ grsyst = f.Get("pp_syst");
 _,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
 plot.AddSyst(data,syst);
 
-gr1 = f.Get("pPb_stat");
-data1 = plot.Add(0,gr1,**dataTypePlotParams[1],labelLegendId=0,label="p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV");
-grsyst1 = f.Get("pPb_syst");
-_,_,_,syst1 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst1));
-plot.AddSyst(data1,syst1);
+#gr1 = f.Get("pPb_stat");
+#data1 = plot.Add(0,gr1,**dataTypePlotParams[1],labelLegendId=0,label="p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV");
+#grsyst1 = f.Get("pPb_syst");
+#_,_,_,syst1 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst1));
+#plot.AddSyst(data1,syst1);
+
+
+#gr1 = f.Get("pPb_v2_zna_stat");
+#data1 = plot.Add(0,gr1,**dataTypePlotParams[1],labelLegendId=0,label="p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, ZNA");
+#grsyst1 = f.Get("pPb_v2_zna_syst");
+#_,_,_,syst1 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst1));
+#plot.AddSyst(data1,syst1);
+
+gr2 = f.Get("pPb_v2_v0a_stat");
+data2 = plot.Add(0,gr2,**dataTypePlotParams[2],labelLegendId=0,label="p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A");
+grsyst2 = f.Get("pPb_v2_v0a_syst");
+_,_,_,syst2 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst2));
+plot.AddSyst(data2,syst2);
+
 
 
 

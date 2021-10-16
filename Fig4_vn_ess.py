@@ -26,14 +26,16 @@ dataTypePlotParams = [
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
-xlimits = [(-0.1,7.1),(-0.1,5.1)];
+xlimits = [
+	[(-0.1,7.1),(-0.1,5.1)],
+	[(-0.1,4.1),(-0.1,5.1)] ];
 ylimits = [[(0.04,0.19)],[(-0.07,0.25)]];
 rlimits = [(0.,4.5),(0.,4.5)];
 
 # add here the histogram names for each pad
 histnames = [
 	["v2_lp",	"v2_jet"],
-	["v2_lp",  "v2_jet"], ];
+	["v3_lp",  "v3_jet"], ];
 histnamesSyst = [
 	["v2_0_ALICE_syst",  "v2_1_ALICE_syst"],
 	["v3_0_ALICE_syst",  "v3_1_ALICE_syst"], ];
@@ -54,10 +56,10 @@ toptitle = "pp $\\sqrt{s}$ = 13 TeV, 0--0.1\%"; # need to add on the top
 dataDetail = ["$1 < p_\\mathrm{T,trig} < 2\\,\\mathrm{GeV}/c$","$1.6 < |\\Delta\\eta| < 1.8$"];
 PanelName = ["LP", "Jet"];
 
-for iobs in range(0,1):
+for iobs in range(0,2):
 	plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 		rowBounds=ylimits[iobs],  # for nrow
-		colBounds=xlimits,  # for ncol
+		colBounds=xlimits[iobs],  # for ncol
 		panelLabel=plables,  # nrowxncol
 		ratioBounds=rlimits,# for nrow
 #		ratioSystPlot=True,
@@ -99,7 +101,10 @@ for iobs in range(0,1):
 	plot.GetPlot().text(0.54,0.75,"ALICE Work in progress",fontsize=11);
 
 	# this is need because of the input histo label setting..
-	plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","3","5","7","9","13","20"]);
+	if( iobs==0 ):
+		plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","3","5","7","9","13","20"]);
+	if( iobs==1 ):
+		plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5], xticklabels=["Unbiased","3","5","7"]);
 #	plot.GetAxes(1).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","10","20","30","40","50","60"]);
 	plot.GetAxes(1).set(xticks=[0.5,1.5,2.5,3.5,4.5], xticklabels=["Unbiased","10","20","30","40"]);
 	cntforaxis=0;
