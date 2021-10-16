@@ -118,7 +118,7 @@ void fig16a()
    UniqueName52->GetZaxis()->SetLabelSize(0.05);
    UniqueName52->GetZaxis()->SetTitleSize(0.05);
    UniqueName52->GetZaxis()->SetTitleFont(42);
-   UniqueName52->Draw("same");
+   UniqueName52->Draw("same"); // pp 13 TeV
    Double_t xAxis2[20] = {0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.5, 4, 6, 8, 10}; 
    
    TH1D *UniqueName73 = new TH1D("UniqueName73","",19, xAxis2);
@@ -188,7 +188,7 @@ void fig16a()
    UniqueName73->GetZaxis()->SetLabelSize(0.05);
    UniqueName73->GetZaxis()->SetTitleSize(0.05);
    UniqueName73->GetZaxis()->SetTitleFont(42);
-   UniqueName73->Draw("same");
+   // UniqueName73->Draw("same"); // pp 5TeV
    Double_t xAxis3[23] = {0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.5, 4, 4.5, 5, 5.5, 6, 8, 10}; 
    
    TH1D *UniqueName94 = new TH1D("UniqueName94","",22, xAxis3);
@@ -336,7 +336,7 @@ void fig16a()
    UniqueName05->GetZaxis()->SetLabelSize(0.05);
    UniqueName05->GetZaxis()->SetTitleSize(0.05);
    UniqueName05->GetZaxis()->SetTitleFont(42);
-   UniqueName05->Draw("same");
+   //UniqueName05->Draw("same");
    Double_t xAxis5[20] = {0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.5, 4, 6, 8, 10}; 
    
    TH1D *UniqueName16 = new TH1D("UniqueName16","",19, xAxis5);
@@ -404,7 +404,7 @@ void fig16a()
    UniqueName16->GetZaxis()->SetLabelSize(0.05);
    UniqueName16->GetZaxis()->SetTitleSize(0.05);
    UniqueName16->GetZaxis()->SetTitleFont(42);
-   UniqueName16->Draw("same");
+   //UniqueName16->Draw("same");
    Double_t xAxis6[23] = {0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.5, 4, 4.5, 5, 5.5, 6, 8, 10}; 
    
    TH1D *UniqueName27 = new TH1D("UniqueName27","",22, xAxis6);
@@ -478,7 +478,7 @@ void fig16a()
    UniqueName27->GetZaxis()->SetLabelSize(0.05);
    UniqueName27->GetZaxis()->SetTitleSize(0.05);
    UniqueName27->GetZaxis()->SetTitleFont(42);
-   UniqueName27->Draw("same");
+   //UniqueName27->Draw("same");
    TLatex *   tex = new TLatex(0.5,0.88,"ATLAS");
 tex->SetNDC();
    tex->SetTextFont(73);
@@ -518,4 +518,15 @@ tex->SetNDC();
    can_v2_SystemCompare_ptadep_cent26_pericent31_ptb6_ch2_eta1_type1->Modified();
    can_v2_SystemCompare_ptadep_cent26_pericent31_ptb6_ch2_eta1_type1->cd();
    can_v2_SystemCompare_ptadep_cent26_pericent31_ptb6_ch2_eta1_type1->SetSelected(can_v2_SystemCompare_ptadep_cent26_pericent31_ptb6_ch2_eta1_type1);
+
+   // Write the results to ROOT file
+   TFile *fout = new TFile("ATLAS-figure16a_v2ptdep_N60.root","recreate");
+   fout->cd();
+   TGraphAsymmErrors *grAtlas_pp13tev_ptdep_N60 =  new   TGraphAsymmErrors(UniqueName52);
+   TGraphAsymmErrors *grAtlas_pPb5tev_ptdep_N60 =  new   TGraphAsymmErrors(UniqueName94);
+   grAtlas_pp13tev_ptdep_N60->Write("grAtlas_pp13tev_ptdep_N60");
+   grAtlas_pPb5tev_ptdep_N60->Write("grAtlas_pPb5tev_ptdep_N60");
+   
+   fout->Write();
+   fout->Close();
 }
