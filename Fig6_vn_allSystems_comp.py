@@ -122,7 +122,7 @@ for i,s in enumerate(data):
 
 
 
-plot.GetPlot().text(0.21,0.34,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
+plot.GetPlot().text(0.21,0.34,"$1 < p_\\mathrm{T} < 2 \\,\\mathrm{GeV}/c$",fontsize=8);
 plot.GetPlot().text(0.21,0.38,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.65,"$|\Delta\eta|<1.4$",fontsize=8);

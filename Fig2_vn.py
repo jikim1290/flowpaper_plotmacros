@@ -83,15 +83,7 @@ for i in range(0,nrow):
 		plot.GetAxes(index).set_xticks([1.5,2.5,3.5]);
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
-		gr = f.Get("{}".format(histnames[j]));
-		gr.Print();
-		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $");
-		grsyst = f.Get("{}".format(histnamesSyst[j]));
-		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
-		plot.AddSyst(data,syst);
 		if(j==0):
-#			grModel = f.Get("{}".format(histnamesModels[j]));
-#			model = plot.Add(index,grModel,**dataTypePlotParams[4],label=modelStr[0]);
 			grATLAS = f.Get("{}".format(histatlas[j]));
 			grATLAS.Print();
 			data = plot.Add(index,grATLAS,**dataTypePlotParams[1],label="ATLAS, $2.0<|\\Delta\\eta|<5.0$ \n 0.5 $ < p_\\mathrm{T,assoc} < 5 \\,\\mathrm{GeV}/c $");
@@ -101,13 +93,13 @@ for i in range(0,nrow):
 			grsystATLAS = f.Get("{}".format(histatlas_v3_syst[0]));
 			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystATLAS));
 			plot.AddSyst(data,syst);
-#		for k in range(0,len(modelStr)):
-#			grModel = f.Get("{}".format(histnamesModels[k][j]));
-#			model = plot.Add(index,grModel,**dataTypePlotParams[1+k],label=modelStr[k]);
-#			if(k>0):
-#				plot.Ratio(model,data,dataTypePlotParams[k+1]);
-#				plot.Ratio(model,data,style="errorbar"); #Calculate and plot ratio between data and theory
-#				plot.Ratio(model,data );
+		gr = f.Get("{}".format(histnames[j]));
+		gr.Print();
+		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $");
+		grsyst = f.Get("{}".format(histnamesSyst[j]));
+		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
+		plot.AddSyst(data,syst);
+
 
 f.Close();
 

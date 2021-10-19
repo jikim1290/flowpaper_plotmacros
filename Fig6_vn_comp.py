@@ -109,7 +109,10 @@ plot.AddSyst(data2,syst2);
 f.Close();
 
 plot.GetPlot().text(0.19,0.8,"ALICE Work in progress",fontsize=14);
-plot.GetPlot().text(0.55,0.27,toptitle,fontsize=12);
+plot.GetPlot().text(0.55,0.2,"$1 < p_\\mathrm{T} < 2 \\,\\mathrm{GeV}/c$",fontsize=14);
+plot.GetPlot().text(0.55,0.28,"$1.6<|\Delta\eta|<1.8$",fontsize=14);
+
+
 #plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);
 
 
