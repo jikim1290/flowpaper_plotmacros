@@ -14,7 +14,8 @@ import JPyPlotRatio
 data = {
 	"vn_pp":ROOT.TFile("data/Final_Items.root","read"),
 #	"vn_pPb_zna":ROOT.TFile("data/Final_Items.root","read"),
-	"vn_pPb_v0a":ROOT.TFile("data/Final_Items.root","read"),
+#	"vn_pPb_v0a":ROOT.TFile("data/Final_Items.root","read"),
+	"vn_pPb_v0a":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),
 #	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
 #	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
 	#"vn_PbPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_PbPb.root","read"),

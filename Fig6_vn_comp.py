@@ -11,6 +11,7 @@ sys.path.append("JPyPlotRatio");
 
 import JPyPlotRatio
 
+fpPb = ROOT.TFile("data/fout_v2_pPb_v1.root","read");
 
 f = ROOT.TFile("data/Final_Items.root","read");
 dataTypePlotParams = [
@@ -97,9 +98,9 @@ plot.AddSyst(data,syst);
 #_,_,_,syst1 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst1));
 #plot.AddSyst(data1,syst1);
 
-gr2 = f.Get("pPb_v2_v0a_stat");
+gr2 = fpPb.Get("pPb_v2_v0a_stat");
 data2 = plot.Add(0,gr2,**dataTypePlotParams[2],labelLegendId=0,label="p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A");
-grsyst2 = f.Get("pPb_v2_v0a_syst");
+grsyst2 = fpPb.Get("pPb_v2_v0a_syst");
 _,_,_,syst2 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst2));
 plot.AddSyst(data2,syst2);
 
