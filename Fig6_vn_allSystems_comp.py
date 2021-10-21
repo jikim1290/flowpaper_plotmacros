@@ -31,7 +31,11 @@ plotParams = {
 #	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	"vn_pp_atl":{"color":"green","fmt":"o","markersize":5.0,"label":"ATLAS: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":2},
-	"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2}
+	"vn_pPb_atl":{"color":"purple","fmt":"s","mfc":"none","markersize":5.0,"label":"ATLAS: p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":2},
+	"vn_pp_pseudo":{"color":"pink","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 1-4 GeV ","labelLegendId":0},
+	"vn_pPb_v0a_pseudo":{"color":"purple","fmt":"*","mfc":"none","markersize":5.0,"label":"p$-$Pb 1-4 GeV","labelLegendId":0},
+
+
 }	
 
 #histNames = ["pp","pPb_v2_zna","pPb_v2_v0a"];
@@ -108,8 +112,10 @@ for i,s in enumerate(data):
 		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
 		if i==0:
 		    x = np.array(NchAtlaspp_data);
+		    print("pp ALICE",y);
 		if i==1:
 		    x = np.array(NchAtlaspPb_data);
+		    
 
 #	if i >=2 and i < 4:
 #		gr = data[s].Get("gv22Gap14Stat{}".format(histNamesPub[i-2]));
@@ -120,8 +126,34 @@ for i,s in enumerate(data):
 		grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-nmeas]));
 		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
 
+		if i==2:
+			print("pp ATLAS",y);
 	plots[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
 	plot.AddSyst(plots[s],grsyst);
+
+#Making psudo pp data points
+i=0;
+s="vn_pp";
+ptDepScale=1.05;
+gr = data[s].Get("{}_stat".format(histNames[i]));
+grsyst = data[s].Get("{}_syst".format(histNames[i]));
+x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
+x = np.array(NchAtlaspp_data);
+y_pseudo = y*ptDepScale;
+y_pseudoerr = yerr*ptDepScale;
+plot_pseudopp=plot.Add(0,(x,y_pseudo,y_pseudoerr),**plotParams["vn_pp_pseudo"]);
+# End of pseudo pp
+#Making psudo pPbdata points
+i=1;
+s="vn_pPb_v0a";
+gr = data[s].Get("{}_stat".format(histNames[i]));
+grsyst = data[s].Get("{}_syst".format(histNames[i]));
+x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
+x = np.array(NchAtlaspPb_data);
+y_pseudo = y*ptDepScale;
+y_pseudoerr = yerr*ptDepScale;
+plot_pseudopp=plot.Add(0,(x,y_pseudo,y_pseudoerr),**plotParams["vn_pPb_v0a_pseudo"]);
+# End of pseudo pPb
 
 '''
 	gr24 = data[s].Get("gv24_3subStat{}".format(histNames[i]));
