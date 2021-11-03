@@ -65,8 +65,8 @@ ytitle = ["$V_{2}$","$V_{2}\\{4\\}$"];
 
 
 # Following two must be added
-toptitle = "$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$"; # need to add on the top
-dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
+toptitle = "$1 < p_\\mathrm{T,trig} < 4 \\,\\mathrm{GeV}/c$"; # need to add on the top
+dataDetail = ["$1 < p_\\mathrm{T,trig} < 4 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
