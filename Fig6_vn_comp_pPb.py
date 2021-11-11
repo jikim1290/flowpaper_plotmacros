@@ -109,8 +109,8 @@ plot.AddSyst(data2,syst2);
 f.Close();
 
 plot.GetPlot().text(0.19,0.8,"ALICE Work in progress",fontsize=14);
-plot.GetPlot().text(0.55,0.2,"pp $\\sqrt{s}$ = 13 TeV",fontsize=14);
-plot.GetPlot().text(0.55,0.28,"$1.6<|\Delta\eta|<1.8$",fontsize=14);
+plot.GetPlot().text(0.45,0.2,"p-Pb $\\sqrt{s_{NN}}$ = 5.02 TeV",fontsize=14);
+plot.GetPlot().text(0.45,0.28,"$1.6<|\Delta\eta|<1.8$",fontsize=14);
 
 
 #plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);
@@ -118,7 +118,7 @@ plot.GetPlot().text(0.55,0.28,"$1.6<|\Delta\eta|<1.8$",fontsize=14);
 
 plot.Plot();
 
-plot.Save("figs/Fig6_v2Mult_pp.pdf");
-plot.Save("figs/Fig6_v2Mult_pp.png");
+plot.Save("figs/Fig6_v2Mult_pPb.pdf");
+plot.Save("figs/Fig6_v2Mult_pPb.png");
 plot.Show();
 
