@@ -27,7 +27,7 @@ dataTypePlotParams = [
 nrow = 1;
 ncol = 1;
 xlimits = {0:(-1.4,4.5)};
-ylimits = {0:(1.15,1.3)};
+ylimits = {0:(1.14,1.315)};
 rlimits = [(0.99,1.01)];
 
 
@@ -90,7 +90,7 @@ for d in range(0,5):
 
 f.Close();
 
-plot.GetPlot().text(0.5,0.83,"ALICE Work in progress",fontsize=11);
+plot.GetPlot().text(0.5,0.83,"ALICE",fontsize=11);
 plot.GetPlot().text(0.5,0.79,toptitle,fontsize=11);
 plot.GetPlot().text(0.52,0.75,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$",fontsize=11);
 plot.GetPlot().text(0.52,0.71,"$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);

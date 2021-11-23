@@ -83,6 +83,15 @@ for i in range(0,nrow):
 		plot.GetAxes(index).set_xticks([1.5,2.5,3.5]);
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
+				#Loading ALICE
+		gr = f.Get("{}".format(histnames[j]));
+		gr.Print();
+		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $");
+		grsyst = f.Get("{}".format(histnamesSyst[j]));
+		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
+		plot.AddSyst(data,syst);
+		# End of ALICE
+		#Loading ATLAS
 		if(j==0):
 			grATLAS = f.Get("{}".format(histatlas[j]));
 			grATLAS.Print();
@@ -94,17 +103,12 @@ for i in range(0,nrow):
 			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystATLAS));
 			plot.AddSyst(data,syst);
 		gr = f.Get("{}".format(histnames[j]));
-		gr.Print();
-		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $");
-		grsyst = f.Get("{}".format(histnamesSyst[j]));
-		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
-		plot.AddSyst(data,syst);
-
+		#End of ATLAS
 
 f.Close();
 
-plot.GetPlot().text(0.15,0.77,"ALICE Work in progress",fontsize=12);
-plot.GetPlot().text(0.54,0.62,toptitle,fontsize=11);
+plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
+#plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
 #plot.GetPlot().text(0.16,0.27,dataDetail[0],fontsize=10);
 #plot.GetPlot().text(0.16,0.17,dataDetail[1],fontsize=10);
 

@@ -98,7 +98,7 @@ for iobs in range(0,2):
 #	plot.GetPlot().text(0.14,0.60,dataDetail[1],fontsize=10);
 	plot.GetPlot().text(0.46,0.75,PanelName[0],fontsize=12);
 	plot.GetPlot().text(0.84,0.75,PanelName[1],fontsize=12);
-	plot.GetPlot().text(0.54,0.75,"ALICE Work in progress",fontsize=11);
+	plot.GetPlot().text(0.54,0.75,"ALICE",fontsize=11);
 
 	# this is need because of the input histo label setting..
 	if( iobs==0 ):
