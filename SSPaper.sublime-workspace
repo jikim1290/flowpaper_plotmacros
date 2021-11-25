@@ -275,6 +275,821 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Fig1_FlotExt.py",
+			"settings":
+			{
+				"buffer_size": 3813,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Fig2_vn.py",
+			"settings":
+			{
+				"buffer_size": 4731,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Fig3_vn_mult.py",
+			"settings":
+			{
+				"buffer_size": 3549,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Fig4_vn_ess.py",
+			"settings":
+			{
+				"buffer_size": 4854,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Fig5_JetY_mult.py",
+			"settings":
+			{
+				"buffer_size": 4902,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\nimport numpy as np\nimport ROOT\n\nimport scipy\nfrom scipy import interpolate\n\nimport sys\nsys.path.append(\"JPyPlotRatio\");\n\n\nimport JPyPlotRatio\n\ndata = {\n\t\"vn_pp\":ROOT.TFile(\"data/Final_Items.root\",\"read\"), # pp 1<pT<2 GeV\n\t\"vn_pp_14\":ROOT.TFile(\"data/Final_Items.root\",\"read\"), # pp 1<pT<4 GeV\n#\t\"vn_pPb_zna\":ROOT.TFile(\"data/Final_Items.root\",\"read\"),\n#\t\"vn_pPb_v0a\":ROOT.TFile(\"data/Final_Items.root\",\"read\"),\n\t\"vn_pPb_v0a\":ROOT.TFile(\"data/fout_v2_pPb_v1.root\",\"read\"),  # pPb 1<pT<2 GeV\n\t\"vn_pPb_v0a_14\":ROOT.TFile(\"data/fout_v2_pPb_v1.root\",\"read\"),  # pPb 1<pT<4 GeV\n#\t\"vn_pp_pub\":ROOT.TFile(\"../flow_in_small_and_large_systems/Data/output_vn_pp.root\",\"read\"),\n#\t\"vn_pPb_pub\":ROOT.TFile(\"../flow_in_small_and_large_systems/Data/output_vn_pPb.root\",\"read\"),\n\t#\"vn_PbPb_pub\":ROOT.TFile(\"../flow_in_small_and_large_systems/Data/output_vn_PbPb.root\",\"read\"),\n    #\"vn_pp_atl\":ROOT.TFile(\"ATLAS-figs/output-figure18a.root\",\"read\"), # ATLAS pp 1<pT<5 GeV\n\t#\"vn_pPb_atl\":ROOT.TFile(\"ATLAS-figs/output-figure18a.root\",\"read\") # ATLAS pPb 1<pT<5 GeV\n}\n\nplotParams = {\n\t\"vn_pp\":{\"color\":\"k\",\"fmt\":\"o\",\"markersize\":5.0,\"label\":\"pp $\\\\sqrt{s}$ = 13 TeV $1<p_T<2$ GeV\",\"labelLegendId\":0},\n\t\"vn_pp_14\":{\"color\":\"orange\",\"fmt\":\"s\",\"markersize\":5.0,\"label\":\"pp $\\\\sqrt{s}$ = 13 TeV $1<p_T<4$ GeV\",\"labelLegendId\":1},\n#\t\"vn_pPb_zna\":{\"color\":\"b\",\"fmt\":\"s\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"2PC: pPb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV, ZNA\",\"labelLegendId\":0},\n#\t\"vn_pPb_v0a\":{\"color\":\"b\",\"fmt\":\"s\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"2PC: pPb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV, V0A\",\"labelLegendId\":0},\n\t\"vn_pPb_v0a\":{\"color\":\"r\",\"fmt\":\"*\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"p$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV $1<p_T<2$ GeV\",\"labelLegendId\":0},\n\t\"vn_pPb_v0a_14\":{\"color\":\"green\",\"fmt\":\"*\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"p$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV $1<p_T<4$ GeV\",\"labelLegendId\":1},\n#\t\"vn_pPb_pub\":{\"color\":\"orange\",\"fmt\":\"p\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"$V_{2}\\\\{2,|\\Delta\\eta|<1.4\\\\}$: pPb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV\",\"labelLegendId\":1},\n\t#\"vn_PbPb_pub\":{\"color\":\"brown\",\"fmt\":\"D\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"$V_{2}\\\\{2\\\\}$: Pb$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV\",\"labelLegendId\":1},\n\t#\"vn_pp_atl\":{\"color\":\"green\",\"fmt\":\"o\",\"markersize\":5.0,\"label\":\"ATLAS: pp $\\\\sqrt{s}$ = 13 TeV\",\"labelLegendId\":2},\n\t#\"vn_pPb_atl\":{\"color\":\"purple\",\"fmt\":\"s\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"ATLAS: p$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV\",\"labelLegendId\":2},\n\t\"vn_pp_pseudo\":{\"color\":\"pink\",\"fmt\":\"o\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"pp 1-4 GeV \",\"labelLegendId\":0},\n\t\"vn_pPb_v0a_pseudo\":{\"color\":\"blue\",\"fmt\":\"*\",\"mfc\":\"none\",\"markersize\":5.0,\"label\":\"p$-$Pb 1-4 GeV\",\"labelLegendId\":0},\n\n\n}\t\n#Histogran names corresponding to system and experiment\n#histNames = [\"pp\",\"pPb_v2_zna\",\"pPb_v2_v0a\"];\nhistNames = [\"pp\",\"pp_14\",\"pPb_v2_v0a\",\"pPb_14\"];\n#histNamesPub = [\"ppHM\",\"pPb\",\"PbPb\"];\nhistNamesAtlas = [\"pp13\",\"pPb\"];\nNremoveAtlas =[3,5]\n\n# define panel/xaxis limits/titles\nnrow = 1;\nncol = 1;\nxlimits = [(0,100),(0,100)];\nylimits = [(-0.005,0.13)];\nrlimits = [(0.,4.5),(0.,4.5)];\n\n#Alice to atlas conversion on multiplicity = N_{ch}\nNchAtlaspp_pythiaOnly = [80.33, 48.83, 29.15, 14.12];\nNchAtlaspp_data =  [84.07, 50.10, 33.70, 16.11]; #From Beomkyu\nNchAtlaspPb_data = [85.35, 83.27, 67.26, 49.93, 33.54]; #From Beomkyu\n\n\n\n# add labels for each pad\nplables = [ \"\", \"\"\n\t#\t\t\"$1.0 < p_\\\\mathrm{T,trigg(assoc)} < 2.0$\",\"$2.0 < p_\\\\mathrm{T,trigg(assoc)} < 3.0$\",\"$3.0 < p_\\\\mathrm{T,trigg(assoc)} < 4.0$\",\n\t#\t\t\"$1.0 < p_\\\\mathrm{T,trigg(assoc)} < 2.0$\",\"$2.0 < p_\\\\mathrm{T,trigg(assoc)} < 3.0$\",\"$3.0 < p_\\\\mathrm{T,trigg(assoc)} < 4.0$\"\n\t\t ];\n\nxtitle = [\"$N_\\\\mathrm{ch}(|\\eta|<0.5)$\",\"\"];\nytitle = [\"$V_{2}$\",\"$V_{2}\\\\{4\\\\}$\"];\n#labelList = [\"pp $\\\\sqrt{s}$ = 13 TeV our\",\"p$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV our\",\"pp $\\\\sqrt{s}$ = 13 TeV\",\"p$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV\",\"Pb$-$Pb $\\\\sqrt{s_\\\\mathrm{NN}}$ = 5.02 TeV\"]\n\n\n# Following two must be added\ntoptitle = \"$1 < p_\\\\mathrm{T,trig} < 2 \\\\,\\\\mathrm{GeV}/c$\"; # need to add on the top\ndataDetail = [\"$1 < p_\\\\mathrm{T,trig} < 2 \\\\,\\\\mathrm{GeV}/c$ \\n $1 < p_\\\\mathrm{T,assoc} < 4 \\\\,\\\\mathrm{GeV}/c$\"];\n\n\nplot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),\n\tpanelsize=(5,5),\n\trowBounds=ylimits,  # for nrow\n\t#colBounds=xlimits,  # for ncol\n\tpanelLabel=plables,  # nrowxncol\n\tratioBounds=rlimits,# for nrow\n\tdisableRatio=[0],\n\tsystPatchWidth=0.02,\n\tpanelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign=\"left\",\n\tlegendPanel={0:0,1:0,2:0},\n\t#legendPanel={0:0},\n        legendLoc={0:(0.7,0.36),1:(0.7,0.16),2:(0.75,0.12)},\n       \t#legendLoc={0:(0.60,0.15)},\n\tlegendSize=7,xlabel=xtitle[0],ylabel=ytitle[0]);\n\n#plot.EnableLatex(True);\n\nplotMatrix = np.empty((nrow,ncol),dtype=int);\n\nplot.GetAxes(0).set_xticks([0,20,40,60,80,120,150,200,250,300]);\n#plot.GetAxes(1).set_xticks([0,15, 30, 45,60]);\nplot.GetAxes(0).xaxis.set_ticks_position('both');\nplot.GetAxes(0).yaxis.set_ticks_position('both');\n\nplots = {};\n\nnmeas=4;\nfor i,s in enumerate(data):\n\tprint(s)\n\n\tif i<nmeas:\n\t\tgr = data[s].Get(\"{}_stat\".format(histNames[i]));\n\t\tgrsyst = data[s].Get(\"{}_syst\".format(histNames[i]));\n\n\t\tx,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch\n\t\t'''\n\t\tif i==0:\n\t\t    x = np.array(NchAtlaspp_data);\n\t\t    print(\"pp ALICE\",y);\n\t\tif i==1:\n\t\t    x = np.array(NchAtlaspPb_data);\n\t\t ''' \n\n#\tif i >=2 and i < 4:\n#\t\tgr = data[s].Get(\"gv22Gap14Stat{}\".format(histNamesPub[i-2]));\n#\t\tgrsyst = data[s].Get(\"gv22Gap14Sys{}\".format(histNamesPub[i-2]));\n\n\tif i >= nmeas:\n\t\tgr = data[s].Get(\"grAtlas_{}_stat\".format(histNamesAtlas[i-nmeas]));\n\t\tgrsyst = data[s].Get(\"grAtlas_{}_syst\".format(histNamesAtlas[i-nmeas]));\n\t\tx,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch\n\n\t\tif i==2:\n\t\t\tprint(\"pp ATLAS\",y);\n\tplots[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch\n\tplot.AddSyst(plots[s],grsyst);\n\n\n\n\n\n\nplot.GetPlot().text(0.19,0.8,\"ALICE\",fontsize=14);\nplot.GetPlot().text(0.23,0.28,\"$1.6<|\\Delta\\eta|<1.8$\",fontsize=8);\n#plot.GetPlot().text(0.5,0.33,\"$1 < p_\\\\mathrm{T} < 2.0 \\\\,\\\\mathrm{GeV}/c$\",fontsize=8);\n#plot.GetPlot().text(0.55,0.53,\"$0.2 < p_\\\\mathrm{T} < 3.0 \\\\,\\\\mathrm{GeV}/c$\",fontsize=8);\n#plot.GetPlot().text(0.55,0.65,\"$|\\Delta\\eta|<1.4$\",fontsize=8);\n#plot.GetPlot().text(0.5,0.36,\"$2.0<|\\Delta\\eta|<5.0$\",fontsize=8);\n#plot.GetPlot().text(0.5,0.32,\"$1.0 < p_\\\\mathrm{T} < 5 \\\\,\\\\mathrm{GeV}/c$\",fontsize=8);\n#plot.GetPlot().text(0.5,0.28,\"$N_\\\\mathrm{ch,ATLAS}^{rec}, |\\eta|<2.5$, $p_\\\\mathrm{T}>0.4\\\\,\\\\mathrm{GeV}/c$\",fontsize=8);\n#plot.GetPlot().text(0.19,0.14,dataDetail[0],fontsize=11);\n\n\nplot.Plot();\n\nplot.Save(\"figs/Fig6_v2Mult_allSystemsComp2.pdf\");\n#plot.Save(\"figs/Fig6_v2Mult_ourresult.pdf\");\nplot.Save(\"figs/Fig6_v2Mult_allSystemsComp2.png\");\n#plot.Save(\"figs/Fig6_v2Mult_ourresult.png\");\nplot.Show();\n\n",
+			"file": "Fig6_vn_allSystems_comp.py",
+			"file_size": 6972,
+			"file_write_time": 132823039775189434,
+			"settings":
+			{
+				"buffer_size": 6972,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAN0AAAAAAAAA3gAAAAAAAAAAAAAA3gAAAAAAAADfAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA3QAAAAAAAADdAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					6,
+					1,
+					"paste",
+					null,
+					"AQAAAN8AAAAAAAAAIgEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA3wAAAAAAAADfAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					9,
+					1,
+					"left_delete",
+					null,
+					"AQAAAB0BAAAAAAAAHQEAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAAHgEAAAAAAAAeAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					10,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAAB0BAAAAAAAAHgEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAHQEAAAAAAAAdAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					1,
+					"insert",
+					{
+						"characters": "_14"
+					},
+					"AwAAAOUAAAAAAAAA5gAAAAAAAAAAAAAA5gAAAAAAAADnAAAAAAAAAAAAAADnAAAAAAAAAOgAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA5QAAAAAAAADlAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					18,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAOoBAAAAAAAA6wEAAAAAAAAAAAAA6wEAAAAAAADsAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA6gEAAAAAAADqAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"paste",
+					null,
+					"AQAAAOwBAAAAAAAAOQIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7AEAAAAAAADsAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": "_14"
+					},
+					"AwAAAPcBAAAAAAAA+AEAAAAAAAAAAAAA+AEAAAAAAAD5AQAAAAAAAAAAAAD5AQAAAAAAAPoBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA9wEAAAAAAAD3AQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					25,
+					1,
+					"left_delete",
+					null,
+					"AQAAADcCAAAAAAAANwIAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAAOAIAAAAAAAA4AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					26,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAADcCAAAAAAAAOAIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAANwIAAAAAAAA3AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					31,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAI8EAAAAAAAAkAQAAAAAAAAAAAAAkAQAAAAAAACRBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAjwQAAAAAAACPBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					32,
+					1,
+					"paste",
+					null,
+					"AQAAAJEEAAAAAAAA9gQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAkQQAAAAAAACRBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					35,
+					1,
+					"left_delete",
+					null,
+					"AQAAAPMEAAAAAAAA8wQAAAAAAAABAAAAMA",
+					"AQAAAAAAAAABAAAA9AQAAAAAAAD0BAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					36,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAAPMEAAAAAAAA9AQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA8wQAAAAAAADzBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					41,
+					1,
+					"insert",
+					{
+						"characters": "_14"
+					},
+					"AwAAAJcEAAAAAAAAmAQAAAAAAAAAAAAAmAQAAAAAAACZBAAAAAAAAAAAAACZBAAAAAAAAJoEAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAlwQAAAAAAACXBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					46,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAOQEAAAAAAAA5QQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA5AQAAAAAAADkBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					47,
+					1,
+					"insert",
+					{
+						"characters": "$$"
+					},
+					"AgAAAOUEAAAAAAAA5gQAAAAAAAAAAAAA5gQAAAAAAADnBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA5QQAAAAAAADlBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					49,
+					1,
+					"insert",
+					{
+						"characters": "1<"
+					},
+					"AgAAAOYEAAAAAAAA5wQAAAAAAAAAAAAA5wQAAAAAAADoBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA5gQAAAAAAADmBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					50,
+					1,
+					"insert",
+					{
+						"characters": "p_"
+					},
+					"AgAAAOgEAAAAAAAA6QQAAAAAAAAAAAAA6QQAAAAAAADqBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA6AQAAAAAAADoBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					51,
+					1,
+					"insert",
+					{
+						"characters": "T<"
+					},
+					"AgAAAOoEAAAAAAAA6wQAAAAAAAAAAAAA6wQAAAAAAADsBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA6gQAAAAAAADqBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					52,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAAOwEAAAAAAAA7QQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7AQAAAAAAADsBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					54,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAO4EAAAAAAAA7wQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7gQAAAAAAADuBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					55,
+					1,
+					"insert",
+					{
+						"characters": "GeV"
+					},
+					"AwAAAO8EAAAAAAAA8AQAAAAAAAAAAAAA8AQAAAAAAADxBAAAAAAAAAAAAADxBAAAAAAAAPIEAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7wQAAAAAAADvBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					60,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAALsGAAAAAAAAvAYAAAAAAAAAAAAAvAYAAAAAAAC9BgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAuwYAAAAAAAC7BgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					61,
+					1,
+					"paste",
+					null,
+					"AQAAAL0GAAAAAAAARwcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAvQYAAAAAAAC9BgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					64,
+					1,
+					"insert",
+					{
+						"characters": "_14"
+					},
+					"AwAAAMgGAAAAAAAAyQYAAAAAAAAAAAAAyQYAAAAAAADKBgAAAAAAAAAAAADKBgAAAAAAAMsGAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAyAYAAAAAAADIBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					71,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAADUHAAAAAAAANgcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAANQcAAAAAAAA1BwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					77,
+					1,
+					"paste",
+					null,
+					"AQAAADYHAAAAAAAAQwcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAANgcAAAAAAAA2BwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					80,
+					1,
+					"left_delete",
+					null,
+					"AQAAAFUHAAAAAAAAVQcAAAAAAAABAAAAMA",
+					"AQAAAAAAAAABAAAAVgcAAAAAAABWBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					81,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAAFUHAAAAAAAAVgcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAVQcAAAAAAABVBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					84,
+					1,
+					"insert",
+					{
+						"characters": "\"\","
+					},
+					"AwAAACYLAAAAAAAAJwsAAAAAAAAAAAAAJwsAAAAAAAAoCwAAAAAAAAAAAAAoCwAAAAAAACkLAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJgsAAAAAAAAmCwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					86,
+					1,
+					"insert",
+					{
+						"characters": "pp_14"
+					},
+					"BQAAACcLAAAAAAAAKAsAAAAAAAAAAAAAKAsAAAAAAAApCwAAAAAAAAAAAAApCwAAAAAAACoLAAAAAAAAAAAAACoLAAAAAAAAKwsAAAAAAAAAAAAAKwsAAAAAAAAsCwAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJwsAAAAAAAAnCwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					90,
+					1,
+					"insert",
+					{
+						"characters": ","
+					},
+					"AQAAADoLAAAAAAAAOwsAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAOgsAAAAAAAA6CwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					91,
+					1,
+					"insert_snippet",
+					{
+						"contents": "\"$0\""
+					},
+					"AQAAADsLAAAAAAAAPQsAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAOwsAAAAAAAA7CwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					92,
+					1,
+					"insert",
+					{
+						"characters": "pPb"
+					},
+					"AwAAADwLAAAAAAAAPQsAAAAAAAAAAAAAPQsAAAAAAAA+CwAAAAAAAAAAAAA+CwAAAAAAAD8LAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAPAsAAAAAAAA8CwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					93,
+					1,
+					"insert",
+					{
+						"characters": "_14"
+					},
+					"AwAAAD8LAAAAAAAAQAsAAAAAAAAAAAAAQAsAAAAAAABBCwAAAAAAAAAAAABBCwAAAAAAAEILAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAPwsAAAAAAAA/CwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					98,
+					1,
+					"insert",
+					{
+						"characters": "#"
+					},
+					"AQAAAKUTAAAAAAAAphMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAApRMAAAAAAAClEwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					99,
+					1,
+					"left_delete",
+					null,
+					"AQAAAKUTAAAAAAAApRMAAAAAAAABAAAAIw",
+					"AQAAAAAAAAABAAAAphMAAAAAAACmEwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					102,
+					1,
+					"left_delete",
+					null,
+					"AQAAAKsTAAAAAAAAqxMAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAArBMAAAAAAACsEwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					103,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAAKsTAAAAAAAArBMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAqxMAAAAAAACrEwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					106,
+					1,
+					"left_delete",
+					null,
+					"AQAAAGoaAAAAAAAAahoAAAAAAAABAAAAMQ",
+					"AQAAAAAAAAABAAAAaxoAAAAAAABrGgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					107,
+					1,
+					"insert",
+					{
+						"characters": "2"
+					},
+					"AQAAAGoaAAAAAAAAaxoAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAahoAAAAAAABqGgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					109,
+					1,
+					"left_delete",
+					null,
+					"AQAAAMsaAAAAAAAAyxoAAAAAAAABAAAAMQ",
+					"AQAAAAAAAAABAAAAzBoAAAAAAADMGgAAAAAAAAAAAAAAgHVA"
+				],
+				[
+					110,
+					1,
+					"insert",
+					{
+						"characters": "2"
+					},
+					"AQAAAMsaAAAAAAAAzBoAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAyxoAAAAAAADLGgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					115,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAKkUAAAAAAAAqhQAAAAAAAAAAAAAqhQAAAAAAACsFAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAqRQAAAAAAACpFAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					116,
+					1,
+					"insert_snippet",
+					{
+						"contents": "'$0'"
+					},
+					"AQAAAKwUAAAAAAAArhQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAArBQAAAAAAACsFAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					118,
+					1,
+					"insert",
+					{
+						"characters": "'"
+					},
+					"AQAAAK4UAAAAAAAArxQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAArhQAAAAAAACuFAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					121,
+					2,
+					"left_delete",
+					null,
+					"AgAAADAVAAAAAAAAMBUAAAAAAAABAAAAIC8VAAAAAAAALxUAAAAAAAABAAAAIA",
+					"AQAAAAAAAAABAAAAMRUAAAAAAAAxFQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					122,
+					1,
+					"insert_snippet",
+					{
+						"contents": "'$0'"
+					},
+					"AQAAAC8VAAAAAAAAMRUAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAALxUAAAAAAAAvFQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					124,
+					1,
+					"insert",
+					{
+						"characters": "'"
+					},
+					"AQAAADEVAAAAAAAAMhUAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAMRUAAAAAAAAxFQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					127,
+					1,
+					"left_delete",
+					null,
+					"AQAAAKYEAAAAAAAApgQAAAAAAAABAAAAaw",
+					"AQAAAAAAAAABAAAApwQAAAAAAACnBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					128,
+					1,
+					"insert",
+					{
+						"characters": "green"
+					},
+					"BQAAAKYEAAAAAAAApwQAAAAAAAAAAAAApwQAAAAAAACoBAAAAAAAAAAAAACoBAAAAAAAAKkEAAAAAAAAAAAAAKkEAAAAAAAAqgQAAAAAAAAAAAAAqgQAAAAAAACrBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAApgQAAAAAAACmBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					131,
+					1,
+					"insert",
+					{
+						"characters": "orange"
+					},
+					"BwAAANsGAAAAAAAA3AYAAAAAAAAAAAAA3AYAAAAAAADcBgAAAAAAAAEAAABy3AYAAAAAAADdBgAAAAAAAAAAAADdBgAAAAAAAN4GAAAAAAAAAAAAAN4GAAAAAAAA3wYAAAAAAAAAAAAA3wYAAAAAAADgBgAAAAAAAAAAAADgBgAAAAAAAOEGAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA3AYAAAAAAADbBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					134,
+					1,
+					"insert",
+					{
+						"characters": "green"
+					},
+					"BgAAANsGAAAAAAAA3AYAAAAAAAAAAAAA3AYAAAAAAADcBgAAAAAAAAcAAABvcmFuZ2Ui3AYAAAAAAADdBgAAAAAAAAAAAADdBgAAAAAAAN4GAAAAAAAAAAAAAN4GAAAAAAAA3wYAAAAAAAAAAAAA3wYAAAAAAADgBgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA4gYAAAAAAADbBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					135,
+					1,
+					"insert",
+					{
+						"characters": "\""
+					},
+					"AQAAAOAGAAAAAAAA4QYAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA4AYAAAAAAADgBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					138,
+					1,
+					"insert",
+					{
+						"characters": "orange"
+					},
+					"BwAAAKYEAAAAAAAApwQAAAAAAAAAAAAApwQAAAAAAACnBAAAAAAAAAUAAABncmVlbqcEAAAAAAAAqAQAAAAAAAAAAAAAqAQAAAAAAACpBAAAAAAAAAAAAACpBAAAAAAAAKoEAAAAAAAAAAAAAKoEAAAAAAAAqwQAAAAAAAAAAAAAqwQAAAAAAACsBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAqwQAAAAAAACmBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					144,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAKsGAAAAAAAArAYAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAqwYAAAAAAACrBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					145,
+					1,
+					"paste",
+					null,
+					"AQAAAKwGAAAAAAAAuQYAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAArAYAAAAAAACsBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					148,
+					1,
+					"left_delete",
+					null,
+					"AQAAALMGAAAAAAAAswYAAAAAAAABAAAANA",
+					"AQAAAAAAAAABAAAAtAYAAAAAAAC0BgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					149,
+					1,
+					"insert",
+					{
+						"characters": "2"
+					},
+					"AQAAALMGAAAAAAAAtAYAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAswYAAAAAAACzBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					152,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAHoEAAAAAAAAewQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAegQAAAAAAAB6BAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					153,
+					1,
+					"paste",
+					null,
+					"AQAAAHsEAAAAAAAAiAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAewQAAAAAAAB7BAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					155,
+					1,
+					"left_delete",
+					null,
+					"AQAAAIIEAAAAAAAAggQAAAAAAAABAAAANA",
+					"AQAAAAAAAAABAAAAgwQAAAAAAACDBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					156,
+					1,
+					"insert",
+					{
+						"characters": "2"
+					},
+					"AQAAAIIEAAAAAAAAgwQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAggQAAAAAAACCBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					159,
+					1,
+					"left_delete",
+					null,
+					"AQAAACASAAAAAAAAIBIAAAAAAAABAAAANg",
+					"AQAAAAAAAAABAAAAIRIAAAAAAAAhEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					160,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAACASAAAAAAAAIRIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAIBIAAAAAAAAgEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					163,
+					1,
+					"insert",
+					{
+						"characters": "16"
+					},
+					"AwAAADMSAAAAAAAANBIAAAAAAAAAAAAANBIAAAAAAAA0EgAAAAAAAAIAAAA0NTQSAAAAAAAANRIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAANRIAAAAAAAAzEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					172,
+					1,
+					"insert",
+					{
+						"characters": "72"
+					},
+					"AwAAACASAAAAAAAAIRIAAAAAAAAAAAAAIRIAAAAAAAAhEgAAAAAAAAIAAAAxNSESAAAAAAAAIhIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAIhIAAAAAAAAgEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					175,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AgAAACUSAAAAAAAAJhIAAAAAAAAAAAAAJhIAAAAAAAAmEgAAAAAAAAEAAAAx",
+					"AQAAAAAAAAABAAAAJhIAAAAAAAAlEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					176,
+					1,
+					"left_delete",
+					null,
+					"AQAAACUSAAAAAAAAJRIAAAAAAAABAAAANA",
+					"AQAAAAAAAAABAAAAJhIAAAAAAAAmEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					177,
+					1,
+					"insert",
+					{
+						"characters": "3"
+					},
+					"AQAAACUSAAAAAAAAJhIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJRIAAAAAAAAlEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					180,
+					1,
+					"insert",
+					{
+						"characters": "#"
+					},
+					"AQAAAA8YAAAAAAAAEBgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAADxgAAAAAAAAPGAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					185,
+					1,
+					"insert",
+					{
+						"characters": "2"
+					},
+					"AQAAAOMXAAAAAAAA5BcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA4xcAAAAAAADjFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					186,
+					1,
+					"left_delete",
+					null,
+					"AQAAAOMXAAAAAAAA4xcAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAA5BcAAAAAAADkFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					188,
+					1,
+					"insert",
+					{
+						"characters": "2"
+					},
+					"AQAAAOIXAAAAAAAA4xcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA4hcAAAAAAADiFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					191,
+					1,
+					"insert",
+					{
+						"characters": "28"
+					},
+					"AwAAAOcXAAAAAAAA6BcAAAAAAAAAAAAA6BcAAAAAAADoFwAAAAAAAAIAAAAzOOgXAAAAAAAA6RcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA6RcAAAAAAADnFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					194,
+					1,
+					"left_delete",
+					null,
+					"AQAAACESAAAAAAAAIRIAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAAIhIAAAAAAAAiEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					197,
+					1,
+					"left_delete",
+					null,
+					"AQAAAC4SAAAAAAAALhIAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAALxIAAAAAAAAvEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					200,
+					1,
+					"insert",
+					{
+						"characters": "3"
+					},
+					"AgAAAOEXAAAAAAAA4hcAAAAAAAAAAAAA4hcAAAAAAADiFwAAAAAAAAEAAAA1",
+					"AQAAAAAAAAABAAAA4hcAAAAAAADhFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					209,
+					1,
+					"left_delete",
+					null,
+					"AQAAAMMEAAAAAAAAwwQAAAAAAAABAAAAbw",
+					"AQAAAAAAAAABAAAAxAQAAAAAAADEBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					210,
+					1,
+					"insert",
+					{
+						"characters": "s"
+					},
+					"AQAAAMMEAAAAAAAAxAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAwwQAAAAAAADDBAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -308,6 +1123,7 @@
 	},
 	"file_history":
 	[
+		"/Users/absonner/Documents/Documents/GitHub/flowpaper_plotmacros/SSPaper.sublime-workspace",
 		"/Users/absonner/cernbox_jfluc/NL/vn_compare_etacut.py",
 		"/Users/absonner/Documents/Documents/GitHub/flowpaper_plotmacros/Fig18a.C",
 		"/Users/absonner/cernbox_jfluc/NL/plot18_vn_pspectra.py",
@@ -372,6 +1188,193 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Fig1_FlotExt.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Fig2_vn.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4731,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Fig3_vn_mult.py",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3549,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Fig4_vn_ess.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4854,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Fig5_JetY_mult.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4902,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 615.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Fig6_vn_allSystems_comp.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6972,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1220,
+								1220
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 87.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"stack_multiselect": false,
+					"type": "text"
+				}
 			]
 		}
 	],

@@ -91,20 +91,25 @@ plot.AddSyst(data_away,syst_away);
 grMC_away = f.Get("{}_MC".format(histnameAway[0]));
 dataMC_away = plot.Add(0,grMC_away,**dataTypePlotParams[4],labelLegendId=0,label=centrality[3]);
 
-plot.Ratio(dataMC_away, dataMC_near);
-plot.Ratio(data_away, data_near);
+
 
 #plot.GetAxes(1).set_xticks([0,1,2,3]);
 #plot.GetAxes(1).xaxis.set_ticks_position('both');
 #plot.GetAxes(1).yaxis.set_ticks_position('both');
-#gr = f.Get("{}_stat".format(histnames[1]));
-#data = plot.Add(1,gr,**dataTypePlotParams[2],labelLegendId=1,label="ALICE");
+gr = f.Get("{}_stat".format(histnames[1]));
+data = plot.Add(0,gr,**dataTypePlotParams[2]);
 #grsyst = f.Get("{}_syst".format(histnames[1]));
 #_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
 #plot.AddSyst(data,syst);
 
-#grMC = f.Get("{}_MC".format(histnames[1]));
-#dataMC = plot.Add(1,grMC,**dataTypePlotParams[5],labelLegendId=1,label="PYTHIA 8 Tune 4C");
+grMC = f.Get("{}_MC".format(histnames[1]));
+dataMC = plot.Add(0,grMC,**dataTypePlotParams[5]);
+div = np.array([2.0,2.0,2.0,2.0]);
+divplot = plot.Add(0,div,color="red");
+
+plot.Ratio(data, divplot);
+plot.Ratio(dataMC_away,divplot);
+#numpy array scale tgrapherrors 
 
 
 
