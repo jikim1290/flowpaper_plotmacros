@@ -1,0 +1,460 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"dict",
+				"dictlen"
+			],
+			[
+				"chi",
+				"chiDictDual"
+			],
+			[
+				"dic",
+				"dictlen"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"chiDict_",
+				"chiDict_pTmean"
+			],
+			[
+				"ob",
+				"obslabelsdual_pTmean"
+			],
+			[
+				"ylege",
+				"ylegendmin"
+			],
+			[
+				"xl",
+				"xlegendmin"
+			],
+			[
+				"legend",
+				"legendcent"
+			],
+			[
+				"diff",
+				"diffsquaredlist"
+			],
+			[
+				"num",
+				"num2"
+			],
+			[
+				"doub",
+				"Double_t"
+			],
+			[
+				"NRan",
+				"NRangesEta"
+			],
+			[
+				"NRa",
+				"NRangesEta"
+			],
+			[
+				"Look",
+				"LookZEta"
+			],
+			[
+				"L",
+				"LookEtaZ"
+			],
+			[
+				"h",
+				"hZvtx"
+			],
+			[
+				"Find",
+				"FindObject"
+			],
+			[
+				"SetMarker",
+				"SetMarkerColor"
+			],
+			[
+				"root",
+				"TGraphErrorsToNumpy"
+			],
+			[
+				"hPhi",
+				"hPhi610"
+			],
+			[
+				"fHist",
+				"fHistZetaPhi"
+			],
+			[
+				"Bin",
+				"BinCenter2"
+			],
+			[
+				"BinC",
+				"BinCenter1"
+			],
+			[
+				"index",
+				"indexLabel"
+			],
+			[
+				"i",
+				"iConfig"
+			],
+			[
+				"Get",
+				"GetHist"
+			],
+			[
+				"Draw",
+				"DrawPhi"
+			],
+			[
+				"Hist",
+				"HistPhiName"
+			],
+			[
+				"hist",
+				"histPhi"
+			],
+			[
+				"hi",
+				"histPhi"
+			],
+			[
+				"pl",
+				"plabels"
+			],
+			[
+				"H",
+				"HistPhiName"
+			],
+			[
+				"Con",
+				"configNames"
+			],
+			[
+				"Ge",
+				"GetHist"
+			],
+			[
+				"P",
+				"PanelNames"
+			],
+			[
+				"His",
+				"HistNames"
+			],
+			[
+				"config",
+				"configNames"
+			],
+			[
+				"plot",
+				"plotParams"
+			],
+			[
+				"label",
+				"labelt"
+			],
+			[
+				"data",
+				"dataStr"
+			],
+			[
+				"NUA",
+				"NUAError"
+			],
+			[
+				"HEP",
+				"HEPTableName"
+			],
+			[
+				"plots",
+				"plots276"
+			],
+			[
+				"gr",
+				"grvn_276_alice"
+			],
+			[
+				"p",
+				"parameter"
+			],
+			[
+				"fFit",
+				"fFitvn"
+			],
+			[
+				"Q",
+				"Qn_x"
+			],
+			[
+				"fF",
+				"fFit3"
+			],
+			[
+				"T",
+				"TMath"
+			],
+			[
+				"hD",
+				"hDeltaPhi"
+			],
+			[
+				"Ps",
+				"Psi_n"
+			],
+			[
+				"Y03",
+				"Y03List"
+			],
+			[
+				"Y",
+				"Y12err"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"Y0",
+				"Y03"
+			],
+			[
+				"mul",
+				"multList"
+			],
+			[
+				"o",
+				"o"
+			],
+			[
+				"mult",
+				"multList"
+			],
+			[
+				"red",
+				"red"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"_",
+				"_h_eta345"
+			],
+			[
+				"_c",
+				"_c_NEvents"
+			],
+			[
+				"_h",
+				"_h_eta345"
+			],
+			[
+				"plo",
+				"plotParams"
+			],
+			[
+				"panel",
+				"panelLabel"
+			],
+			[
+				"TH",
+				"TH1D"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/absonner/cernbox_jfluc/NL/vn_compare_etacut.py",
+		"/Users/absonner/Documents/Documents/GitHub/flowpaper_plotmacros/Fig18a.C",
+		"/Users/absonner/cernbox_jfluc/NL/plot18_vn_pspectra.py",
+		"/Users/absonner/cernbox_A11.CorrectionMap/figs/Phi_zbins_Data00_finelastbin.pdf",
+		"/Users/absonner/Documents/Documents/GitHub/ToyMCFlowAO/ToyMCFlowAO/macros/FitTwoPart.C",
+		"/Users/absonner/cernbox_jfluc/NL/plot_vn_pspectra_ToyMC_pt08.py",
+		"/Users/absonner/.bash_profile",
+		"/Users/absonner/cernbox_jfluc/NL/hej.py",
+		"/Users/absonner/Documents/GitHub/CLT/Central.C",
+		"/Users/absonner/cernbox_jfluc/hydro/plot18_vn.py",
+		"/Users/absonner/cernbox_jfluc/common/0.legotrainResults/toymc/countevts.C",
+		"/Users/absonner/cernbox_jfluc/NL/plot_vn_pspectra-bayesian.py",
+		"/Users/absonner/cernbox_jfluc/NL/plot18_vn.py",
+		"/Users/absonner/cernbox_jfluc/hydro/jstyle.py",
+		"/Users/absonner/Downloads/param_transport_priori.py",
+		"/Users/absonner/work/FlowEx/CLT/plotCLT.py",
+		"/Users/absonner/work/FlowEx/CLT/outfile.root",
+		"/Users/absonner/work/FlowEx/Ex1/Central.C",
+		"/Users/absonner/softwares/root_build/tutorials/graphs/graph.C",
+		"/Users/absonner/softwares/root_build/tutorials/math/Legendre.C",
+		"/Users/absonner/softwares/root_build/tutorials/math/GammaFun.C",
+		"/Users/absonner/softwares/root_build/tutorials/math/chi2test.C",
+		"/Users/absonner/work/FlowEx/Ex1/CL.C",
+		"/Users/absonner/softwares/root_build/tutorials/fit/fithist.C",
+		"/Users/absonner/softwares/root_build/tutorials/fit/FittingDemo.C",
+		"/Users/absonner/softwares/root_build/tutorials/math/mathStudent.C"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "SSPaper.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
