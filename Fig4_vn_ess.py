@@ -29,7 +29,7 @@ ncol = 2;
 xlimits = [
 	[(-0.1,7.1),(-0.1,5.1)],
 	[(-0.1,4.1),(-0.1,5.1)] ];
-ylimits = [(0.04,0.19),(-0.07,0.25)];
+ylimits = [(0.04,0.15),(0.0,0.12)];
 rlimits = [(0.,4.5),(0.,4.5)];
 
 # add here the histogram names for each pad
@@ -52,8 +52,8 @@ xtitle = ["$p^{\\mathrm{LP}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$","$p^{\\mathrm
 ytitle = ["$V_{2}$", "$V_{3}$"];
 
 # Following two must be added
-toptitle = "pp $\\sqrt{s}$ = 13 TeV, 0--0.1\%"; # need to add on the top
-dataDetail = ["$1 < p_\\mathrm{T,trig} < 2\\,\\mathrm{GeV}/c$","$1.6 < |\\Delta\\eta| < 1.8$"];
+toptitle = ["pp $\\sqrt{s}$ = 13 TeV","0--0.1$\%$"]; # need to add on the top
+dataDetail = ["$1 < p_\\mathrm{T} < 2\\,\\mathrm{GeV}/c$","$1.6 < |\\Delta\\eta| < 1.8$"];
 PanelName = ["LP", "Jet"];
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
@@ -62,7 +62,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0,1],
-	panelLabelLoc=(0.06,0.54),panelLabelSize=9,panelLabelAlign="left",
+	panelLabelLoc=(0.07,0.58),panelLabelSize=9,panelLabelAlign="left",
 	legendPanel=2,
 	legendLoc=(0.40,0.64),legendSize=10,xlabel={0:xtitle[0],1:xtitle[1]},
 	ylabel={0:ytitle[0],1:ytitle[1]});
@@ -86,7 +86,7 @@ for iobs in range(0,2):
 			syst = syst[:4];
 			gr = (x,y,yerr);
 
-		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6 < |\\Delta\\eta| < 1.8$");
+		data = plot.Add(index,gr,**dataTypePlotParams[0],label=dataDetail[0]);
 		plot.AddSyst(data,syst);
 #			if( iobs==0 ):
 #				grModel = f.Get("{}".format(histnamesModels[iobs][j]));
@@ -102,14 +102,15 @@ for iobs in range(0,2):
 
 
 #'''
-plot.GetPlot().text(0.15,0.82,toptitle,fontsize=12);
-plot.GetPlot().text(0.16,0.78,dataDetail[0],fontsize=11);
-#	plot.GetPlot().text(0.14,0.60,dataDetail[1],fontsize=10);
-plot.GetPlot().text(0.46,0.80,PanelName[0],fontsize=12);
-plot.GetPlot().text(0.84,0.80,PanelName[1],fontsize=12);
-plot.GetPlot().text(0.46,0.40,PanelName[0],fontsize=12);
-plot.GetPlot().text(0.84,0.40,PanelName[1],fontsize=12);
-plot.GetPlot().text(0.54,0.80,"ALICE",fontsize=11);
+plot.GetPlot().text(0.15,0.82,toptitle[0],fontsize=12);
+plot.GetPlot().text(0.17,0.77,toptitle[1],fontsize=12);
+#plot.GetPlot().text(0.16,0.78,dataDetail[0],fontsize=11);
+plot.GetPlot().text(0.18,0.39,dataDetail[1],fontsize=11);
+plot.GetPlot().text(0.44,0.80,PanelName[0],fontsize=12);
+plot.GetPlot().text(0.80,0.80,PanelName[1],fontsize=12);
+plot.GetPlot().text(0.44,0.40,PanelName[0],fontsize=12);
+plot.GetPlot().text(0.80,0.40,PanelName[1],fontsize=12);
+plot.GetPlot().text(0.18,0.43,"ALICE",fontsize=11);
 
 # this is need because of the input histo label setting..
 #if( iobs==0 ):
