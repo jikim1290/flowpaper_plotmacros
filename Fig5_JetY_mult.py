@@ -47,7 +47,7 @@ centrality =["ALICE near","PYTHIA 8 Tune 4C near",
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
 xtitle = ["",""];
-ytitle = ["$Y_\\mathrm{frag}$"," $2Y_\\mathrm{frag}^\\mathrm{away}/Y_\\mathrm{frag}^\\mathrm{near}$"];
+ytitle = ["$Y_\\mathrm{frag}$"," away/near$"];
 
 
 # Following two must be added
@@ -62,9 +62,10 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
+#	ratioSystPlot=True,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel={0:0},
-	legendLoc={0:(0.7,0.85)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="$Y_\\mathrm{frag}^\\mathrm{away}/Y_\\mathrm{frag}^\\mathrm{near}$",fontsize=1);
+	legendLoc={0:(0.7,0.85)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
 
 
 plot.EnableLatex(True);
