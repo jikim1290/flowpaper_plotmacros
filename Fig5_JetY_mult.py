@@ -29,12 +29,12 @@ nrow = 1;
 ncol = 1;
 xlimits = [(0,4)];
 ylimits = [(0.055,0.145)];
-rlimits = [(0.3,1.3)];
+rlimits = [(0.1,0.7)];
 
 
 # add here the histogram names for each pad
-histnames = ["NearJet","Acceptance_d"];
-histnameAway = ["AwayJet_d"];
+histnames = ["NearJet","Acceptance"]; #_d means x2
+histnameAway = ["AwayJet_d"];	      # w.o _d mean x1
 
 # add labels for each pad
 plables = [ "", ""
@@ -97,18 +97,20 @@ dataMC_away = plot.Add(0,grMC_away,**dataTypePlotParams[4],labelLegendId=0,label
 #plot.GetAxes(1).xaxis.set_ticks_position('both');
 #plot.GetAxes(1).yaxis.set_ticks_position('both');
 gr = f.Get("{}_stat".format(histnames[1]));
-data = plot.Add(0,gr,**dataTypePlotParams[2]);
-#grsyst = f.Get("{}_syst".format(histnames[1]));
-#_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
-#plot.AddSyst(data,syst);
+data = plot.Add(0,gr,**dataTypePlotParams[1]);
+grsyst = f.Get("{}_syst".format(histnames[1]));
+x,y,yerr,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
+plot.AddSyst(data,syst);
 
 grMC = f.Get("{}_MC".format(histnames[1]));
-dataMC = plot.Add(0,grMC,**dataTypePlotParams[5]);
-div = np.array([2.0,2.0,2.0,2.0]);
-divplot = plot.Add(0,div,color="red");
+dataMC = plot.Add(0,grMC,**dataTypePlotParams[4]);
+y.fill(1)
+yerr.fill(0)
+print(x,y,yerr)
+divplot = plot.Add(0,(x,y,yerr),**dataTypePlotParams[4]);
 
 plot.Ratio(data, divplot);
-plot.Ratio(dataMC_away,divplot);
+plot.Ratio(dataMC,divplot);
 #numpy array scale tgrapherrors 
 
 
