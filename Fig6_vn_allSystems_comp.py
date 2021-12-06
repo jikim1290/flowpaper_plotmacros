@@ -18,6 +18,7 @@ data = {
 #	"vn_pPb_v0a":ROOT.TFile("data/Final_Items.root","read"),
 #	"vn_pPb_v0a":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<2 GeV
 	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<4 GeV
+	#"vn_hydro_pPb":ROOT.TFile("data/results_dual_MAP_502_pPb.root","read")
 #	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
 #	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
 	#"vn_PbPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_PbPb.root","read"),
@@ -32,6 +33,7 @@ plotParams = {
 #	"vn_pPb_v0a":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A","labelLegendId":0},
 #	"vn_pPb_v0a":{"color":"k","fmt":"*","markersize":5.0,"label":"p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV ","labelLegendId":0},
 	"vn_pPb_v0a_14":{"color":"r","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV, $1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$","labelLegendId":0},
+	#"vn_hydro_pPb":{"color":"g","plotType":"theory"},
 #	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_pp_atl":{"color":"green","fmt":"o","markersize":5.0,"label":"ATLAS: pp $\\sqrt{s}$ = 13 TeV","labelLegendId":2},
@@ -90,11 +92,24 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel={0:0,1:0,2:0},
 	#legendPanel={0:0},
-        legendLoc={0:(0.65,0.26),1:(0.75,0.16),2:(0.75,0.12)},
+        legendLoc={0:(0.65,0.22),1:(0.75,0.16),2:(0.75,0.12)},
        	#legendLoc={0:(0.60,0.15)},
 	legendSize=7,xlabel=xtitle[0],ylabel=ytitle[0]);
 
 #plot.EnableLatex(True);
+
+#--- hydro calculation -------------------------------------
+#pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
+fh = ROOT.TFile("data/results_dual_MAP_502_pPb.root","read")
+gr = fh.Get("gr_v2_QC");
+
+pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
+pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
+_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
+#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
+plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
+fh.Close();
+#-----------------------------------------------------------
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
@@ -138,11 +153,6 @@ for i,s in enumerate(data):
 	plot.AddSyst(plots[s],grsyst);
 plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
-
-
-
-
-
 
 plot.GetPlot().text(0.19,0.8,"ALICE",fontsize=14);
 plot.GetPlot().text(0.5,0.55,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
