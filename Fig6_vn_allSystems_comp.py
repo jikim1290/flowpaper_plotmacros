@@ -106,7 +106,8 @@ gr = fh.Get("gr_v2_QC");
 pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 _,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
+#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
+plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
 fh.Close();
 #-----------------------------------------------------------
 
