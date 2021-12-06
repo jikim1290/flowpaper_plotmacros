@@ -92,7 +92,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel={0:0,1:0,2:0},
 	#legendPanel={0:0},
-        legendLoc={0:(0.65,0.26),1:(0.75,0.16),2:(0.75,0.12)},
+        legendLoc={0:(0.65,0.22),1:(0.75,0.16),2:(0.75,0.12)},
        	#legendLoc={0:(0.60,0.15)},
 	legendSize=7,xlabel=xtitle[0],ylabel=ytitle[0]);
 
