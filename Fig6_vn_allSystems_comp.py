@@ -87,7 +87,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	#colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
-	#disableRatio=[0],
+	disableRatio=[0],
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel={0:0,1:0,2:0},
@@ -155,7 +155,7 @@ plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
 plot.GetPlot().text(0.19,0.8,"ALICE",fontsize=14);
-plot.GetPlot().text(0.5,0.55,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
+plot.GetPlot().text(0.5,0.45,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
