@@ -55,7 +55,7 @@ NremoveAtlas =[3,5]
 nrow = 1;
 ncol = 1;
 xlimits = [(0,100),(0,100)];
-ylimits = [(-0.005,0.13)];
+ylimits = [(-0.005,0.155)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 #Alice to atlas conversion on multiplicity = N_{ch}
@@ -107,7 +107,7 @@ pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 _,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
 #plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
-plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
+plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD",labelOrder=1);
 fh.Close();
 
 
@@ -154,8 +154,8 @@ for i,s in enumerate(data):
 plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
-plot.GetPlot().text(0.19,0.8,"ALICE",fontsize=14);
-plot.GetPlot().text(0.5,0.45,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
+plot.GetPlot().text(0.19,0.77,"ALICE",fontsize=14);
+plot.GetPlot().text(0.5,0.43,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
