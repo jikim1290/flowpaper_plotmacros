@@ -13,9 +13,10 @@ sys.path.append("JPyPlotRatio");
 import JPyPlotRatio
 
 
-f = ROOT.TFile("data/Final_Items.root","read");
+f = ROOT.TFile("data/Final_Items.root","read"); #root file for 1-4 GeV/c pt
 dataTypePlotParams = [
 	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
+	{'plotType':'data','color':'r','fmt':'s','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
 	{'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
@@ -33,7 +34,11 @@ ylimits = [(0.04,0.15),(0.0,0.12)];
 rlimits = [(0.,4.5),(0.,4.5)];
 
 # add here the histogram names for each pad
-histnames = [
+histnames = [ # 1-4 GeV hist
+	["v2_LP",	"v2_jet"],
+	["v3_LP",  "v3_jet"], ];
+
+histnames12 = [ #1-2 GeV 
 	["v2_lp",	"v2_jet"],
 	["v3_lp",  "v3_jet"], ];
 histnamesSyst = [
@@ -53,7 +58,8 @@ ytitle = ["$V_{2}$", "$V_{3}$"];
 
 # Following two must be added
 toptitle = ["pp $\\sqrt{s}$ = 13 TeV","0--0.1$\%$"]; # need to add on the top
-dataDetail = ["$1 < p_\\mathrm{T} < 2\\,\\mathrm{GeV}/c$","$1.6 < |\\Delta\\eta| < 1.8$"];
+dataDetail = ["$1 < p_\\mathrm{T} < 4\\,\\mathrm{GeV}/c$","$1.6 < |\\Delta\\eta| < 1.8$"];
+dataDetail12 = ["$1 < p_\\mathrm{T} < 2\\,\\mathrm{GeV}/c$"];
 PanelName = ["LP", "Jet"];
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
@@ -62,23 +68,28 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0,1],
-	panelLabelLoc=(0.07,0.58),panelLabelSize=9,panelLabelAlign="left",
+	panelLabelLoc=(0.07,0.14),panelLabelSize=9,panelLabelAlign="left",
 	legendPanel=2,
-	legendLoc=(0.40,0.64),legendSize=10,xlabel={0:xtitle[0],1:xtitle[1]},
+	legendLoc=(0.40,0.6),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
 	ylabel={0:ytitle[0],1:ytitle[1]});
-plot.EnableLatex(False); # for publication need fonts via texlive
+plot.EnableLatex(True); # for publication need fonts via texlive
 
 for iobs in range(0,2):
 	for j in range(0,ncol):
 		index = iobs*ncol+j;
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
-		gr = f.Get("{}_stat".format(histnames[iobs][j]));
-		gr.Print();
+		gr = f.Get("h{}_1_4_stat".format(histnames[iobs][j])); # 1-4 GeV
+		gr12 = f.Get("{}_stat".format(histnames12[iobs][j])); # 1-2 GeV without mom. range in the hist name
+		#gr.Print();
 
-		grsyst = f.Get("{}_syst".format(histnames[iobs][j]));
+		grsyst = f.Get("h{}_1_4_syst".format(histnames[iobs][j])); # 1-4 GeV
 		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
-
+		print("1-4",syst);
+		grsyst12 = f.Get("{}_syst".format(histnames12[iobs][j])); # 1-2 GeV without mom. range in the hist name
+		print(grsyst);
+		_,_,_,syst12 = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst12));
+		print("1-2",syst12);
 		if index == 2:
 			#remove pT_LP > 7 points
 			x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(gr));
@@ -86,8 +97,15 @@ for iobs in range(0,2):
 			syst = syst[:4];
 			gr = (x,y,yerr);
 
+			x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(gr12));
+			x,y,yerr = x[:4],y[:4],yerr[:4];
+			syst12 = syst12[:4];
+			gr12 = (x,y,yerr);
+
 		data = plot.Add(index,gr,**dataTypePlotParams[0],label=dataDetail[0]);
+		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0]);
 		plot.AddSyst(data,syst);
+		plot.AddSyst(data12,syst12);
 #			if( iobs==0 ):
 #				grModel = f.Get("{}".format(histnamesModels[iobs][j]));
 #				data = plot.Add(index,grModel,**dataTypePlotParams[3],label=modelStr[0]);
