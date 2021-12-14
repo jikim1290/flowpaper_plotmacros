@@ -12,7 +12,7 @@ sys.path.append("JPyPlotRatio");
 import JPyPlotRatio
 
 data = {
-	"vn_pp":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<2 GeV
+	#"vn_pp":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<2 GeV
 	"vn_pp_14":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<4 GeV
 #	"vn_pPb_zna":ROOT.TFile("data/Final_Items.root","read"),
 #	"vn_pPb_v0a":ROOT.TFile("data/Final_Items.root","read"),
@@ -27,12 +27,12 @@ data = {
 }
 
 plotParams = {
-	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"pp 13 TeV, $1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$","labelLegendId":0},
-	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV, $1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$","labelLegendId":0},
+	#"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"pp 13 TeV, $1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV","labelLegendId":0},
 #	"vn_pPb_zna":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, ZNA","labelLegendId":0},
 #	"vn_pPb_v0a":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A","labelLegendId":0},
 #	"vn_pPb_v0a":{"color":"k","fmt":"*","markersize":5.0,"label":"p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV ","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"r","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV, $1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"r","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
 	#"vn_hydro_pPb":{"color":"g","plotType":"theory"},
 #	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
@@ -46,7 +46,8 @@ plotParams = {
 }	
 #Histogran names corresponding to system and experiment
 #histNames = ["pp","pPb_v2_zna","pPb_v2_v0a"];
-histNames = ["pp","pp_14","pPb_14"];
+#histNames = ["pp","pp_14","pPb_14"];
+histNames = ["pp_14","pPb_14"];
 #histNamesPub = ["ppHM","pPb","PbPb"];
 histNamesAtlas = ["pp13","pPb"];
 NremoveAtlas =[3,5]
@@ -101,21 +102,22 @@ plot.EnableLatex(True);
 #--- hydro calculation -------------------------------------
 #pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
 for s,color in [
-	("14","green"),
-	("12","orange")]:
+	("14","green")]:#,
+	#("12","orange")]:
 	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_pT{}.root".format(s),"read")
 	gr = fh.Get("gr_v2_QC");
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
+	#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}",labelOrder=1); #+" ${} < p_\\mathrm{{T}} < {}\\,\\mathrm{{GeV}}$".format(*s)
 	plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD"+" {}".format(s),labelOrder=1);
 	fh.Close();
 
-with open("data/schenke_SmallSystem.pkl","rb") as f:
+with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
 	schenkeDict = pickle.load(f);
 for s,label,color in [
-	(('pPb5020','v2','1_4'),"Schenke p-Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$","red"),
-	(('pp13TeV','v2','1_4'),"Schenke 13 TeV pp, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$","pink")]:
+	(('pPb5020','v2','1_4'),"IP-Glasma $\\eta/s=0.095$, $\\zeta/s(T)$ p-Pb 5.02 TeV","purple"),
+	(('pp13TeV','v2','1_4'),"IP-Glasma $\\eta/s=0.095$, $\\zeta/s(T)$ 13 TeV pp","pink")]:
 	d = schenkeDict[s];
 	plot.Add(0,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2);
 
@@ -159,11 +161,11 @@ for i,s in enumerate(data):
 
 	plots[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
 	plot.AddSyst(plots[s],grsyst);
-plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
+#plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
 plot.GetPlot().text(0.19,0.75,"ALICE",fontsize=14);
-plot.GetPlot().text(0.5,0.43,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
+plot.GetPlot().text(0.5,0.40,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=8);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
