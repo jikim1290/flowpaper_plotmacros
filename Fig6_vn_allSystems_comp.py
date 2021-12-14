@@ -6,8 +6,8 @@ import scipy
 from scipy import interpolate
 
 import sys
+import pickle
 sys.path.append("JPyPlotRatio");
-
 
 import JPyPlotRatio
 
@@ -100,16 +100,24 @@ plot.EnableLatex(True);
 
 #--- hydro calculation -------------------------------------
 #pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
-fh = ROOT.TFile("data/results_dual_MAP_502_pPb.root","read")
-gr = fh.Get("gr_v2_QC");
-# Adding hydro calculations
-pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
-pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
-_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
-plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD",labelOrder=1);
-fh.Close();
+for s,color in [
+	("14","green"),
+	("12","orange")]:
+	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_pT{}.root".format(s),"read")
+	gr = fh.Get("gr_v2_QC");
+	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
+	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
+	_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
+	plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD"+" {}".format(s),labelOrder=1);
+	fh.Close();
 
+with open("data/schenke_SmallSystem.pkl","rb") as f:
+	schenkeDict = pickle.load(f);
+for s,label,color in [
+	(('pPb5020','v2','1_4'),"Schenke p-Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$","red"),
+	(('pp13TeV','v2','1_4'),"Schenke 13 TeV pp, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$","pink")]:
+	d = schenkeDict[s];
+	plot.Add(0,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2);
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
@@ -154,7 +162,7 @@ for i,s in enumerate(data):
 plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
-plot.GetPlot().text(0.19,0.77,"ALICE",fontsize=14);
+plot.GetPlot().text(0.19,0.75,"ALICE",fontsize=14);
 plot.GetPlot().text(0.5,0.43,"$1.6<|\Delta\eta|<1.8$",fontsize=8);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
