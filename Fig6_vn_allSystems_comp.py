@@ -32,7 +32,7 @@ plotParams = {
 #	"vn_pPb_zna":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, ZNA","labelLegendId":0},
 #	"vn_pPb_v0a":{"color":"b","fmt":"s","mfc":"none","markersize":5.0,"label":"2PC: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV, V0A","labelLegendId":0},
 #	"vn_pPb_v0a":{"color":"k","fmt":"*","markersize":5.0,"label":"p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV ","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"r","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
 	#"vn_hydro_pPb":{"color":"g","plotType":"theory"},
 #	"vn_pPb_pub":{"color":"orange","fmt":"p","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2,|\Delta\eta|<1.4\\}$: pPb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
 	#"vn_PbPb_pub":{"color":"brown","fmt":"D","mfc":"none","markersize":5.0,"label":"$V_{2}\\{2\\}$: Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","labelLegendId":1},
@@ -110,14 +110,14 @@ for s,color in [
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
 	#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}",labelOrder=1); #+" ${} < p_\\mathrm{{T}} < {}\\,\\mathrm{{GeV}}$".format(*s)
-	plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD"+" {}".format(s),labelOrder=1);
+	plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)",labelOrder=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
 	schenkeDict = pickle.load(f);
 for s,label,color in [
-	(('pPb5020','v2','1_4'),"IP-Glasma $\\eta/s=0.095$, $\\zeta/s(T)$ p-Pb 5.02 TeV","purple"),
-	(('pp13TeV','v2','1_4'),"IP-Glasma $\\eta/s=0.095$, $\\zeta/s(T)$ 13 TeV pp","pink")]:
+	(('pPb5020','v2','1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ p-Pb 5.02 TeV","purple"),
+	(('pp13TeV','v2','1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","pink")]:
 	d = schenkeDict[s];
 	plot.Add(0,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2);
 
@@ -164,7 +164,7 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
-plot.GetPlot().text(0.19,0.75,"ALICE",fontsize=14);
+plot.GetPlot().text(0.19,0.75,"ALICE",fontsize=12);
 plot.GetPlot().text(0.5,0.40,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=8);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
