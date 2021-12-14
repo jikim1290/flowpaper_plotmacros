@@ -6,8 +6,8 @@ import scipy
 from scipy import interpolate
 
 import sys
+import pickle
 sys.path.append("JPyPlotRatio");
-
 
 import JPyPlotRatio
 
@@ -105,14 +105,19 @@ for s,color in [
 	("12","orange")]:
 	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_pT{}.root".format(s),"read")
 	gr = fh.Get("gr_v2_QC");
-	# Adding hydro calculations
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-	#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor="green",linestyle="--",color="green",plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD");
 	plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}+VISH(2+1)+UrQMD"+" {}".format(s),labelOrder=1);
 	fh.Close();
 
+with open("data/schenke_SmallSystem.pkl","rb") as f:
+	schenkeDict = pickle.load(f);
+for s,label,color in [
+	(('pPb5020','v2','1_4'),"Schenke p-Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$","red"),
+	(('pp13TeV','v2','1_4'),"Schenke 13 TeV pp, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$","pink")]:
+	d = schenkeDict[s];
+	plot.Add(0,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2);
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
