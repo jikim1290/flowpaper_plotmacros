@@ -17,12 +17,12 @@ data = {};
 
 for f in files:
 	name = f.split('_');
-	pt = f.split('pT')[1].replace('.','_');
+	pt = f.split('pT')[1][:-4];
 
 	a = np.loadtxt(f);
-	data[(name[0],name[2][:-3],pt[:-4])] = {"cent":a[:,0],"mult":a[:,1],"y":a[:,2],"yerr":a[:,3]};
-	print((name[0],name[2][:-3],pt[:-4]));
+	data[(name[0],name[2][:-3],pt)] = {"cent":a[:,0],"mult":a[:,1],"y":a[:,2],"yerr":a[:,3]};
+	print((name[0],name[2][:-3],pt));
 
-with open("schenke_smallSystem.pkl","wb") as f:
+with open("schenke_SmallSystem.pkl","wb") as f:
 	pickle.dump(data,f);
 
