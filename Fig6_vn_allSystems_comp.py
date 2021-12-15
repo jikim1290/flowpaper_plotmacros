@@ -10,6 +10,7 @@ import pickle
 sys.path.append("JPyPlotRatio");
 
 import JPyPlotRatio
+import matplotlib.ticker as plticker
 
 data = {
 	#"vn_pp":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<2 GeV
@@ -54,8 +55,8 @@ NremoveAtlas =[3,5]
 
 # define panel/xaxis limits/titles
 nrow = 1;
-ncol = 1;
-xlimits = [(0,100),(0,100)];
+ncol = 2;
+xlimits = [(0,65),(0,65)];
 ylimits = [(-0.005,0.155)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
@@ -73,7 +74,8 @@ plables = [ "", ""
 		 ];
 
 xtitle = ["$N_\\mathrm{ch}(|\eta|<0.5)$",""];
-ytitle = ["$V_{2}$","$V_{2}\\{4\\}$"];
+#ytitle = ["$V_{2}$","$V_{2}\\{4\\}$"];
+ytitle = ["$v_{2}$","$v_{3}$"];
 #labelList = ["pp $\\sqrt{s}$ = 13 TeV our","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV our","pp $\\sqrt{s}$ = 13 TeV","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV"]
 
 
@@ -85,17 +87,19 @@ dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathr
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelsize=(5,5),
 	rowBounds=ylimits,  # for nrow
-	#colBounds=xlimits,  # for ncol
-	panelLabel=plables,  # nrowxncol
+	colBounds=xlimits,  # for ncol
+	#panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
+	panelPrivateScale=[1],
+	panelPrivateRowBounds={1:(0.01,0.10)},
+	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
-	legendPanel={0:0,1:0,2:0},
-	#legendPanel={0:0},
-        legendLoc={0:(0.65,0.22),1:(0.75,0.16),2:(0.75,0.12)},
-       	#legendLoc={0:(0.60,0.15)},
-	legendSize=7,xlabel=xtitle[0],ylabel=ytitle[0]);
+	#legendPanel={0:0,1:0,2:0},
+	legendPanel={0:0,1:1},
+	legendLoc={0:(0.63,0.22),1:(0.49,0.5),2:(0.75,0.12)},
+	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -105,28 +109,32 @@ for s,color in [
 	("14","green")]:#,
 	#("12","orange")]:
 	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_pT{}.root".format(s),"read")
-	gr = fh.Get("gr_v2_QC");
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
-	_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-	#plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}",labelOrder=1); #+" ${} < p_\\mathrm{{T}} < {}\\,\\mathrm{{GeV}}$".format(*s)
-	plot.Add(0,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)",labelOrder=1);
+	for i,n in enumerate(range(2,4)):
+		gr = fh.Get("gr_v{}_QC".format(n));
+		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
+		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)",labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
 	schenkeDict = pickle.load(f);
-for s,label,color in [
-	(('pPb5020','v2','1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ p-Pb 5.02 TeV","purple"),
-	(('pp13TeV','v2','1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","pink")]:
-	d = schenkeDict[s];
-	plot.Add(0,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2);
+for i,n in enumerate(range(2,4)):
+	for s,label,color in [
+		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ p-Pb 5.02 TeV","purple"),
+		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","pink")]:
+		d = schenkeDict[s];
+		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
-plot.GetAxes(0).set_xticks([0,10,20,30,40,50,60,70,100, 120, 150, 200, 250,300]);
-#plot.GetAxes(1).set_xticks([0,15, 30, 45,60]);
-plot.GetAxes(0).xaxis.set_ticks_position('both');
-plot.GetAxes(0).yaxis.set_ticks_position('both');
+for i in range(0,2):
+	#XXX use majorTickMultiple=10 in constructor
+	#plot.GetAxes(i).set_xticks([0,10,20,30,40,50,60]);#,70,100, 120, 150, 200, 250,300]);
+	#plot.GetAxes(1).set_xticks([0,15, 30, 45,60]);
+	plot.GetAxes(i).xaxis.set_ticks_position('both');
+	plot.GetAxes(i).yaxis.set_ticks_position('both');
+	plot.GetAxes(i).yaxis.set_major_locator(plticker.MaxNLocator(7));
 
 plots = {};
 
@@ -164,8 +172,8 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
-plot.GetPlot().text(0.19,0.75,"ALICE",fontsize=12);
-plot.GetPlot().text(0.5,0.40,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=8);
+plot.GetPlot().text(0.15,0.75,"ALICE",fontsize=12);
+plot.GetPlot().text(0.31,0.38,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
@@ -177,6 +185,8 @@ plot.GetPlot().text(0.5,0.40,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\
 #-----------------------------------------------------------
 
 plot.Plot();
+
+plot.GetAxes(1).yaxis.tick_right();
 
 #plot.Save("figs/Fig6_v2Mult_allSystemsComp2.pdf");
 #plot.Save("figs/Fig6_v2Mult_allSystemsComp2.png");
