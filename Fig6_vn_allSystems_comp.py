@@ -57,7 +57,7 @@ NremoveAtlas =[3,5]
 nrow = 1;
 ncol = 2;
 xlimits = [(0,65),(0,65)];
-ylimits = [(-0.005,0.155)];
+ylimits = [(-0.005,0.170)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 #Alice to atlas conversion on multiplicity = N_{ch}
@@ -105,16 +105,16 @@ plot.EnableLatex(True);
 
 #--- hydro calculation -------------------------------------
 #pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
-for s,color in [
-	("14","green")]:#,
-	#("12","orange")]:
-	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_pT{}.root".format(s),"read")
+for si,(s,color) in enumerate([
+	("pT14","green"),
+	("pT14_m3","red")]):#,
+	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_{}.root".format(s),"read")
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
 		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)",labelOrder=1,labelLegendId=1);
+		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)"+", m={}".format([6,3][si]),labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
