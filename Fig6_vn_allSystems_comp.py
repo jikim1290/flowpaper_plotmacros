@@ -97,8 +97,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
-	legendPanel={0:0,1:1},
-	legendLoc={0:(0.63,0.22),1:(0.49,0.5),2:(0.75,0.12)},
+	legendPanel={0:0,1:1,2:1},
+	legendLoc={0:(0.63,0.22),1:(0.49,0.5),2:(0.29,0.1)},
 	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
@@ -125,6 +125,10 @@ for i,n in enumerate(range(2,4)):
 		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","pink")]:
 		d = schenkeDict[s];
 		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
+
+for i,p in enumerate([0,1]):
+	d = np.loadtxt("data/GubsHyd/gubshyd_param{}.dat".format(p));
+	plot.Add(0,(d[:,0],d[:,1]),linestyle=["-","--"][i],color="blue",plotType="line",labelLegendId=2,label="Gubs pp param{}".format(p));
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
@@ -173,7 +177,7 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
 plot.GetPlot().text(0.15,0.75,"ALICE",fontsize=12);
-plot.GetPlot().text(0.31,0.38,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
+plot.GetPlot().text(0.31,0.35,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
