@@ -57,7 +57,7 @@ NremoveAtlas =[3,5]
 nrow = 1;
 ncol = 2;
 xlimits = [(0,65),(0,65)];
-ylimits = [(-0.005,0.170)];
+ylimits = [(-0.005,0.175)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 #Alice to atlas conversion on multiplicity = N_{ch}
@@ -98,7 +98,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:1},
-	legendLoc={0:(0.63,0.22),1:(0.49,0.5),2:(0.29,0.1)},
+	legendLoc={0:(0.63,0.16),1:(0.49,0.5),2:(0.29,0.1)},
 	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
@@ -106,8 +106,8 @@ plot.EnableLatex(True);
 #--- hydro calculation -------------------------------------
 #pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
 for si,(s,color) in enumerate([
-	("pT14","green"),
-	("pT14_m3","red")]):#,
+	("pT14","blue"),
+	("pT14_m3","slateblue")]):#,
 	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_{}.root".format(s),"read")
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
@@ -121,14 +121,15 @@ with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
 	schenkeDict = pickle.load(f);
 for i,n in enumerate(range(2,4)):
 	for s,label,color in [
-		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ p-Pb 5.02 TeV","purple"),
-		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","pink")]:
+		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ p-Pb 5.02 TeV","royalblue"),
+		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","darkorange")]:
 		d = schenkeDict[s];
 		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
-
+#GubsHyd Farid's
+color = ["coral","red"]
 for i,p in enumerate([0,1]):
 	d = np.loadtxt("data/GubsHyd/gubshyd_param{}.dat".format(p));
-	plot.Add(0,(d[:,0],d[:,1]),linestyle=["-","--"][i],color="blue",plotType="line",labelLegendId=2,label="Gubs pp param{}".format(p));
+	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHydro pp 13 TeV param{}".format(p));
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
@@ -176,8 +177,8 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
-plot.GetPlot().text(0.15,0.75,"ALICE",fontsize=12);
-plot.GetPlot().text(0.31,0.35,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
+plot.GetPlot().text(0.14,0.77,"ALICE",fontsize=12);
+plot.GetPlot().text(0.31,0.30,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
