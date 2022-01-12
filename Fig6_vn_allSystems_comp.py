@@ -98,7 +98,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:1},
-	legendLoc={0:(0.63,0.16),1:(0.49,0.5),2:(0.29,0.1)},
+	legendLoc={0:(0.63,0.16),1:(0.49,0.5),2:(0.43,0.1)},
 	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
@@ -114,22 +114,24 @@ for si,(s,color) in enumerate([
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
 		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="p--Pb 5.02 TeV {T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)"+", m={}".format([6,3][si]),labelOrder=1,labelLegendId=1);
+		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)"+", m={}, p--Pb 5.02 TeV".format([6,3][si]),labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
 	schenkeDict = pickle.load(f);
 for i,n in enumerate(range(2,4)):
 	for s,label,color in [
-		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ p-Pb 5.02 TeV","royalblue"),
-		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$ pp 13 TeV","darkorange")]:
+		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, p--Pb 5.02 TeV","royalblue"),
+		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, pp 13 TeV","darkorange")]:
 		d = schenkeDict[s];
 		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
 #GubsHyd Farid's
 color = ["coral","red"]
+gubparam=["$\\sigma_{r}$ = 0.40[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.097",
+		"$\\sigma_{r}$ = 0.62[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.086"]
 for i,p in enumerate([0,1]):
 	d = np.loadtxt("data/GubsHyd/gubshyd_param{}.dat".format(p));
-	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHyd pp 13 TeV param{}".format(p));
+	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHyd, {}, pp 13 TeV".format(gubparam[p]));
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
@@ -177,7 +179,7 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
-plot.GetPlot().text(0.14,0.77,"ALICE",fontsize=12);
+plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
 plot.GetPlot().text(0.31,0.30,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
