@@ -129,7 +129,7 @@ for i,n in enumerate(range(2,4)):
 color = ["coral","red"]
 for i,p in enumerate([0,1]):
 	d = np.loadtxt("data/GubsHyd/gubshyd_param{}.dat".format(p));
-	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHydro pp 13 TeV param{}".format(p));
+	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHyd pp 13 TeV param{}".format(p));
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
