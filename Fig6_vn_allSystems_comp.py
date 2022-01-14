@@ -57,7 +57,7 @@ NremoveAtlas =[3,5]
 nrow = 1;
 ncol = 2;
 xlimits = [(0,65),(0,65)];
-ylimits = [(-0.005,0.175)];
+ylimits = [(-0.02,0.185)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 #Alice to atlas conversion on multiplicity = N_{ch}
@@ -97,8 +97,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
-	legendPanel={0:0,1:1,2:1},
-	legendLoc={0:(0.63,0.16),1:(0.49,0.5),2:(0.43,0.1)},
+	legendPanel={0:0,1:1,2:0},
+	legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
 	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
@@ -127,11 +127,18 @@ for i,n in enumerate(range(2,4)):
 		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
 #GubsHyd Farid's
 color = ["coral","red"]
-gubparam=["$\\sigma_{r}$ = 0.40[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.097",
-		"$\\sigma_{r}$ = 0.62[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.086"]
+#gubparam=["$\\sigma_{r}$ = 0.40[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.097",
+#		"$\\sigma_{r}$ = 0.62[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.086"]
+gubparam=["param0",
+		"param1"]
 for i,p in enumerate([0,1]):
 	d = np.loadtxt("data/GubsHyd/gubshyd_param{}.dat".format(p));
 	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHyd, {}, pp 13 TeV".format(gubparam[p]));
+#GubsHyd pPb
+gubparamPb = "GubsHyd, $\\sigma_{r}$ = 0.72[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.11, p--Pb 5.02 TeV";
+gubparamPb = "GubsHyd, param2, p--Pb 5.02 TeV";
+d = np.loadtxt("data/GubsHyd/gubshyd_pPb_param2.dat");
+plot.Add(0,(d[:,0],d[:,1]),linestyle="-",linecolor="deepskyblue",color="deepskyblue",plotType="theory",alpha=0.4,labelLegendId=2,label=gubparamPb);
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
@@ -180,7 +187,7 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
-plot.GetPlot().text(0.31,0.30,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
+plot.GetPlot().text(0.15,0.20,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
