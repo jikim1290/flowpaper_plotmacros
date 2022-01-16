@@ -92,29 +92,30 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
-	panelPrivateRowBounds={1:(0.01,0.10)},
+	panelPrivateRowBounds={1:(-0.010,0.10)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:0},
-	legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
+	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
+	legendLoc={0:(0.68,0.34),1:(0.40,0.17),2:(0.68,0.14)},
 	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
 #--- hydro calculation -------------------------------------
 #pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
-for si,(s,color) in enumerate([
-	("pT14","blue"),
-	("pT14_m3","slateblue")]):#,
-	fh = ROOT.TFile("data/results_dual_MAP_502_pPb_{}.root".format(s),"read")
+for si,(s,color,label) in enumerate([
+	("results_QM2018_pPb_502.root","blue","MAP(QM2018), m=6"),
+	("results_dual_MAP_pPb_502.root","slateblue","MAP(2021), m=6")]):
+	fh = ROOT.TFile("data/{}".format(s),"read")
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
 		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}, MAP(2021)"+", m={}, p--Pb 5.02 TeV".format([6,3][si]),labelOrder=1,labelLegendId=1);
+		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="--",color=color,plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
@@ -125,6 +126,7 @@ for i,n in enumerate(range(2,4)):
 		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, pp 13 TeV","darkorange")]:
 		d = schenkeDict[s];
 		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
+
 #GubsHyd Farid's
 color = ["coral","red"]
 #gubparam=["$\\sigma_{r}$ = 0.40[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.097",
