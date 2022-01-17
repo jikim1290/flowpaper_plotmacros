@@ -82,12 +82,14 @@ for si,(s,color,label) in enumerate([
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
-		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
+		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
+		plotEcc.Add(i,(x,y,yerr),linecolor=color,linestyle="-",color=color,plotType="theory",alpha=0.4,label=label,labelOrder=1,labelLegendId=0);
 		#----
 		gr = fh.Get("gr_ecc{}".format(n));
 		xecc,yecc,_,yerrEcc = JPyPlotRatio.TGraphErrorsToNumpy(gr);
 		plotVnEcc.Add(i,JPyPlotRatio.RatioSamples((pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),(xecc,yecc,yerrEcc)),linecolor=color,linestyle=":",color=color,plotType="theory",alpha=0.4,label="Hydro/"+label,labelOrder=1,labelLegendId=0);
-		plotEcc.Add(i,(xecc,yecc,yerrEcc),linecolor=color,linestyle=":",color=color,plotType="theory",alpha=0.4,label=label,labelOrder=1,labelLegendId=0);
+		plotEcc.Add(i,(xecc,yecc,yerrEcc),linecolor=color,linestyle="-",color=color,plotType="theory",alpha=0.4,label=label,labelOrder=1,labelLegendId=0);
+		plotEcc.Add(i,JPyPlotRatio.RatioSamples((pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),(xecc,yecc,yerrEcc)),linecolor=color,linestyle=":",color=color,plotType="theory",alpha=0.4,label="$v_{n}/\\varepsilon_{n}$, "+label,labelOrder=1,labelLegendId=0);
 		eccArrays.append((xecc,yecc,yerrEcc));
 	fh.Close();
 
@@ -109,7 +111,8 @@ for i,s in enumerate(data):
 		plotVnEcc.Add(0,a,color="red",edgecolor="red",linecolor="red",alpha=0.5,plotType="theory",label="Data/{T\\raisebox{-.5ex}{R}ENTo}(QM2018)"); # to replace with ATLAS converted Nch
 
 for plot in [plotVnEcc,plotEcc]:
-	plot.GetPlot().text(0.35,0.38,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
+	plot.GetPlot().text(0.35,0.18,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
+	plot.GetPlot().text(0.35,0.30,"p--Pb 5.02 TeV",fontsize=12);
 	plot.Plot();
 	plot.GetAxes(1).yaxis.tick_right();
 
