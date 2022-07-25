@@ -192,7 +192,7 @@ for i,s in enumerate(data):
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
-plot.GetPlot().text(0.15,0.20,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
+plot.GetPlot().text(0.15,0.20,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$",fontsize=9);
 #plot.GetPlot().text(0.35,0.3,"$1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.65,0.3,"$1 < p_\\mathrm{T} < 4.0 \\,\\mathrm{GeV}/c$",fontsize=8);
 #plot.GetPlot().text(0.55,0.53,"$0.2 < p_\\mathrm{T} < 3.0 \\,\\mathrm{GeV}/c$",fontsize=8);
