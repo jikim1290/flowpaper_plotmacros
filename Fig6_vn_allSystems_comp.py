@@ -18,7 +18,7 @@ data = {
 #	"vn_pPb_zna":ROOT.TFile("data/Final_Items.root","read"),
 #	"vn_pPb_v0a":ROOT.TFile("data/Final_Items.root","read"),
 #	"vn_pPb_v0a":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<2 GeV
-	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<4 GeV
+	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v2.root","read"),  # pPb 1<pT<4 GeV
 	#"vn_hydro_pPb":ROOT.TFile("data/results_dual_MAP_502_pPb.root","read")
 #	"vn_pp_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pp.root","read"),
 #	"vn_pPb_pub":ROOT.TFile("../flow_in_small_and_large_systems/Data/output_vn_pPb.root","read"),
@@ -57,7 +57,7 @@ NremoveAtlas =[3,5]
 nrow = 1;
 ncol = 2;
 xlimits = [(0,65),(0,65)];
-ylimits = [(-0.02,0.185)];
+ylimits = {0:(-0.02,0.185)};
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 #Alice to atlas conversion on multiplicity = N_{ch}
@@ -92,7 +92,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
-	panelPrivateRowBounds={1:(-0.010,0.10)},
+	#panelPrivateRowBounds={1:(-0.010,0.10)},
+	panelPrivateRowBounds={1:(-0.03,0.10)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
@@ -148,8 +149,8 @@ for i in range(0,2):
 	#XXX use majorTickMultiple=10 in constructor
 	#plot.GetAxes(i).set_xticks([0,10,20,30,40,50,60]);#,70,100, 120, 150, 200, 250,300]);
 	#plot.GetAxes(1).set_xticks([0,15, 30, 45,60]);
-	plot.GetAxes(i).xaxis.set_ticks_position('both');
-	plot.GetAxes(i).yaxis.set_ticks_position('both');
+	#plot.GetAxes(i).xaxis.set_ticks_position('both');
+	#plot.GetAxes(i).yaxis.set_ticks_position('both');
 	plot.GetAxes(i).yaxis.set_major_locator(plticker.MaxNLocator(7));
 
 plots = {};
@@ -158,33 +159,35 @@ nmeas=4;
 for i,s in enumerate(data):
 	print(s)
 
-	if i<nmeas:
-		gr = data[s].Get("{}_stat".format(histNames[i]));
-		grsyst = data[s].Get("{}_syst".format(histNames[i]));
+	for vi in range(0,2):
+		if i<nmeas:
+			print("{}_{}stat".format(histNames[i],"v3_" if vi > 0 else ("v2_" if i == 1 else "")));
+			gr = data[s].Get("{}_{}stat".format(histNames[i],"v3_" if vi > 0 else ("v2_" if i == 1 else "")));
+			grsyst = data[s].Get("{}_{}syst".format(histNames[i],"v3_" if vi > 0 else ("v2_" if i == 1 else "")));
 
-		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
-		'''
-		if i==0:
-		    x = np.array(NchAtlaspp_data);
-		    print("pp ALICE",y);
-		if i==1:
-		    x = np.array(NchAtlaspPb_data);
-		 ''' 
+			x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
+			'''
+			if i==0:
+				x = np.array(NchAtlaspp_data);
+				print("pp ALICE",y);
+			if i==1:
+				x = np.array(NchAtlaspPb_data);
+			 ''' 
 
-#	if i >=2 and i < 4:
-#		gr = data[s].Get("gv22Gap14Stat{}".format(histNamesPub[i-2]));
-#		grsyst = data[s].Get("gv22Gap14Sys{}".format(histNamesPub[i-2]));
+	#	if i >=2 and i < 4:
+	#		gr = data[s].Get("gv22Gap14Stat{}".format(histNamesPub[i-2]));
+	#		grsyst = data[s].Get("gv22Gap14Sys{}".format(histNamesPub[i-2]));
 
-	if i >= nmeas:
-		gr = data[s].Get("grAtlas_{}_stat".format(histNamesAtlas[i-nmeas]));
-		grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-nmeas]));
-		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
+		if i >= nmeas:
+			gr = data[s].Get("grAtlas_{}_stat".format(histNamesAtlas[i-nmeas]));
+			grsyst = data[s].Get("grAtlas_{}_syst".format(histNamesAtlas[i-nmeas]));
+			x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
 
-		if i==2:
-			print("pp ATLAS",y);
+			if i==2:
+				print("pp ATLAS",y);
 
-	plots[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
-	plot.AddSyst(plots[s],grsyst);
+		plots[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
+		plot.AddSyst(plots[s],grsyst);
 #plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
 #plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
 
