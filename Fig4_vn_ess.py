@@ -16,7 +16,7 @@ import JPyPlotRatio
 f = ROOT.TFile("data/Final_Items.root","read"); #root file for 1-4 GeV/c pt
 dataTypePlotParams = [
 	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
-	{'plotType':'data','color':'r','fmt':'s','markersize':5.0},
+	{'plotType':'data','color':'r','fmt':'s','fillstyle':'none','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
 	{'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
@@ -135,9 +135,9 @@ plot.GetPlot().text(0.18,0.43,"ALICE",fontsize=11);
 #	plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","3","5","7","9","13","20"]);
 #if( iobs==1 ):
 #	plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5], xticklabels=["Unbiased","3","5","7"]);
-plot.GetAxes(2).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","3","5","7","9","13","20"]);
+plot.GetAxes(2).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["All $p_\\mathrm{T}$","3","5","7","9","13","20"]);
 #	plot.GetAxes(1).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5,6.5], xticklabels=["Unbiased","10","20","30","40","50","60"]);
-plot.GetAxes(3).set(xticks=[0.5,1.5,2.5,3.5,4.5], xticklabels=["Unbiased","10","20","30","40"]);
+plot.GetAxes(3).set(xticks=[0.5,1.5,2.5,3.5,4.5], xticklabels=["All $p_\\mathrm{T}$","10","20","30","40"]);
 cntforaxis=0;
 for tick in plot.GetAxes(2).get_xticklabels():
 	if( cntforaxis==0 ):

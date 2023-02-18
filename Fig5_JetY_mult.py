@@ -42,11 +42,11 @@ plables = [ "", ""
 	#		"$1.0 < p_\\mathrm{T,trigg(assoc)} < 2.0$","$2.0 < p_\\mathrm{T,trigg(assoc)} < 3.0$","$3.0 < p_\\mathrm{T,trigg(assoc)} < 4.0$"
 		 ];
 # model names : for histonames in ROOT file
-centrality =["ALICE near","PYTHIA 8 Tune 4C near",
-	"ALICE away ($\\times$ 2), Template fit", "PYTHIA 8 Tune 4C away ($\\times$ 2)"];
+centrality =["ALICE Near side","PYTHIA 8 Tune 4C Near side",
+	"ALICE Away side($\\times$ 2), Template fit", "PYTHIA 8 Tune 4C Away side ($\\times$ 2)"];
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
-xtitle = ["",""];
+xtitle = ["V0M Event classes",""];
 ytitle = ["$Y_\\mathrm{frag}$"," away/near$"];
 
 
@@ -72,7 +72,7 @@ plot.EnableLatex(True);
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
-plot.GetAxes(0).set_xticks([0,1,2,3]);
+#plot.GetAxes(0).set_xticks([0,1,2,3]);
 plot.GetAxes(0).xaxis.set_ticks_position('both');
 plot.GetAxes(0).yaxis.set_ticks_position('both');
 gr_near = f.Get("{}_stat".format(histnames[0]));
@@ -119,7 +119,7 @@ plot.Ratio(dataMC,divplot);
 f.Close();
 
 plot.GetPlot().text(0.5,0.38,"$|\\Delta\\eta|<$1.3",fontsize=11);
-plot.GetPlot().text(0.16,0.82,toptitle,fontsize=11);
+plot.GetPlot().text(0.16,0.82,toptitle,fontsize=12);
 plot.GetPlot().text(0.16,0.38,dataDetail[0],fontsize=11);
 
 #plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],

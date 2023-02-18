@@ -44,7 +44,7 @@ histatlas_v3_syst =      ["v3_altas_syst"];
 
 # add labels for each pad
 #plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\mathrm{T}$ $R=0.4$ $|\\eta|<0.4$" ];
-plables = [ "$V_{2}$", "$V_{3}$" ];
+plables = [ "n = 2", "n = 3" ];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
@@ -65,7 +65,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
 	disableRatio=[0],
-	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
+	panelLabelLoc=(0.75,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel=0,
 	legendLoc=(0.46,0.27),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
