@@ -15,7 +15,7 @@ import matplotlib.ticker as plticker
 data = {
 	"vn_pp":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<2 GeV
 	"vn_pp_14":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<4 GeV
-	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<4 GeV
+	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v2.root","read"),  # pPb 1<pT<4 GeV
 }
 
 plotParams = {
@@ -24,7 +24,7 @@ plotParams = {
 	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
-histNames = ["pp","pp_14","pPb_14"];
+histNames = ["pp","pp_14","pPb_14_v2"];
 #histNames = ["pp_14","pPb_14"];
 
 # define panel/xaxis limits/titles

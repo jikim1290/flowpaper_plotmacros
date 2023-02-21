@@ -14,7 +14,7 @@ import matplotlib.ticker as plticker
 
 data = {
 	"vn_pp_14":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<4 GeV
-	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<4 GeV
+	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v2.root","read"),  # pPb 1<pT<4 GeV
 }
 
 plotParams = {
@@ -112,19 +112,14 @@ plotsV3 = {};
 nmeas=4;
 for i,s in enumerate(data):
 	print(s)
-	#v2
-	gr = data[s].Get("{}_stat".format(histNames[i]));
-	grsyst = data[s].Get("{}_syst".format(histNames[i]));
-	x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
-	plotsV2[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
-	plot.AddSyst(plotsV2[s],grsyst);
-	#v3
-	if(i<1): # no pPb for v3
-		gr = data[s].Get("{}_v3_stat".format(histNames[i]));
-		grsyst = data[s].Get("{}_v3_syst".format(histNames[i]));
+	for vi in range(0,2):
+		name = "{}_{}".format(histNames[i],"v3_" if vi > 0 else ("v2_" if i == 1 else ""));
+		print("  {}{}".format(name,"stat"));
+		gr = data[s].Get("{}{}".format(name,"stat"));
+		grsyst = data[s].Get("{}{}".format(name,"syst"));
 		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
-		plotsV3[s] = plot.Add(1,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
-		plot.AddSyst(plotsV3[s],grsyst);
+		plotsV2[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
+		plot.AddSyst(plotsV2[s],grsyst);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
 plot.GetPlot().text(0.15,0.20,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
