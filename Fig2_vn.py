@@ -37,14 +37,13 @@ histnames =      ["v2_pt_stat","v3_pt_stat"]; #LP,jet  # check it with ROOT file
 histnamesSyst =  ["v2_pt_syst","v3_pt_syst"]; #LP,jet  # check it with ROOT file Title	
 histnamesModels = [ "v2_EPOS","v3_EPOS" ];	
 
-histatlas =	 ["v2_ATLAS_pp"];
-histatlas_v3_stat =      ["v3_altas_stat"];
-histatlas_v3_syst =      ["v3_altas_syst"];
+histatlas_stat = ["v2_atlas_stat","v3_atlas_stat"];
+histatlas_syst = ["v2_atlas_syst","v3_atlas_syst"];
 
 
 # add labels for each pad
 #plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\mathrm{T}$ $R=0.4$ $|\\eta|<0.4$" ];
-plables = [ "$V_{2}$", "$V_{3}$" ];
+plables = [ "n = 2", "n = 3" ];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
@@ -65,7 +64,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
 	disableRatio=[0],
-	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
+	panelLabelLoc=(0.75,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel=0,
 	legendLoc=(0.46,0.27),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
@@ -83,27 +82,24 @@ for i in range(0,nrow):
 		plot.GetAxes(index).set_xticks([1.5,2.5,3.5]);
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
-				#Loading ALICE
+		gr = f.Get("{}".format(histnames[j]));
+		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $");
+		grsyst = f.Get("{}".format(histnamesSyst[j]));
+		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
+		plot.AddSyst(data,syst);
+		#Loading ATLAS
+		grATLAS = f.Get("{}".format(histatlas_stat[j]));
+		data = plot.Add(index,grATLAS,**dataTypePlotParams[1],label="ATLAS, $2.0<|\\Delta\\eta|<5.0$ \n 0.5 $ < p_\\mathrm{T,assoc} < 5 \\,\\mathrm{GeV}/c $");
+		grsystATLAS = f.Get("{}".format(histatlas_syst[j]));
+		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystATLAS));
+		plot.AddSyst(data,syst);
+		#End of ATLAS
 		gr = f.Get("{}".format(histnames[j]));
 		gr.Print();
 		data = plot.Add(index,gr,**dataTypePlotParams[0],label="ALICE, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $");
 		grsyst = f.Get("{}".format(histnamesSyst[j]));
 		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
 		plot.AddSyst(data,syst);
-		# End of ALICE
-		#Loading ATLAS
-		if(j==0):
-			grATLAS = f.Get("{}".format(histatlas[j]));
-			grATLAS.Print();
-			data = plot.Add(index,grATLAS,**dataTypePlotParams[1],label="ATLAS, $2.0<|\\Delta\\eta|<5.0$ \n 0.5 $ < p_\\mathrm{T,assoc} < 5 \\,\\mathrm{GeV}/c $");
-		if(j==1):
-			grATLAS = f.Get("{}".format(histatlas_v3_stat[0]));
-			data = plot.Add(index,grATLAS,**dataTypePlotParams[1],label="ATLAS, $2.0<|\\Delta\\eta|<5.0$ \n 0.5 $ < p_\\mathrm{T,assoc} < 5 \\,\\mathrm{GeV}/c $");
-			grsystATLAS = f.Get("{}".format(histatlas_v3_syst[0]));
-			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystATLAS));
-			plot.AddSyst(data,syst);
-		gr = f.Get("{}".format(histnames[j]));
-		#End of ATLAS
 
 f.Close();
 

@@ -28,7 +28,7 @@ nrow = 1;
 ncol = 1;
 xlimits = {0:(-1.4,4.5)};
 ylimits = {0:(1.14,1.315)};
-rlimits = [(0.99,1.01)];
+rlimits = [(0.99,1.009)];
 
 
 histnames = ["signal","LM","fit","v22","v33" ];
@@ -44,7 +44,7 @@ modelStrInROOT = ["pythiadefault","stringshoving","eposlhc"]; # for data reading
 modelStr = ["EPOS LHC near-side","EPOS LHC away-side"]; # for legend
 
 #TypeName =["Signal", "Fit", "$F$LM + $G$","$G$(1 + $v_{2,2}$)","$G$(1 + $v_{3,3}$)" ];
-TypeName =["Signal (0--0.1\%)", "Fit","$FY_{\\mathrm{LM}} + G$", "$G(1+2v_{2,2}cos(2\\Delta\\varphi))$ \n $+ FY_{\\mathrm{LM,min}}$","$G(1+2v_{3,3}cos(3\\Delta\\varphi))$ \n $+ FY_{\\mathrm{LM,min}}$"];
+TypeName =["Signal (0--0.1\% V0M)", "Fit","$FY_{\\mathrm{LM}} + G$", "$G(1+2v_{2,2}cos(2\\Delta\\varphi))$ \n $+ FY_{\\mathrm{LM,min}}$","$G(1+2v_{3,3}cos(3\\Delta\\varphi))$ \n $+ FY_{\\mathrm{LM,min}}$"];
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
 xtitle = ["$\\Delta\\varphi (\\mathrm{rad})$"];
