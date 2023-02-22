@@ -16,7 +16,7 @@ import JPyPlotRatio
 f = ROOT.TFile("data/Final_Items.root","read");
 dataTypePlotParams = [
 	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
-	{'plotType':'data','color':'b','fmt':'d','markersize':5.0},
+	{'plotType':'data','color':'g','fmt':'d','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
 	{'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
@@ -43,7 +43,7 @@ histatlas_syst = ["v2_atlas_syst","v3_atlas_syst"];
 
 # add labels for each pad
 #plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\mathrm{T}$ $R=0.4$ $|\\eta|<0.4$" ];
-plables = [ "n = 2", "n = 3" ];
+plables = [ "$n = 2$", "$n = 3$" ];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
