@@ -43,7 +43,7 @@ histatlas_syst = ["v2_atlas_syst","v3_atlas_syst"];
 
 # add labels for each pad
 #plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\mathrm{T}$ $R=0.4$ $|\\eta|<0.4$" ];
-plables = [ "n = 2", "n = 3" ];
+plables = [ "$n = 2$", "$n = 3$" ];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
