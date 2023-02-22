@@ -24,14 +24,14 @@ plotParams = {
 	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
-histNames = ["pp","pp_14","pPb_14_v2"];
+histNames = ["pp","pp_14","pPb_14"];
 #histNames = ["pp_14","pPb_14"];
 
 # define panel/xaxis limits/titles
 nrow = 1;
-ncol = 1;
-xlimits = [(5,50)];
-ylimits = [(-0.01,0.13)];
+ncol = 2;
+xlimits = [(5,50),(7,50)];
+ylimits = [(-0.01,0.13),(-0.01,0.13)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 # add labels for each pad
@@ -50,7 +50,9 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	colBounds=xlimits,  # for ncol
 	#panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
-	disableRatio=[],
+	disableRatio=[0],
+	panelPrivateScale=[1],
+	panelPrivateRowBounds={1:(-0.01,0.07)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
@@ -58,34 +60,42 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
 	legendLoc={0:(0.68,0.32),1:(0.45,0.17)},
-	legendSize=9,xlabel=xtitle[0],ylabel=ytitle);
+	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
-#for i in range(0,2):
 plot.GetAxes(0).yaxis.set_major_locator(plticker.MaxNLocator(7));
-##plot.ax.flat[0].yaxis.set_ticks_position('both');
+plot.GetAxes(1).yaxis.set_major_locator(plticker.MaxNLocator(7));
 
 plotsV2 = {};
 
 nmeas=4;
 for i,s in enumerate(data):
 	print(s)
-	#v2
-	gr = data[s].Get("{}_stat".format(histNames[i]));
-	grsyst = data[s].Get("{}_syst".format(histNames[i]));
-	x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
-	plotsV2[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
-	plot.AddSyst(plotsV2[s],grsyst);
+	for vi in range(0,2):
+		name = "{}_{}".format(histNames[i],"v3_" if vi > 0 else ("v2_" if i > 1 else ""));
+		print("  {}{}".format(name,"stat"));
+		gr = data[s].Get("{}{}".format(name,"stat"));
+		grsyst = data[s].Get("{}{}".format(name,"syst"));
+		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
+		plotsV2[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
+		plot.AddSyst(plotsV2[s],grsyst);
 
 plot.Ratio(plotsV2["vn_pp_14"],plotsV2["vn_pp"]);
 
-plot.GetPlot().text(0.18,0.80,"ALICE",fontsize=12);
-plot.GetPlot().text(0.45,0.58,"$1.6<|\Delta\eta|<1.8$",fontsize=9);
+#plot.GetPlot().text(0.18,0.80,"ALICE",fontsize=12);
+plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
+#plot.GetPlot().text(0.45,0.58,"$1.6<|\Delta\eta|<1.8$",fontsize=9);
+plot.GetPlot().text(0.35,0.47,"$1.6<|\Delta\eta|<1.8$",fontsize=9);
 
 #-----------------------------------------------------------
 
 plot.Plot();
+
+plot.GetAxes(1).yaxis.tick_right();
+
+for a in plot.ax.flat[1:]: #hack
+	a.yaxis.set_ticks_position('both');
 
 plot.Save("figs/Fig6_v2Mult_allSystems_Data.pdf");
 plot.Save("figs/Fig6_v2Mult_allSystems_Data.png");
