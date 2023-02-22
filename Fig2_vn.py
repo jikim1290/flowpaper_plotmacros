@@ -16,7 +16,7 @@ import JPyPlotRatio
 f = ROOT.TFile("data/Final_Items.root","read");
 dataTypePlotParams = [
 	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
-	{'plotType':'data','color':'b','fmt':'d','markersize':5.0},
+	{'plotType':'data','color':'g','fmt':'d','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
 	{'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
