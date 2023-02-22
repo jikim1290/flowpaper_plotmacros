@@ -90,11 +90,11 @@ for d in range(0,5):
 
 f.Close();
 
-plot.GetPlot().text(0.5,0.83,"ALICE",fontsize=11);
-plot.GetPlot().text(0.5,0.79,toptitle,fontsize=11);
-plot.GetPlot().text(0.52,0.75,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$",fontsize=11);
-plot.GetPlot().text(0.52,0.71,"$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
-plot.GetPlot().text(0.2,0.51,"$1.6 < |\\Delta\\eta| < 1.8$",fontsize=10);
+plot.GetPlot().text(0.53,0.83,"ALICE",fontsize=11);
+plot.GetPlot().text(0.53,0.79,toptitle,fontsize=11);
+plot.GetPlot().text(0.54,0.75,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$",fontsize=11);
+plot.GetPlot().text(0.54,0.71,"$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
+plot.GetPlot().text(0.2,0.515,"$1.6 < |\\Delta\\eta| < 1.8$",fontsize=10);
 plot.GetRatioAxes(0).xaxis.set_ticks_position('both');
 plot.GetRatioAxes(0).yaxis.set_ticks_position('both');
 #plot.GetAxes(0).xticks(rotation=45)
