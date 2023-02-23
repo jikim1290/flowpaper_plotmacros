@@ -35,7 +35,7 @@ ylimits = [(-0.01,0.13),(-0.01,0.13)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 # add labels for each pad
-plables = [ "", ""]
+plables = [ "$n = 2$", "$n = 3$" ];
 
 xtitle = ["$N_\\mathrm{ch}(|\eta|<0.5)$",""];
 ytitle = ["$v_{2}$","$v_{3}$"];
@@ -48,18 +48,18 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelsize=(5,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
-	#panelLabel=plables,  # nrowxncol
+	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
 	panelPrivateRowBounds={1:(-0.01,0.07)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
-	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
+	panelLabelLoc=(0.4,0.90),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.68,0.32),1:(0.45,0.17)},
+	legendLoc={0:(0.65,0.20),1:(0.45,0.17)},
 	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
