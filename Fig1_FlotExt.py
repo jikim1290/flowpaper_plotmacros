@@ -65,7 +65,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 #	disableRatio=[0],
 	ratioPlot=True,
 	panelLabelLoc=(0.1,0.87),panelLabelSize=10,panelLabelAlign="left",
-	legendPanel=0,
+	legendPanel=0,ylabelRatio="Data/Fit",
 	legendLoc=(0.26,0.65),legendSize=11,xlabel=xtitle[0],ylabel=ytitle[0]);
 
 

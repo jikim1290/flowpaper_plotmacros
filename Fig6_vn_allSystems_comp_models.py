@@ -58,7 +58,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
 	legendLoc={0:(0.68,0.34),1:(0.45,0.17),2:(0.68,0.14)},
-	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -121,8 +121,8 @@ for i,s in enumerate(data):
 		plotsV2[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
 		plot.AddSyst(plotsV2[s],grsyst);
 
-plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
-plot.GetPlot().text(0.15,0.20,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
+plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
+plot.GetPlot().text(0.135,0.19,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
 
 #-----------------------------------------------------------
 
