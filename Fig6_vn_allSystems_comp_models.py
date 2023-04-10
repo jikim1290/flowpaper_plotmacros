@@ -18,8 +18,8 @@ data = {
 }
 
 plotParams = {
-	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
+	"vn_pp_14":{"color":"r","fmt":"o","markersize":5.5,"label":"pp 13 TeV","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"b","fmt":"s","mfc":"none","markersize":5.5,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
 histNames = ["pp_14","pPb_14"];
@@ -57,8 +57,10 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.68,0.34),1:(0.45,0.17),2:(0.68,0.14)},
-	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.67,0.34),1:(0.46,0.18),2:(0.67,0.14)},
+	axisLabelSize=17,
+	tickLabelSize=15,
+	legendSize=10,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -122,7 +124,7 @@ for i,s in enumerate(data):
 		plot.AddSyst(plotsV2[s],grsyst);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
-plot.GetPlot().text(0.135,0.19,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
+plot.GetPlot().text(0.14,0.19,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=10.5);
 
 #-----------------------------------------------------------
 

@@ -19,9 +19,9 @@ data = {
 }
 
 plotParams = {
-	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"pp 13 TeV, $1<p_\\mathrm{T}<2.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
-	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pp":{"color":"k","fmt":"o","markersize":5.5,"label":"pp 13 TeV, $1<p_\\mathrm{T}<2.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.5,"label":"pp 13 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"b","fmt":"s","mfc":"none","markersize":5.5,"label":"p$-$Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
 histNames = ["pp","pp_14","pPb_14"];
@@ -30,7 +30,7 @@ histNames = ["pp","pp_14","pPb_14"];
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
-xlimits = [(5,50),(7,50)];
+xlimits = [(5,52),(7,52)];
 ylimits = [(-0.01,0.13),(-0.01,0.13)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
@@ -45,7 +45,7 @@ toptitle = "$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$"; # need to add on t
 dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(5,5),
+	panelsize=(4,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
@@ -59,8 +59,10 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.65,0.20),1:(0.45,0.17)},
-	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.56,0.20),1:(0.45,0.17)},
+	axisLabelSize=15,
+	tickLabelSize=14,
+	legendSize=10,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
