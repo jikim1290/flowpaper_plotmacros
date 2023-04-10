@@ -17,8 +17,8 @@ matplotlib.rcParams["axes.linewidth"] = 1.1;
 
 f = ROOT.TFile("data/Final_Items.root","read"); #root file for 1-4 GeV/c pt
 dataTypePlotParams = [
-	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
-	{'plotType':'data','color':'r','fmt':'s','fillstyle':'none','markersize':5.0},
+	{'plotType':'data','color':'k','fmt':'o','markersize':3.5},
+	{'plotType':'data','color':'r','fmt':'s','fillstyle':'none','markersize':3.5},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
 	{'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
@@ -106,7 +106,7 @@ for iobs in range(0,2):
 			gr12 = (x,y,yerr);
 
 		data = plot.Add(index,gr,**dataTypePlotParams[0],label=dataDetail[0]);
-		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0],xshift=0.1);
+		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0],xshift=0.05);
 		plot.AddSyst(data,syst);
 		plot.AddSyst(data12,syst12);
 #			if( iobs==0 ):
