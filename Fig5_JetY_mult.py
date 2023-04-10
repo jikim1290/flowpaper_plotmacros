@@ -65,7 +65,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 #	ratioSystPlot=True,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel={0:0},
-	legendLoc={0:(0.7,0.85)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
+	axisLabelSize=14,legendLoc={0:(0.7,0.85)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
 
 
 plot.EnableLatex(True);
@@ -118,9 +118,9 @@ plot.Ratio(dataMC,divplot);
 
 f.Close();
 
-plot.GetPlot().text(0.5,0.38,"$|\\Delta\\eta|<$1.3",fontsize=11);
+plot.GetPlot().text(0.5,0.38,"$|\\Delta\\eta|<$1.3",fontsize=12);
 plot.GetPlot().text(0.16,0.82,toptitle,fontsize=12);
-plot.GetPlot().text(0.16,0.38,dataDetail[0],fontsize=11);
+plot.GetPlot().text(0.16,0.38,dataDetail[0],fontsize=12);
 
 #plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
 #	xticklabels=[ "", "", "", "" ]);

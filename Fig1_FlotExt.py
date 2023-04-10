@@ -65,7 +65,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 #	disableRatio=[0],
 	ratioPlot=True,
 	panelLabelLoc=(0.1,0.87),panelLabelSize=10,panelLabelAlign="left",
-	legendPanel=0,
+	legendPanel=0,ylabelRatio="Data/Fit",
 	legendLoc=(0.26,0.65),legendSize=11,xlabel=xtitle[0],ylabel=ytitle[0]);
 
 
@@ -85,16 +85,17 @@ for d in range(0,5):
 	if(d==0):
 		grFit = f.Get("{}".format(histnames[1]));
 		fit = plot.Add(0,grFit,**dataTypePlotParams[1],label=TypeName[1]);
-		plot.Ratio(data, fit );
+		plot.Ratio(data,fit);
 
 
 f.Close();
 
-plot.GetPlot().text(0.5,0.83,"ALICE",fontsize=11);
-plot.GetPlot().text(0.5,0.79,toptitle,fontsize=11);
-plot.GetPlot().text(0.52,0.75,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$",fontsize=11);
-plot.GetPlot().text(0.52,0.71,"$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
-plot.GetPlot().text(0.2,0.51,"$1.6 < |\\Delta\\eta| < 1.8$",fontsize=10);
+plot.GetPlot().text(0.57,0.83,"ALICE",fontsize=11);
+plot.GetPlot().text(0.57,0.79,toptitle,fontsize=11);
+plot.GetPlot().text(0.57,0.71,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$\n$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
+#plot.GetPlot().text(0.54,0.75,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$",fontsize=11);
+#plot.GetPlot().text(0.54,0.71,"$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
+plot.GetPlot().text(0.2,0.515,"$1.6 < |\\Delta\\eta| < 1.8$",fontsize=10);
 plot.GetRatioAxes(0).xaxis.set_ticks_position('both');
 plot.GetRatioAxes(0).yaxis.set_ticks_position('both');
 #plot.GetAxes(0).xticks(rotation=45)

@@ -15,34 +15,30 @@ import matplotlib.ticker as plticker
 data = {
 	"vn_pp":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<2 GeV
 	"vn_pp_14":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<4 GeV
-	"vn_pPb_v0a":ROOT.TFile("data/fout_v2_pPb_v1.root","read"),  # pPb 1<pT<2 GeV
-	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v1.root","read")  # pPb 1<pT<4 GeV
+	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v2.root","read"),  # pPb 1<pT<4 GeV
 }
 
 plotParams = {
-	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"pp 13 TeV, $1 < p_\\mathrm{T} < 2.0 \\,\\mathrm{GeV}/c$","labelLegendId":0},
-	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV","labelLegendId":0},
-	"vn_pPb_v0a":{"color":"k","fmt":"*","markersize":5.0,"label":"p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV ","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV","labelLegendId":0}	
+	"vn_pp":{"color":"k","fmt":"o","markersize":5.0,"label":"pp 13 TeV, $1<p_\\mathrm{T}<2.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV, $1<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}/c$","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
-histNames = ["pp","pp_14","pPb_v2_v0a","pPb_14"];
+histNames = ["pp","pp_14","pPb_14"];
+#histNames = ["pp_14","pPb_14"];
 
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
-xlimits = [(0,65),(0,65)];
-ylimits = [(-0.02,0.185)];
+xlimits = [(5,50),(7,50)];
+ylimits = [(-0.01,0.13),(-0.01,0.13)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 # add labels for each pad
-plables = [ "", ""
-		 ];
+plables = [ "$n = 2$", "$n = 3$" ];
 
 xtitle = ["$N_\\mathrm{ch}(|\eta|<0.5)$",""];
 ytitle = ["$v_{2}$","$v_{3}$"];
-#labelList = ["pp $\\sqrt{s}$ = 13 TeV our","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV our","pp $\\sqrt{s}$ = 13 TeV","p$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV","Pb$-$Pb $\\sqrt{s_\\mathrm{NN}}$ = 5.02 TeV"]
-
 
 # Following two must be added
 toptitle = "$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$"; # need to add on the top
@@ -52,53 +48,45 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelsize=(5,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
-	#panelLabel=plables,  # nrowxncol
+	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
-	panelPrivateRowBounds={1:(-0.010,0.10)},
+	panelPrivateRowBounds={1:(-0.01,0.07)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
-	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
+	panelLabelLoc=(0.4,0.90),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
-	legendPanel={0:0,1:1,2:0},
+	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.68,0.34),1:(0.40,0.17),2:(0.68,0.14)},
-	legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.65,0.20),1:(0.45,0.17)},
+	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
-plotMatrix = np.empty((nrow,ncol),dtype=int);
-
-for i in range(0,2):
-	plot.GetAxes(i).xaxis.set_ticks_position('both');
-	plot.GetAxes(i).yaxis.set_ticks_position('both');
-	plot.GetAxes(i).yaxis.set_major_locator(plticker.MaxNLocator(7));
+plot.GetAxes(0).yaxis.set_major_locator(plticker.MaxNLocator(7));
+plot.GetAxes(1).yaxis.set_major_locator(plticker.MaxNLocator(7));
 
 plotsV2 = {};
-plotsV3 = {};
 
+nmeas=4;
 for i,s in enumerate(data):
-	print(i,s)
-	print(histNames[i])
-	gr = data[s].Get("{}_stat".format(histNames[i]));
-	grsyst = data[s].Get("{}_syst".format(histNames[i]));
-	x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
-	plotsV2[s] = plot.Add(0,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
-	plot.AddSyst(plotsV2[s],grsyst);
-
-	#v3
-	if(i<2):
-		gr = data[s].Get("{}_v3_stat".format(histNames[i]));
-		grsyst = data[s].Get("{}_v3_syst".format(histNames[i]));
+	print(s)
+	for vi in range(0,2):
+		name = "{}_{}".format(histNames[i],"v3_" if vi > 0 else ("v2_" if i > 1 else ""));
+		print("  {}{}".format(name,"stat"));
+		gr = data[s].Get("{}{}".format(name,"stat"));
+		grsyst = data[s].Get("{}{}".format(name,"syst"));
 		x,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr); # to replace with ATLAS converted Nch
-		plotsV3[s] = plot.Add(1,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
-		plot.AddSyst(plotsV3[s],grsyst);
-#plot.Ratio(plots["vn_pp_14"], plots["vn_pp"]);
-#plot.Ratio(plots["vn_pPb_v0a_14"], plots["vn_pPb_v0a"]);
+		plotsV2[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
+		plot.AddSyst(plotsV2[s],grsyst);
 
-plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=12);
-plot.GetPlot().text(0.15,0.20,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=9);
+plot.Ratio(plotsV2["vn_pp_14"],plotsV2["vn_pp"]);
+
+#plot.GetPlot().text(0.18,0.80,"ALICE",fontsize=12);
+plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
+#plot.GetPlot().text(0.45,0.58,"$1.6<|\Delta\eta|<1.8$",fontsize=9);
+plot.GetPlot().text(0.35,0.47,"$1.6<|\Delta\eta|<1.8$",fontsize=12);
 
 #-----------------------------------------------------------
 
@@ -106,7 +94,10 @@ plot.Plot();
 
 plot.GetAxes(1).yaxis.tick_right();
 
-plot.Save("figs/Fig6_vnMult_allSystemsDataOnly.pdf");
-plot.Save("figs/Fig6_vnMult_allSystemsDataOnly.png");
+for a in plot.ax.flat[1:]: #hack
+	a.yaxis.set_ticks_position('both');
+
+plot.Save("figs/Fig6_v2Mult_allSystems_Data.pdf");
+plot.Save("figs/Fig6_v2Mult_allSystems_Data.png");
 plot.Show();
 
