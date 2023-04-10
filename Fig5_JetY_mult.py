@@ -135,6 +135,9 @@ for tick in plot.GetAxes(0).get_xticklabels():
 #plot.GetAxes(0).xticks(rotation=45)
 plot.Plot();
 
+plot.GetAxes(0).tick_params(axis='x',which='minor',bottom=False);
+plot.GetRatioAxes(0).tick_params(axis='x',which='minor',bottom=False);
+
 
 plot.Save("figs/Fig5_Plot_v2Mult.pdf");
 plot.Save("figs/Fig5_Plot_v2Mult.png");
