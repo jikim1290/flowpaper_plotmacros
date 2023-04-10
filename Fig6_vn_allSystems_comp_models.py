@@ -18,8 +18,8 @@ data = {
 }
 
 plotParams = {
-	"vn_pp_14":{"color":"r","fmt":"o","mfc":"none","markersize":5.0,"label":"pp 13 TeV","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"b","fmt":"D","mfc":"none","markersize":5.0,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
+	"vn_pp_14":{"color":"r","fmt":"o","markersize":5.5,"label":"pp 13 TeV","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"b","fmt":"s","mfc":"none","markersize":5.5,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
 histNames = ["pp_14","pPb_14"];

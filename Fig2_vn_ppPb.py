@@ -30,7 +30,7 @@ addpPb = True;
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
-xlimits = [(1.0,3.8),(1.0,3.8)];
+xlimits = [(0.8,3.8),(0.8,3.8)];
 ylimits = [(0.005,0.175)];
 rlimits = [(0.3,1.9),(0.,4.5)];
 
@@ -73,7 +73,6 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	axisLabelSize=14,tickLabelSize=14,legendPanel=0,
 	legendLoc=(0.46,0.20),legendSize=14,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
-
 plot.EnableLatex(True); # for publication need fonts via texlive
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
@@ -104,7 +103,7 @@ for i in range(0,nrow):
 		if(addpPb):
 			grpPb = fpPb.Get("{}".format(histpPb_stat[j]));
 			grpPb.Print();
-			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="pPb 5.02 TeV 0--20\%");
+			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="p--Pb 5.02 TeV 0--20\%");
 			grsystpPb = fpPb.Get("{}".format(histpPb_syst[j]));
 			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystpPb));
 			plot.AddSyst(dataPb,syst);
