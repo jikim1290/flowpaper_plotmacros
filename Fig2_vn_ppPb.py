@@ -16,7 +16,7 @@ import JPyPlotRatio
 f = ROOT.TFile("data/Final_Items.root","read");
 fpPb = ROOT.TFile("data/fout_v2_pPb_v2.root","read");
 dataTypePlotParams = [
-	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
+	{'plotType':'data','color':'r','fmt':'o','markersize':5.0},
 	{'plotType':'data','color':'g','fmt':'d','markersize':5.0},
 	{'plotType':'data','color':'b','fmt':'s','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
@@ -30,9 +30,9 @@ addpPb = True;
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
-xlimits = [(1.0,4.2),(1.0,4.2)];
-ylimits = [(0,0.175)];
-rlimits = [(1.1,1.9),(0.,4.5)];
+xlimits = [(1.0,3.8),(1.0,3.8)];
+ylimits = [(0.005,0.175)];
+rlimits = [(0.3,1.9),(0.,4.5)];
 
 
 # add here the histogram names for each pad
@@ -68,8 +68,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
-	#disableRatio=[0],
-	panelLabelLoc=(0.70,0.88),panelLabelSize=16,panelLabelAlign="left",
+	disableRatio=[0],
+	panelLabelLoc=(0.71,0.89),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel=0,
 	legendLoc=(0.46,0.20),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
@@ -101,7 +101,7 @@ for i in range(0,nrow):
 		#plot.AddSyst(data,syst);
 		#End of ATLAS
 		#Loading pPb
-		if(addpPb and j==0):
+		if(addpPb):
 			grpPb = fpPb.Get("{}".format(histpPb_stat[j]));
 			grpPb.Print();
 			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="pPb 5.02 TeV 0--20\%");
@@ -119,9 +119,9 @@ for i in range(0,nrow):
 
 f.Close();
 
-plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
+plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=13);
 #plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
-plot.GetPlot().text(0.67,0.40,dataDetail[0],fontsize=12);
+plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=12);
 #plot.GetPlot().text(0.16,0.17,dataDetail[1],fontsize=10);
 
 # this is need because of the input histo label setting..
