@@ -18,7 +18,7 @@ fpPb = ROOT.TFile("data/fout_v2_pPb_v2.root","read");
 dataTypePlotParams = [
 	{'plotType':'data','color':'r','fmt':'o','markersize':5.0},
 	{'plotType':'data','color':'g','fmt':'d','fillstyle':'none','markersize':5.0},
-	{'plotType':'data','color':'b','fmt':'s','fillstyle':'none','markersize':5.0},
+	{'plotType':'data','color':'b','fmt':'D','fillstyle':'none','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
 	{'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
@@ -62,16 +62,16 @@ dataDetail = ["$1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\ma
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(4,5),
+	panelsize=(5,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
 	disableRatio=[0],
-	panelLabelLoc=(0.71,0.89),panelLabelSize=16,panelLabelAlign="left",
-	legendPanel=0,
-	legendLoc=(0.46,0.20),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
+	panelLabelLoc=(0.71,0.89),panelLabelSize=14,panelLabelAlign="left",
+	axisLabelSize=14,tickLabelSize=14,legendPanel=0,
+	legendLoc=(0.46,0.20),legendSize=14,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
 
 plot.EnableLatex(True); # for publication need fonts via texlive
@@ -119,9 +119,9 @@ for i in range(0,nrow):
 
 f.Close();
 
-plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=13);
+plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=14);
 #plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
-plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=12);
+plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=14);
 #plot.GetPlot().text(0.16,0.17,dataDetail[1],fontsize=10);
 
 # this is need because of the input histo label setting..

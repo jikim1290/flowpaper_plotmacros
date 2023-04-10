@@ -27,6 +27,8 @@ plotParams = {
 histNames = ["pp","pp_14","pPb_14"];
 #histNames = ["pp_14","pPb_14"];
 
+#XXX for this plotter, font size 14 roughly corresponds to the text size.
+
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
@@ -53,14 +55,14 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	disableRatio=[0],
 	panelPrivateScale=[1],
 	panelPrivateRowBounds={1:(-0.01,0.07)},
-	majorTickMultiple=10,
+	majorTickMultiple=5,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.4,0.90),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.65,0.20),1:(0.45,0.17)},
-	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.60,0.20),1:(0.45,0.17)},
+	axisLabelSize=14,tickLabelSize=14,legendSize=12,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 

@@ -9,9 +9,11 @@ import sys
 sys.path.append("JPyPlotRatio");
 #https://github.com/jaelpark/JPyPlotRatio
 
-
+#other figures have adjusted panelsize. Adjust the frame thickness to match the others.
 import JPyPlotRatio
 
+import matplotlib
+matplotlib.rcParams["axes.linewidth"] = 1.1;
 
 f = ROOT.TFile("data/Final_Items.root","read"); #root file for 1-4 GeV/c pt
 dataTypePlotParams = [
@@ -49,7 +51,7 @@ histnamesModels = [
 	["v3_0_EPOS",  "v3_1_EPOS"], ];
 
 # add labels for each pad
-plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\\mathrm{T}$ $R=0.4$ $|\\eta|<0.4$" ,"",""];
+plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\\mathrm{T}$\n$R=0.4$ $|\\eta|<0.4$" ,"",""];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
@@ -68,9 +70,10 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0,1],
-	panelLabelLoc=(0.07,0.14),panelLabelSize=9,panelLabelAlign="left",
+	panelLabelLoc=(0.06,0.62),panelLabelSize=12,panelLabelAlign="left",
 	legendPanel=2,
-	legendLoc=(0.40,0.6),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
+	legendLoc=(0.40,0.61),legendSize=12,xlabel={0:xtitle[0],1:xtitle[1]},
+	axisLabelSize=12,tickLabelSize=12,
 	ylabel={0:ytitle[0],1:ytitle[1]});
 plot.EnableLatex(True); # for publication need fonts via texlive
 
@@ -103,7 +106,7 @@ for iobs in range(0,2):
 			gr12 = (x,y,yerr);
 
 		data = plot.Add(index,gr,**dataTypePlotParams[0],label=dataDetail[0]);
-		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0]);
+		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0],xshift=0.1);
 		plot.AddSyst(data,syst);
 		plot.AddSyst(data12,syst12);
 #			if( iobs==0 ):
@@ -123,12 +126,12 @@ for iobs in range(0,2):
 plot.GetPlot().text(0.15,0.82,toptitle[0],fontsize=12);
 plot.GetPlot().text(0.17,0.77,toptitle[1],fontsize=12);
 #plot.GetPlot().text(0.16,0.78,dataDetail[0],fontsize=11);
-plot.GetPlot().text(0.18,0.39,dataDetail[1],fontsize=11);
+plot.GetPlot().text(0.18,0.40,dataDetail[1],fontsize=11);
 plot.GetPlot().text(0.44,0.80,PanelName[0],fontsize=12);
 plot.GetPlot().text(0.80,0.80,PanelName[1],fontsize=12);
 plot.GetPlot().text(0.44,0.40,PanelName[0],fontsize=12);
 plot.GetPlot().text(0.80,0.40,PanelName[1],fontsize=12);
-plot.GetPlot().text(0.18,0.43,"ALICE",fontsize=11);
+plot.GetPlot().text(0.18,0.44,"ALICE",fontsize=11);
 
 # this is need because of the input histo label setting..
 #if( iobs==0 ):

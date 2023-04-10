@@ -28,7 +28,8 @@ dataTypePlotParams = [
 nrow = 1;
 ncol = 1;
 xlimits = [(0,4)];
-ylimits = [(0.055,0.145)];
+#ylimits = [(0.055,0.155)];
+ylimits = [(0.03,0.13)];
 rlimits = [(0.1,0.7)];
 
 
@@ -57,15 +58,15 @@ dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathr
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(6,6),
+	panelsize=(5,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
-	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
+	panelLabelLoc=(0.85,0.85),panelLabelSize=14,panelLabelAlign="left",
 	legendPanel={0:0},
-	axisLabelSize=14,legendLoc={0:(0.7,0.85)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
+	axisLabelSize=14,legendLoc={0:(0.42,0.20)},legendSize=11,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
 
 
 plot.EnableLatex(True);
@@ -118,9 +119,9 @@ plot.Ratio(dataMC,divplot);
 
 f.Close();
 
-plot.GetPlot().text(0.5,0.38,"$|\\Delta\\eta|<$1.3",fontsize=12);
-plot.GetPlot().text(0.16,0.82,toptitle,fontsize=12);
-plot.GetPlot().text(0.16,0.38,dataDetail[0],fontsize=12);
+plot.GetPlot().text(0.6,0.75,"$|\\Delta\\eta|<$1.3",fontsize=12);
+plot.GetPlot().text(0.16,0.77,toptitle,fontsize=14);
+plot.GetPlot().text(0.17,0.14,dataDetail[0],fontsize=12);
 
 #plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
 #	xticklabels=[ "", "", "", "" ]);

@@ -24,6 +24,8 @@ plotParams = {
 #Histogran names corresponding to system and experiment
 histNames = ["pp_14","pPb_14"];
 
+#XXX for this plotter, font size 14 roughly corresponds to the text size.
+
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 2;
@@ -50,15 +52,15 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
-	panelPrivateRowBounds={1:(-0.015,0.10)},
+	panelPrivateRowBounds={1:(-0.025,0.10)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.68,0.34),1:(0.45,0.17),2:(0.68,0.14)},
-	axisLabelSize=14,legendSize=9,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.64,0.34),1:(0.5,0.19),2:(0.64,0.14)},
+	axisLabelSize=14,tickLabelSize=14,legendSize=11,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -122,7 +124,7 @@ for i,s in enumerate(data):
 		plot.AddSyst(plotsV2[s],grsyst);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
-plot.GetPlot().text(0.135,0.19,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
+plot.GetPlot().text(0.35,0.755,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
 
 #-----------------------------------------------------------
 
