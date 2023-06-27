@@ -25,16 +25,17 @@ dataTypePlotParams = [
 
 
 # define panel/xaxis limits/titles
-nrow = 2;
+nrow = 1;
 ncol = 1;
 xlimits = [(0,4)];
-ylimits = [(0.055,0.165),(0.6,1.0)];
-rlimits = [(0.,4.5),(0.,4.5)];
+#ylimits = [(0.055,0.155)];
+ylimits = [(0.03,0.13)];
+rlimits = [(0.1,0.7)];
 
 
 # add here the histogram names for each pad
-histnames = ["NearJet","Acceptance_d"];
-histnameAway = ["AwayJet_d"];
+histnames = ["NearJet","Acceptance"]; #_d means x2
+histnameAway = ["AwayJet_d"];	      # w.o _d mean x1
 
 # add labels for each pad
 plables = [ "", ""
@@ -42,95 +43,104 @@ plables = [ "", ""
 	#		"$1.0 < p_\\mathrm{T,trigg(assoc)} < 2.0$","$2.0 < p_\\mathrm{T,trigg(assoc)} < 3.0$","$3.0 < p_\\mathrm{T,trigg(assoc)} < 4.0$"
 		 ];
 # model names : for histonames in ROOT file
-centrality =["ALICE near $|\\Delta\\eta|<$1.3","PYTHIA 8 Tune 4C near, $|\\Delta\\eta|<$1.3",
-	"ALICE away $\\times$ 2, Template fit, $|\\Delta\\eta|<$1.3", "PYTHIA 8 Tune 4C away $\\times$ 2, $|\\Delta\\eta|<$1.3"];
+centrality =["ALICE Near side","PYTHIA 8 Tune 4C Near side",
+	"ALICE Away side($\\times$ 2), Template fit", "PYTHIA 8 Tune 4C Away side ($\\times$ 2)"];
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
-xtitle = ["",""];
-ytitle = ["$Y_\\mathrm{frag}$"," $2Y_\\mathrm{frag}^\\mathrm{away}/Y_\\mathrm{frag}^\\mathrm{near}$"];
+xtitle = ["V0M Event classes",""];
+ytitle = ["$Y_\\mathrm{frag}$"," away/near$"];
 
 
 # Following two must be added
 toptitle = "pp $\\sqrt{s}$ = 13 TeV"; # need to add on the top
-dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
+dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
 #dataDetail = ["","$1.6 < |\\Delta\\eta| < 1.8$"];
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(6,4),
+	panelsize=(5,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
-	disableRatio=[0,1],
-	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
-	legendPanel={0:0,1:1},
-	legendLoc={0:(0.7,0.81),1:(0.75,0.2)},legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},ylabel={0:ytitle[0],1:ytitle[1]},fontsize=1);
+#	ratioSystPlot=True,
+	panelLabelLoc=(0.85,0.85),panelLabelSize=14,panelLabelAlign="left",
+	legendPanel={0:0},
+	axisLabelSize=14,legendLoc={0:(0.42,0.20)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
 
 
 plot.EnableLatex(True);
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 
-plot.GetAxes(0).set_xticks([0,1,2,3]);
+#plot.GetAxes(0).set_xticks([0,1,2,3]);
 plot.GetAxes(0).xaxis.set_ticks_position('both');
 plot.GetAxes(0).yaxis.set_ticks_position('both');
-gr = f.Get("{}_stat".format(histnames[0]));
-data = plot.Add(0,gr,**dataTypePlotParams[0],labelLegendId=0,label=centrality[0]);
-grsyst = f.Get("{}_syst".format(histnames[0]));
-_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
-plot.AddSyst(data,syst);
+gr_near = f.Get("{}_stat".format(histnames[0]));
+data_near = plot.Add(0,gr_near,**dataTypePlotParams[0],labelLegendId=0,label=centrality[0]);
+grsyst_near = f.Get("{}_syst".format(histnames[0]));
+_,_,_,syst_near = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst_near));
+plot.AddSyst(data_near,syst_near);
 
-grMC = f.Get("{}_MC".format(histnames[0]));
-dataMC = plot.Add(0,grMC,**dataTypePlotParams[3],labelLegendId=0,label=centrality[1]);
+grMC_near = f.Get("{}_MC".format(histnames[0]));
+dataMC_near = plot.Add(0,grMC_near,**dataTypePlotParams[3],labelLegendId=0,label=centrality[1]);
 
-gr = f.Get("{}_stat".format(histnameAway[0]));
-data = plot.Add(0,gr,**dataTypePlotParams[1],labelLegendId=0,label=centrality[2]);
-grsyst = f.Get("{}_syst".format(histnameAway[0]));
-_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
-plot.AddSyst(data,syst);
-grMC = f.Get("{}_MC".format(histnameAway[0]));
-dataMC = plot.Add(0,grMC,**dataTypePlotParams[4],labelLegendId=0,label=centrality[3]);
+gr_away = f.Get("{}_stat".format(histnameAway[0]));
+data_away = plot.Add(0,gr_away,**dataTypePlotParams[1],labelLegendId=0,label=centrality[2]);
+grsyst_away = f.Get("{}_syst".format(histnameAway[0]));
+_,_,_,syst_away = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst_away));
+plot.AddSyst(data_away,syst_away);
+grMC_away = f.Get("{}_MC".format(histnameAway[0]));
+dataMC_away = plot.Add(0,grMC_away,**dataTypePlotParams[4],labelLegendId=0,label=centrality[3]);
 
 
 
-plot.GetAxes(1).set_xticks([0,1,2,3]);
-plot.GetAxes(1).xaxis.set_ticks_position('both');
-plot.GetAxes(1).yaxis.set_ticks_position('both');
+#plot.GetAxes(1).set_xticks([0,1,2,3]);
+#plot.GetAxes(1).xaxis.set_ticks_position('both');
+#plot.GetAxes(1).yaxis.set_ticks_position('both');
 gr = f.Get("{}_stat".format(histnames[1]));
-data = plot.Add(1,gr,**dataTypePlotParams[2],labelLegendId=1,label="ALICE");
+data = plot.Add(0,gr,**dataTypePlotParams[1]);
 grsyst = f.Get("{}_syst".format(histnames[1]));
-_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
+x,y,yerr,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
 plot.AddSyst(data,syst);
 
 grMC = f.Get("{}_MC".format(histnames[1]));
-dataMC = plot.Add(1,grMC,**dataTypePlotParams[5],labelLegendId=1,label="PYTHIA 8 Tune 4C");
+dataMC = plot.Add(0,grMC,**dataTypePlotParams[4]);
+y.fill(1)
+yerr.fill(0)
+print(x,y,yerr)
+divplot = plot.Add(0,(x,y,yerr),**dataTypePlotParams[4]);
+
+plot.Ratio(data, divplot);
+plot.Ratio(dataMC,divplot);
+#numpy array scale tgrapherrors 
 
 
 
 f.Close();
 
-plot.GetPlot().text(0.16,0.826,"ALICE Work in progress",fontsize=12);
-plot.GetPlot().text(0.16,0.78,toptitle,fontsize=11);
-plot.GetPlot().text(0.16,0.14,dataDetail[0],fontsize=11);
+plot.GetPlot().text(0.72,0.3,"$|\\Delta\\eta|<$1.3",fontsize=9);
+plot.GetPlot().text(0.48,0.3,toptitle,fontsize=9);
+plot.GetPlot().text(0.17,0.14,dataDetail[0],fontsize=9);
+plot.GetPlot().text(0.17,0.3,"ALICE Preliminary",fontsize=11);
 
+#plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
+#	xticklabels=[ "", "", "", "" ]);
 plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
-	xticklabels=[ "", "", "", "" ]);
-
-plot.GetAxes(1).set(xticks=[0.5,1.5,2.5,3.5],
         xticklabels=[ "0$-$0.1%  ","1$-$5%   ","5$-$20%  ","20$-$60% " ]);
 
 for tick in plot.GetAxes(0).get_xticklabels():
 	tick.set_rotation(15)
-for tick in plot.GetAxes(1).get_xticklabels():
-        tick.set_rotation(15)
 
 
 #plot.GetAxes(0).xticks(rotation=45)
 plot.Plot();
 
+plot.GetAxes(0).tick_params(axis='x',which='minor',bottom=False);
+plot.GetRatioAxes(0).tick_params(axis='x',which='minor',bottom=False);
+
 
 plot.Save("figs/Fig5_Plot_v2Mult.pdf");
 plot.Save("figs/Fig5_Plot_v2Mult.png");
-plot.Show();
+#plot.Show();
 
