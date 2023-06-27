@@ -53,7 +53,7 @@ ytitle = ["$Y_\\mathrm{frag}$"," away/near$"];
 
 # Following two must be added
 toptitle = "pp $\\sqrt{s}$ = 13 TeV"; # need to add on the top
-dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
+dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$"];
 #dataDetail = ["","$1.6 < |\\Delta\\eta| < 1.8$"];
 
 
@@ -66,7 +66,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 #	ratioSystPlot=True,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=14,panelLabelAlign="left",
 	legendPanel={0:0},
-	axisLabelSize=14,legendLoc={0:(0.42,0.20)},legendSize=11,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
+	axisLabelSize=14,legendLoc={0:(0.42,0.20)},legendSize=9,xlabel={0:xtitle[0]},ylabel={0:ytitle[0]},ylabelRatio="away/near",fontsize=1);
 
 
 plot.EnableLatex(True);
@@ -119,9 +119,10 @@ plot.Ratio(dataMC,divplot);
 
 f.Close();
 
-plot.GetPlot().text(0.6,0.75,"$|\\Delta\\eta|<$1.3",fontsize=12);
-plot.GetPlot().text(0.16,0.77,toptitle,fontsize=14);
-plot.GetPlot().text(0.17,0.14,dataDetail[0],fontsize=12);
+plot.GetPlot().text(0.72,0.3,"$|\\Delta\\eta|<$1.3",fontsize=9);
+plot.GetPlot().text(0.48,0.3,toptitle,fontsize=9);
+plot.GetPlot().text(0.17,0.14,dataDetail[0],fontsize=9);
+plot.GetPlot().text(0.17,0.3,"ALICE Preliminary",fontsize=11);
 
 #plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
 #	xticklabels=[ "", "", "", "" ]);
@@ -141,5 +142,5 @@ plot.GetRatioAxes(0).tick_params(axis='x',which='minor',bottom=False);
 
 plot.Save("figs/Fig5_Plot_v2Mult.pdf");
 plot.Save("figs/Fig5_Plot_v2Mult.png");
-plot.Show();
+#plot.Show();
 

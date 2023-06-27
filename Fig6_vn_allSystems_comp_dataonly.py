@@ -57,12 +57,12 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelPrivateRowBounds={1:(-0.01,0.07)},
 	majorTickMultiple=5,
 	systPatchWidth=0.02,
-	panelLabelLoc=(0.4,0.90),panelLabelSize=16,panelLabelAlign="left",
+	panelLabelLoc=(0.7,0.90),panelLabelSize=12,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.60,0.20),1:(0.45,0.17)},
-	axisLabelSize=14,tickLabelSize=14,legendSize=12,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.55,0.20),1:(0.45,0.17)},
+	axisLabelSize=11,tickLabelSize=10,legendSize=10,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -86,9 +86,9 @@ for i,s in enumerate(data):
 plot.Ratio(plotsV2["vn_pp_14"],plotsV2["vn_pp"]);
 
 #plot.GetPlot().text(0.18,0.80,"ALICE",fontsize=12);
-plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
+plot.GetPlot().text(0.15,0.80,"ALICE Preliminary",fontsize=12);
 #plot.GetPlot().text(0.45,0.58,"$1.6<|\Delta\eta|<1.8$",fontsize=9);
-plot.GetPlot().text(0.35,0.47,"$1.6<|\Delta\eta|<1.8$",fontsize=12);
+plot.GetPlot().text(0.35,0.47,"$1.6<|\Delta\eta|<1.8$",fontsize=10);
 
 #-----------------------------------------------------------
 
@@ -101,5 +101,5 @@ for a in plot.ax.flat[1:]: #hack
 
 plot.Save("figs/Fig6_v2Mult_allSystems_Data.pdf");
 plot.Save("figs/Fig6_v2Mult_allSystems_Data.png");
-plot.Show();
+#plot.Show();
 

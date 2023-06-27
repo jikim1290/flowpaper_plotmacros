@@ -12,6 +12,10 @@ sys.path.append("JPyPlotRatio");
 import JPyPlotRatio
 import matplotlib.ticker as plticker
 
+from matplotlib import rc
+
+
+
 data = {
 	"vn_pp_14":ROOT.TFile("data/Final_Items.root","read"), # pp 1<pT<4 GeV
 	"vn_pPb_v0a_14":ROOT.TFile("data/fout_v2_pPb_v2.root","read"),  # pPb 1<pT<4 GeV
@@ -75,7 +79,7 @@ for si,(s,color,label) in enumerate([
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
 		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="dashdot",color=color,plotType="theory",alpha=0.4,label="{T\\raisebox{-.5ex}{R}ENTo}"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
+		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="dashdot",color=color,plotType="theory",alpha=0.4,label="$T_RENTo$"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
@@ -123,8 +127,12 @@ for i,s in enumerate(data):
 		plotsV2[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
 		plot.AddSyst(plotsV2[s],grsyst);
 
-plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
+plot.GetPlot().text(0.14,0.80,"ALICE Preliminary",fontsize=14);
 plot.GetPlot().text(0.35,0.755,"$1.6<|\Delta\eta|<1.8$\n$1.0<p_\\mathrm{T}<4.0\\,\\mathrm{GeV}$",fontsize=12);
+
+rc('font',**{'family':'serif','serif':['Helvetica']})
+#rc('font',**{'family':'serif','serif':['Times']})
+#rc('text', usetex=True)
 
 #-----------------------------------------------------------
 
@@ -137,5 +145,5 @@ for a in plot.ax.flat[1:]: #hack
 
 plot.Save("figs/Fig6_v2Mult_allSystems_Hydro.pdf");
 plot.Save("figs/Fig6_v2Mult_allSystems_Hydro.png");
-plot.Show();
+#plot.Show();
 

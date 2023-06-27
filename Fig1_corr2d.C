@@ -38,18 +38,28 @@ void Fig1_corr2d(){
 	hStyle[i]->GetZaxis()->SetLabelSize(28);
 
 	hStyle[i]->GetZaxis()->SetNdivisions(505);	
-	hStyle[i]->GetZaxis()->SetTitleOffset(1.33);
+	hStyle[i]->GetZaxis()->SetTitleOffset(1.5);
+	hStyle[i]->GetXaxis()->SetTitleOffset(1.5);
+	hStyle[i]->GetYaxis()->SetTitleOffset(1.5);
 
  }
 
- const char description[6][100] = {
-	"0#font[122]{-}0.1%, V0M",
-	"60#font[122]{-}100%, V0M",
-	"(0#font[122]{-}0.1%) - #it{F}(60#font[122]{-}100%), V0M",
-        "0#font[122]{-}5%, V0A",
-        "60#font[122]{-}100%, V0A",
-        "(0#font[122]{-}5%) - #it{F}(60#font[122]{-}100%), V0A" };
- const char savename[6][100] = {
+ const char description[6][200] = {
+	"#splitline{ALICE Preliminary}{pp #sqrt{#it{s}} = 13 TeV}  ",
+	"#splitline{ALICE Preliminary}{pp #sqrt{#it{s}} = 13 TeV}",
+	"#splitline{ALICE Preliminary}{pp #sqrt{#it{s}} = 13 TeV}",
+        "#splitline{ALICE Preliminary}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
+        "#splitline{ALICE Preliminary}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
+        "#splitline{ALICE Preliminary}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}" };
+ const char divided[6][200] = {
+ 	"#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{0#font[122]{-}0.1%, V0M}  ",
+	"#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{60#font[122]{-}100%, V0M}",
+	"#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{(0#font[122]{-}0.1%) - #it{F}(60#font[122]{-}100%), V0M}",
+        "#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{0#font[122]{-}5%, V0A}",
+        "#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{60#font[122]{-}100%, V0A}",
+        "#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{(0#font[122]{-}5%) - #it{F}(60#font[122]{-}100%), V0A}"
+ };
+ const char savename[6][1000] = {
 	"ppHigh",
 	"ppLow",
 	"ppSub",
@@ -58,7 +68,7 @@ void Fig1_corr2d(){
 	"pPbSub" };
 
 
- TCanvas* c = new TCanvas("c","c",800,700);
+ TCanvas* c = new TCanvas("c","c",950,800);
  gPad->SetLeftMargin(0.15);
  gPad->SetBottomMargin(0.09);
  gPad->SetRightMargin(0.03);
@@ -66,17 +76,29 @@ void Fig1_corr2d(){
  gStyle->SetOptStat(0);
  gPad->SetTicks();
 
- TLegend* leg = new TLegend(0.01,0.93,0.2,0.99);
+ TLegend* leg = new TLegend(0.01,0.94,0.1,0.98);
  leg->SetFillStyle(0);
  leg->SetLineWidth(0.0);
- leg->SetTextSize(32);
+ leg->SetTextSize(28);
  leg->SetTextFont(43);
+
+ TLegend* leg2 = new TLegend(0.01,0.05,0.1,0.08);
+ leg2->SetFillStyle(0);
+ leg2->SetLineWidth(0.0);
+ leg2->SetTextSize(28);
+ leg2->SetTextFont(43);
+
+
 
  for(int i=0;i<6;i++){
 	leg->Clear();
+	leg2->Clear();
 	hStyle[i]->Draw("surf1");
+	//hStyle[i]->SetTitle(description[i]);
 	leg->AddEntry( (TObject*)0, description[i], "");
 	leg->Draw();
+	leg2->AddEntry( (TObject*)0, divided[i], "");
+	leg2->Draw();
 
 	c->SaveAs(Form("figs/Fig1_%s.pdf",savename[i]));
 	c->SaveAs(Form("figs/Fig1_%s.jpg",savename[i]));
