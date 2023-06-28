@@ -13,8 +13,8 @@ sys.path.append("JPyPlotRatio");
 import JPyPlotRatio
 
 
-f = ROOT.TFile("data/Final_Items.root","read");
-fpPb = ROOT.TFile("data/fout_v2_pPb_v2.root","read");
+f = ROOT.TFile("data/fout_vn_28jun2023.root","read");
+fpPb = ROOT.TFile("data/fout_vn_28jun2023.root","read");
 dataTypePlotParams = [
 	{'plotType':'data','color':'r','fmt':'o','markersize':5.0},
 	{'plotType':'data','color':'g','fmt':'d','fillstyle':'none','markersize':5.0},

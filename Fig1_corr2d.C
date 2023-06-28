@@ -45,20 +45,21 @@ void Fig1_corr2d(){
  }
 
  const char description[6][200] = {
-	"#splitline{ALICE Preliminary}{pp #sqrt{#it{s}} = 13 TeV}  ",
-	"#splitline{ALICE Preliminary}{pp #sqrt{#it{s}} = 13 TeV}",
-	"#splitline{ALICE Preliminary}{pp #sqrt{#it{s}} = 13 TeV}",
-        "#splitline{ALICE Preliminary}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
-        "#splitline{ALICE Preliminary}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
-        "#splitline{ALICE Preliminary}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}" };
+	"#splitline{ALICE}{pp #sqrt{#it{s}} = 13 TeV}  ",
+	"#splitline{ALICE}{pp #sqrt{#it{s}} = 13 TeV}",
+	"#splitline{ALICE}{pp #sqrt{#it{s}} = 13 TeV}",
+        "#splitline{ALICE}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
+        "#splitline{ALICE}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
+        "#splitline{ALICE}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}" };
  const char divided[6][200] = {
- 	"#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{0#font[122]{-}0.1%, V0M}  ",
-	"#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{60#font[122]{-}100%, V0M}",
-	"#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{(0#font[122]{-}0.1%) - #it{F}(60#font[122]{-}100%), V0M}",
-        "#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{0#font[122]{-}5%, V0A}",
-        "#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{60#font[122]{-}100%, V0A}",
-        "#splitline{1<p_{T,trig},p_{T,assoc}<4 GeV/#it{c}}{(0#font[122]{-}5%) - #it{F}(60#font[122]{-}100%), V0A}"
+ 	"0#font[122]{-}0.1%, V0M",
+	"60#font[122]{-}100%, V0M",
+	"(0#font[122]{-}0.1%) - #it{F}(60#font[122]{-}100%), V0M",
+	"0#font[122]{-}5%, V0A",
+	"60#font[122]{-}100%, V0A",
+	"(0#font[122]{-}5%) - #it{F}(60#font[122]{-}100%), V0A"
  };
+
  const char savename[6][1000] = {
 	"ppHigh",
 	"ppLow",
@@ -82,7 +83,7 @@ void Fig1_corr2d(){
  leg->SetTextSize(28);
  leg->SetTextFont(43);
 
- TLegend* leg2 = new TLegend(0.01,0.05,0.1,0.08);
+ TLegend* leg2 = new TLegend(0.01,0.04,0.1,0.17);
  leg2->SetFillStyle(0);
  leg2->SetLineWidth(0.0);
  leg2->SetTextSize(28);
@@ -98,6 +99,8 @@ void Fig1_corr2d(){
 	leg->AddEntry( (TObject*)0, description[i], "");
 	leg->Draw();
 	leg2->AddEntry( (TObject*)0, divided[i], "");
+	leg2->AddEntry( (TObject*)0, "1 < #it{p}_{T,trig} < 2 GeV/#it{c}", "");
+	leg2->AddEntry( (TObject*)0, "1 < #it{p}_{T,assoc} < 4 GeV/#it{c}", "");
 	leg2->Draw();
 
 	c->SaveAs(Form("figs/Fig1_%s.pdf",savename[i]));
