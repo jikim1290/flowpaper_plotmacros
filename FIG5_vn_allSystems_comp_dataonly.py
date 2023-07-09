@@ -66,7 +66,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	axisLabelSize=11,tickLabelSize=10,legendSize=10,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 
-#plot.EnableLatex(True);
+plot.EnableLatex(True);
 
 plot.GetAxes(0).yaxis.set_major_locator(plticker.MaxNLocator(7));
 plot.GetAxes(1).yaxis.set_major_locator(plticker.MaxNLocator(7));
@@ -101,6 +101,6 @@ plot.GetAxes(1).yaxis.tick_right();
 for a in plot.ax.flat[1:]: #hack
 	a.yaxis.set_ticks_position('both');
 
-plot.Save("figs/Fig6_v2Mult_allSystems_Data.pdf");
-plot.Save("figs/Fig6_v2Mult_allSystems_Data.png");
+plot.Save("figures/FIG5_v2Mult_allSystems_Data.pdf");
+plot.Save("figures/FIG5_v2Mult_allSystems_Data.png");
 plot.Show();

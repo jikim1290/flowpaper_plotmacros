@@ -14,12 +14,12 @@ import JPyPlotRatio
 
 f = ROOT.TFile("data/dphi_extract.root","read");
 dataTypePlotParams = [
-        {'plotType':'data','color':'k','fmt':'o','markersize':5.0},
+    {'plotType':'data','color':'k','fmt':'o','markersize':5.0},
 	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
-	{'plotType':'data','color':'r','fmt':'s','markersize':3.0},
-        {'plotType':'theory','facecolor':'C1','edgecolor':'C1','alpha':0.5,'linestyle':'dotted','linecolor':'C1'},
-        {'plotType':'theory','facecolor':'C2','edgecolor':'C2','alpha':0.5,'linestyle':'dashed','linecolor':'C2'},
-        {'plotType':'theory','facecolor':'C3','edgecolor':'C3','alpha':0.5,'linestyle':'dashdot','linecolor':'C3'}
+	{'plotType':'data','color':'r','fmt':'s','markersize':3.5},
+    {'plotType':'theory','facecolor':'C3','edgecolor':'C3','alpha':0.5,'linestyle':'dotted','linecolor':'C3'},
+    {'plotType':'theory','facecolor':'C7','edgecolor':'C7','alpha':0.5,'linestyle':'dashed','linecolor':'C7'},
+    {'plotType':'theory','facecolor':'C7','edgecolor':'C7','alpha':0.5,'linestyle':'dashdot','linecolor':'C7'}
 ];
 
 
@@ -47,7 +47,7 @@ modelStr = ["EPOS LHC near-side","EPOS LHC away-side"]; # for legend
 TypeName =["Signal (0--0.1\% V0M)", "Fit","$FY_{\\mathrm{LM}} + G$", "$G(1+2v_{2,2}cos(2\\Delta\\varphi))$ \n $+ FY_{\\mathrm{LM,min}}$","$G(1+2v_{3,3}cos(3\\Delta\\varphi))$ \n $+ FY_{\\mathrm{LM,min}}$"];
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
-xtitle = ["$\\Delta\\varphi (\\mathrm{rad})$"];
+xtitle = ["$\\Delta\\varphi~(\\mathrm{rad})$"];
 ytitle = ["$\\frac{1}{N_{\\mathrm{trig}}}\\frac{\\mathrm{d}N^{\\mathrm{pair}}}{\\mathrm{d}\\Delta\\varphi}$"];
 
 # Following two must be added
@@ -66,7 +66,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioPlot=True,
 	panelLabelLoc=(0.1,0.87),panelLabelSize=10,panelLabelAlign="left",
 	legendPanel=0,ylabelRatio="Data/Fit",
-	legendLoc=(0.26,0.65),legendSize=11,xlabel=xtitle[0],ylabel=ytitle[0]);
+	legendLoc=(0.28,0.65),legendSize=11,
+	axisLabelSize=16,xlabel=xtitle[0],ylabel=ytitle[0],fontsize=1);
 
 
 
@@ -102,7 +103,7 @@ plot.GetRatioAxes(0).yaxis.set_ticks_position('both');
 plot.Plot();
 
 
-plot.Save("figs/Fig1_FlowExt.pdf");
-plot.Save("figs/Fig1_FlowExt.png");
+plot.Save("figures/FIG2_FlowExt.pdf");
+plot.Save("figures/FIG2_FlowExt.png");
 plot.Show();
 

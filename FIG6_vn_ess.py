@@ -154,8 +154,8 @@ for tick in plot.GetAxes(3).get_xticklabels():
 
 plot.Plot();
 	
-plot.Save("figs/Fig4_vn_LP.pdf");
-plot.Save("figs/Fig4_vn_LP.png");
+plot.Save("figures/FIG6_vn_LP.pdf");
+plot.Save("figures/FIG6_vn_LP.png");
 
 plot.Show();
 

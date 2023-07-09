@@ -143,7 +143,7 @@ plot.GetAxes(1).yaxis.tick_right();
 for a in plot.ax.flat[1:]: #hack
 	a.yaxis.set_ticks_position('both');
 
-plot.Save("figs/Fig6_v2Mult_allSystems_Hydro.pdf");
-plot.Save("figs/Fig6_v2Mult_allSystems_Hydro.png");
+plot.Save("figures/FIG7_v2Mult_allSystems_Hydro.pdf");
+plot.Save("figures/FIG7_v2Mult_allSystems_Hydro.png");
 plot.Show();
 

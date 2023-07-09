@@ -57,7 +57,7 @@ xtitle = ["$p_\\mathrm{T,trig}\\,(\\mathrm{GeV}/c)$","$p_\\mathrm{T,trig}\\,(\\m
 ytitle = ["$V_{n}$"];
 
 # Following two must be added
-toptitle = "pp $\\sqrt{s}$ = 13 TeV \n 0--0.1\%"; # need to add on the top
+toptitle = "pp $\\sqrt{s}$ = 13 TeV \n $0--0.1\%$"; # need to add on the top
 dataDetail = ["$1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $"];
 
 
@@ -71,7 +71,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	disableRatio=[0],
 	panelLabelLoc=(0.71,0.89),panelLabelSize=14,panelLabelAlign="left",
 	axisLabelSize=14,tickLabelSize=14,legendPanel=0,
-	legendLoc=(0.46,0.20),legendSize=14,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
+	legendLoc=(0.47,0.20),legendSize=14,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
 plot.EnableLatex(True); # for publication need fonts via texlive
 
@@ -87,7 +87,7 @@ for i in range(0,nrow):
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
 		gr = f.Get("{}".format(histnames[j]));
-		datapp = plot.Add(index,gr,**dataTypePlotParams[0],label="pp 13 TeV 0--0.1\%");
+		datapp = plot.Add(index,gr,**dataTypePlotParams[0],label="pp $\\sqrt{s} = 13$ TeV 0--0.1\%");
 		    #, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $"
 		grsyst = f.Get("{}".format(histnamesSyst[j]));
 		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
@@ -103,7 +103,7 @@ for i in range(0,nrow):
 		if(addpPb):
 			grpPb = fpPb.Get("{}".format(histpPb_stat[j]));
 			grpPb.Print();
-			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="p--Pb 5.02 TeV 0--20\%");
+			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="p--Pb $\\sqrt{s_{\\rm NN}} = 5.02$ TeV 0--20\%");
 			grsystpPb = fpPb.Get("{}".format(histpPb_syst[j]));
 			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystpPb));
 			plot.AddSyst(dataPb,syst);
@@ -128,11 +128,11 @@ plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=14);
 #plot.GetAxes(1).set(xticks=[0.5,1.5,2.5,3.5,4.5,5.5], xticklabels=["0","10","20","30","40","50"]);
 plot.Plot();
 if(addpPb):
-	plot.Save("figs/Fig2_vn_pppPb.pdf");
-	plot.Save("figs/Fig2_vn_pppPb.png");
+	plot.Save("figures/FIG4_vn_pppPb.pdf");
+	plot.Save("figs/FIG4_vn_pppPb.png");
 else:
-    plot.Save("figs/Fig2_vn.pdf")
-    plot.Save("figs/Fig2_vn.png");
+    plot.Save("figures/FIG4_vn.pdf")
+    plot.Save("figures/FIG4_vn.png");
 
 plot.Show();
 

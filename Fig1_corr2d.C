@@ -1,4 +1,4 @@
-void Fig1_corr2d(){
+void FIG1_corr2d(){
  TFile* fpp  = new TFile("data/Corr2d_figures_pp.root","read");
  TFile* fpPb = new TFile("data/Corr2d_figures_pPb.root","read");
 
@@ -83,7 +83,7 @@ void Fig1_corr2d(){
  leg->SetTextSize(28);
  leg->SetTextFont(43);
 
- TLegend* leg2 = new TLegend(0.01,0.04,0.1,0.17);
+ TLegend* leg2 = new TLegend(0.0001,0.01,0.08,0.15);
  leg2->SetFillStyle(0);
  leg2->SetLineWidth(0.0);
  leg2->SetTextSize(28);
@@ -103,8 +103,8 @@ void Fig1_corr2d(){
 	leg2->AddEntry( (TObject*)0, "1 < #it{p}_{T,assoc} < 4 GeV/#it{c}", "");
 	leg2->Draw();
 
-	c->SaveAs(Form("figs/Fig1_%s.pdf",savename[i]));
-	c->SaveAs(Form("figs/Fig1_%s.jpg",savename[i]));
+	c->SaveAs(Form("figures/FIG1_%s.pdf",savename[i]));
+	c->SaveAs(Form("figures/FIG1_%s.jpg",savename[i]));
  }
 
 
