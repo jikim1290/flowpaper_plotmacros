@@ -127,7 +127,7 @@ plot.GetPlot().text(0.55,0.16,"$|\\Delta\\eta|<$1.3",fontsize=11);
 #plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
 #	xticklabels=[ "", "", "", "" ]);
 plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
-        xticklabels=[ "0$-$0.1%  ","1$-$5%   ","5$-$20%  ","20$-$60% " ]);
+        xticklabels=[ "$~~$0$-$0.1%  ","$~~$1$-$5%   ","$~~$5$-$20%  ","$~$20$-$60% " ]);
 
 for tick in plot.GetAxes(0).get_xticklabels():
 	tick.set_rotation(15)

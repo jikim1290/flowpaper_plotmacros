@@ -38,7 +38,7 @@ void FIG1_corr2d(){
 	hStyle[i]->GetZaxis()->SetLabelSize(28);
 
 	hStyle[i]->GetZaxis()->SetNdivisions(505);	
-	hStyle[i]->GetZaxis()->SetTitleOffset(1.5);
+	hStyle[i]->GetZaxis()->SetTitleOffset(1.8);
 	hStyle[i]->GetXaxis()->SetTitleOffset(1.5);
 	hStyle[i]->GetYaxis()->SetTitleOffset(1.5);
 
@@ -48,9 +48,9 @@ void FIG1_corr2d(){
 	"#splitline{ALICE}{pp #sqrt{#it{s}} = 13 TeV}  ",
 	"#splitline{ALICE}{pp #sqrt{#it{s}} = 13 TeV}",
 	"#splitline{ALICE}{pp #sqrt{#it{s}} = 13 TeV}",
-        "#splitline{ALICE}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
-        "#splitline{ALICE}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
-        "#splitline{ALICE}{p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}" };
+        "#splitline{ALICE}{p#font[122]{-}Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
+        "#splitline{ALICE}{p#font[122]{-}Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}",
+        "#splitline{ALICE}{p#font[122]{-}Pb #sqrt{#it{s}_{NN}} = 5.02 TeV}" };
  const char divided[6][200] = {
  	"0#font[122]{-}0.1%, V0M",
 	"60#font[122]{-}100%, V0M",
