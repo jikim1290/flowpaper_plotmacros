@@ -66,7 +66,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	disableRatio=[0],
 	panelLabelLoc=(0.75,0.85),panelLabelSize=16,panelLabelAlign="left",
 	legendPanel=0,
-	legendLoc=(0.46,0.27),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
+	legendLoc=(0.46,0.27),legendSize=12,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
 
 plot.EnableLatex(True); # for publication need fonts via texlive
