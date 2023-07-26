@@ -22,8 +22,8 @@ data = {
 }
 
 plotParams = {
-	"vn_pp_14":{"color":"r","fmt":"o","markersize":5.5,"label":"pp 13 TeV","labelLegendId":0},
-	"vn_pPb_v0a_14":{"color":"b","fmt":"s","mfc":"none","markersize":5.5,"label":"p$-$Pb 5.02 TeV","labelLegendId":0},
+	"vn_pp_14":{"color":"r","fmt":"o","markersize":5.5,"label":"pp $\\sqrt{s}$ = 13 TeV","labelLegendId":0},
+	"vn_pPb_v0a_14":{"color":"b","fmt":"s","mfc":"none","markersize":5.5,"label":"p--Pb $\\sqrt{s_{\\rm NN}} = 5.02$ TeV","labelLegendId":0},
 }	
 #Histogran names corresponding to system and experiment
 histNames = ["pp_14","pPb_14"];
@@ -71,15 +71,15 @@ plot.EnableLatex(True);
 #--- hydro calculation -------------------------------------
 #pPb_hydro_mult = np.array([171.9,74.0,65.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]); #fine bins
 for si,(s,color,label) in enumerate([
-	("results_QM2018_pPb_502.root","green","MAP(QM2018), m=6"),
-	("results_dual_MAP_pPb_502.root","deeppink","MAP(2021), m=6")]):
+	("results_QM2018_pPb_502.root","green","MAP(QM2018), $m=6$"),
+	("results_dual_MAP_pPb_502.root","deeppink","MAP(2021), $m=6$")]):
 	fh = ROOT.TFile("data/{}".format(s),"read")
 	pPb_hydro_mult = np.array([171.9,54.1,44.1,32.8,25.4,19.6,14.7,10.6]);
 	pPb_hydro_mult_avg = 0.5*(pPb_hydro_mult[:-1]+pPb_hydro_mult[1:])
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
 		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="dashdot",color=color,plotType="theory",alpha=0.4,label="$T_RENTo$"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
+		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="dashdot",color=color,plotType="theory",alpha=0.4,label="T\\raisebox{-.5ex}{R}ENTo"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:

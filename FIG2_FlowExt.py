@@ -15,11 +15,11 @@ import JPyPlotRatio
 f = ROOT.TFile("data/dphi_extract.root","read");
 dataTypePlotParams = [
     {'plotType':'data','color':'k','fmt':'o','markersize':5.0},
-	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.5,'linestyle':'solid','linecolor':'C0'},
+	{'plotType':'theory','facecolor':'C0','edgecolor':'C0','alpha':0.,'linestyle':'solid','linecolor':'C0'},
 	{'plotType':'data','color':'r','fmt':'s','markersize':3.5},
-    {'plotType':'theory','facecolor':'C3','edgecolor':'C3','alpha':0.5,'linestyle':'dotted','linecolor':'C3'},
-    {'plotType':'theory','facecolor':'C7','edgecolor':'C7','alpha':0.5,'linestyle':'dashed','linecolor':'C7'},
-    {'plotType':'theory','facecolor':'C7','edgecolor':'C7','alpha':0.5,'linestyle':'dashdot','linecolor':'C7'}
+    {'plotType':'theory','facecolor':'C3','edgecolor':'C3','alpha':0.,'linestyle':'dotted','linecolor':'C3'},
+    {'plotType':'theory','facecolor':'C7','edgecolor':'C7','alpha':0.,'linestyle':'dashed','linecolor':'C7'},
+    {'plotType':'theory','facecolor':'C7','edgecolor':'C7','alpha':0.,'linestyle':'dashdot','linecolor':'C7'}
 ];
 
 

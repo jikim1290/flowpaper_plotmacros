@@ -49,7 +49,7 @@ histnamesModels = [
 	["v3_0_EPOS",  "v3_1_EPOS"], ];
 
 # add labels for each pad
-plables = [ "Leading Particle $|\\eta|<0.9$","Jet, anti-$k_\\mathrm{T}$ \n $R=0.4$ $|\\eta|<0.4$" ,"",""];
+plables = [ "Leading Particle $|\\eta_{\\mathrm{LP}}|<0.9$","Jet, anti-$k_\\mathrm{T}$ \n $R=0.4$ $|\\eta_{\\mathrm{Jet}}|<0.4$" ,"",""];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
@@ -68,7 +68,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0,1],
-	panelLabelLoc=(0.07,0.63),panelLabelSize=11,panelLabelAlign="left",
+	panelLabelLoc=(0.07,0.73),panelLabelSize=11,panelLabelAlign="left",
 	legendPanel=2,
 	legendLoc=(0.40,0.6),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
 	ylabel={0:ytitle[0],1:ytitle[1]});
@@ -121,14 +121,14 @@ for iobs in range(0,2):
 
 #'''
 plot.GetPlot().text(0.15,0.82,toptitle[0],fontsize=12);
-plot.GetPlot().text(0.17,0.77,toptitle[1],fontsize=12);
+plot.GetPlot().text(0.38,0.82,toptitle[1],fontsize=12);
 #plot.GetPlot().text(0.16,0.78,dataDetail[0],fontsize=11);
 plot.GetPlot().text(0.18,0.39,dataDetail[1],fontsize=11);
-plot.GetPlot().text(0.44,0.80,PanelName[0],fontsize=12);
-plot.GetPlot().text(0.80,0.80,PanelName[1],fontsize=12);
-plot.GetPlot().text(0.44,0.40,PanelName[0],fontsize=12);
-plot.GetPlot().text(0.80,0.40,PanelName[1],fontsize=12);
-plot.GetPlot().text(0.18,0.43,"ALICE",fontsize=11);
+plot.GetPlot().text(0.44,0.54,PanelName[0],fontsize=12);
+plot.GetPlot().text(0.80,0.54,PanelName[1],fontsize=12);
+plot.GetPlot().text(0.44,0.14,PanelName[0],fontsize=12);
+plot.GetPlot().text(0.80,0.14,PanelName[1],fontsize=12);
+plot.GetPlot().text(0.15,0.72,"ALICE",fontsize=12);
 
 # this is need because of the input histo label setting..
 #if( iobs==0 ):

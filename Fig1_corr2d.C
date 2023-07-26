@@ -23,22 +23,24 @@ void FIG1_corr2d(){
 	hStyle[i]->GetYaxis()->SetTitle( hStyle[0]->GetYaxis()->GetTitle() );
 	hStyle[i]->GetZaxis()->SetTitle( hStyle[0]->GetZaxis()->GetTitle() );
 
-	hStyle[i]->GetXaxis()->SetTitleFont(43);
-	hStyle[i]->GetXaxis()->SetLabelFont(43);
-	hStyle[i]->GetYaxis()->SetTitleFont(43);
-	hStyle[i]->GetYaxis()->SetLabelFont(43);
-	hStyle[i]->GetZaxis()->SetTitleFont(43);
-	hStyle[i]->GetZaxis()->SetLabelFont(43);
+	int fontsize = 45;
+	hStyle[i]->GetXaxis()->SetTitleFont(4);
+	hStyle[i]->GetXaxis()->SetLabelFont(fontsize);
+	hStyle[i]->GetYaxis()->SetTitleFont(fontsize);
+	hStyle[i]->GetYaxis()->SetLabelFont(fontsize);
+	hStyle[i]->GetZaxis()->SetTitleFont(fontsize);
+	hStyle[i]->GetZaxis()->SetLabelFont(fontsize);
 
-	hStyle[i]->GetXaxis()->SetTitleSize(32);
-	hStyle[i]->GetYaxis()->SetTitleSize(32);
-	hStyle[i]->GetZaxis()->SetTitleSize(32);
-	hStyle[i]->GetXaxis()->SetLabelSize(28);
-	hStyle[i]->GetYaxis()->SetLabelSize(28);
-	hStyle[i]->GetZaxis()->SetLabelSize(28);
+	int titlesize = 34;
+	hStyle[i]->GetXaxis()->SetTitleSize(titlesize);
+	hStyle[i]->GetYaxis()->SetTitleSize(titlesize);
+	hStyle[i]->GetZaxis()->SetTitleSize(titlesize);
+	hStyle[i]->GetXaxis()->SetLabelSize(titlesize);
+	hStyle[i]->GetYaxis()->SetLabelSize(titlesize);
+	hStyle[i]->GetZaxis()->SetLabelSize(titlesize);
 
 	hStyle[i]->GetZaxis()->SetNdivisions(505);	
-	hStyle[i]->GetZaxis()->SetTitleOffset(1.8);
+	hStyle[i]->GetZaxis()->SetTitleOffset(2.0);
 	hStyle[i]->GetXaxis()->SetTitleOffset(1.5);
 	hStyle[i]->GetYaxis()->SetTitleOffset(1.5);
 
@@ -77,23 +79,24 @@ void FIG1_corr2d(){
  gStyle->SetOptStat(0);
  gPad->SetTicks();
 
- TLegend* leg = new TLegend(0.01,0.94,0.1,0.98);
+ TLegend* leg = new TLegend(0.01,0.89,0.1,0.93);
  leg->SetFillStyle(0);
  leg->SetLineWidth(0.0);
- leg->SetTextSize(28);
- leg->SetTextFont(43);
+ leg->SetTextSize(30);
+ leg->SetTextFont(46);
 
  TLegend* leg2 = new TLegend(0.0001,0.01,0.08,0.15);
  leg2->SetFillStyle(0);
  leg2->SetLineWidth(0.0);
  leg2->SetTextSize(28);
- leg2->SetTextFont(43);
+ leg2->SetTextFont(46);
 
 
 
  for(int i=0;i<6;i++){
 	leg->Clear();
 	leg2->Clear();
+	hStyle[i]->GetZaxis()->SetTitle("(1/#it{N}_{trig})(d^{2} #it{N}_{pair} / d#Delta#it{#eta} d#Delta#it{#varphi})" );
 	hStyle[i]->Draw("surf1");
 	//hStyle[i]->SetTitle(description[i]);
 	leg->AddEntry( (TObject*)0, description[i], "");

@@ -17,9 +17,9 @@ dataTypePlotParams = [
 	{'plotType':'data','color':'k','fmt':'o','markersize':5.0},
 	{'plotType':'data','color':'b','fmt':'s','fillstyle':'none','markersize':5.0},
 	{'plotType':'data','color':'r','fmt':'s','fillstyle':'none','markersize':5.0},
-	{'plotType':'theory','facecolor':'k','edgecolor':'k','alpha':0.5,'linestyle':'dotted','linecolor':'k'},
-	{'plotType':'theory','facecolor':'b','edgecolor':'b','alpha':0.5,'linestyle':'solid','linecolor':'b'},
-	{'plotType':'theory','facecolor':'r','edgecolor':'r','alpha':0.5,'linestyle':'dashed','linecolor':'r'},
+	{'plotType':'theory','facecolor':'k','edgecolor':'k','alpha':0.,'linestyle':'dotted','linecolor':'k'},
+	{'plotType':'theory','facecolor':'b','edgecolor':'b','alpha':0.,'linestyle':'solid','linecolor':'b'},
+	{'plotType':'theory','facecolor':'r','edgecolor':'r','alpha':0.,'linestyle':'dashed','linecolor':'r'},
 	{'plotType':'theory','facecolor':'C3','edgecolor':'C3','alpha':0.5,'linestyle':'dashdot','linecolor':'C3'},
 ];
 
@@ -112,7 +112,7 @@ print(x,y,yerr)
 divplot = plot.Add(0,(x,y,yerr),**dataTypePlotParams[4]);
 
 plot.Ratio(data, divplot);
-plot.Ratio(dataMC,divplot);
+plot.Ratio(dataMC,divplot,color='b',alpha=0.5);
 #numpy array scale tgrapherrors 
 
 
@@ -122,7 +122,7 @@ f.Close();
 
 plot.GetPlot().text(0.28,0.82,toptitle,fontsize=13);
 plot.GetPlot().text(0.20,0.15,dataDetail[0],fontsize=11);
-plot.GetPlot().text(0.55,0.16,"$|\\Delta\\eta|<$1.3",fontsize=11);
+#plot.GetPlot().text(0.55,0.16,"$|\\Delta\\eta|<$1.3",fontsize=11);
 
 #plot.GetAxes(0).set(xticks=[0.5,1.5,2.5,3.5],
 #	xticklabels=[ "", "", "", "" ]);
