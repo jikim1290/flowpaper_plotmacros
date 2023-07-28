@@ -34,7 +34,7 @@ histNames = ["pp_14","pPb_14"];
 nrow = 1;
 ncol = 2;
 xlimits = [(0,65),(0,65)];
-ylimits = [(-0.02,0.185)];
+ylimits = [(-0.01,0.185)];
 rlimits = [(0.5,1.6),(0.,4.5)];
 
 # add labels for each pad
@@ -49,22 +49,22 @@ dataDetail = ["$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$ \n $1 < p_\\mathr
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(5,5),
+	panelsize=(4,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
 	#panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
-	panelPrivateRowBounds={1:(-0.025,0.10)},
+	panelPrivateRowBounds={1:(-0.015,0.10)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.64,0.34),1:(0.5,0.19),2:(0.64,0.14)},
-	axisLabelSize=14,tickLabelSize=14,legendSize=11,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.64,0.34),1:(0.5,0.16),2:(0.60,0.14)},
+	axisLabelSize=11,tickLabelSize=11,legendSize=8.5,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -128,7 +128,7 @@ for i,s in enumerate(data):
 		plot.AddSyst(plotsV2[s],grsyst);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
-plot.GetPlot().text(0.35,0.755,"$1.6<|\Delta\eta|<1.8$\n$1<p_\\mathrm{T}<4\\,\\mathrm{GeV}/c$",fontsize=12);
+plot.GetPlot().text(0.33,0.755,"$1.6<|\Delta\eta|<1.8$\n$1<p_\\mathrm{T}<4\\,\\mathrm{GeV}/c$",fontsize=12);
 
 rc('font',**{'family':'serif','serif':['Helvetica']})
 #rc('font',**{'family':'serif','serif':['Times']})

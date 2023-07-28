@@ -62,16 +62,16 @@ dataDetail = ["$1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\ma
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(5,5),
+	panelsize=(4,5),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
 	panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
 	disableRatio=[0],
-	panelLabelLoc=(0.71,0.89),panelLabelSize=14,panelLabelAlign="left",
-	axisLabelSize=14,tickLabelSize=14,legendPanel=0,
-	legendLoc=(0.47,0.20),legendSize=14,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
+	panelLabelLoc=(0.71,0.89),panelLabelSize=11,panelLabelAlign="left",
+	axisLabelSize=11,tickLabelSize=11,legendPanel=0,
+	legendLoc=(0.47,0.20),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
 plot.EnableLatex(True); # for publication need fonts via texlive
 

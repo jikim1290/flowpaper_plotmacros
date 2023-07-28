@@ -12,6 +12,8 @@ sys.path.append("JPyPlotRatio");
 
 import JPyPlotRatio
 
+import matplotlib
+matplotlib.rcParams["axes.linewidth"] = 1.2;
 
 f = ROOT.TFile("data/fout_vn_28jun2023.root","read"); #root file for 1-4 GeV/c pt
 dataTypePlotParams = [
@@ -30,7 +32,7 @@ ncol = 2;
 xlimits = [
 	[(-0.1,7.1),(-0.1,5.1)],
 	[(-0.1,4.1),(-0.1,5.1)] ];
-ylimits = [(0.04,0.15),(0.0,0.12)];
+ylimits = [(0.032,0.15),(0.0,0.12)];
 rlimits = [(0.,4.5),(0.,4.5)];
 
 # add here the histogram names for each pad
@@ -69,8 +71,9 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0,1],
 	panelLabelLoc=(0.07,0.73),panelLabelSize=11,panelLabelAlign="left",
+	tickLabelSize=10,
+	axisLabelSize=10,
 	legendPanel=2,
-	axisLabelSize=12,tickLabelSize=12,
 	legendLoc=(0.40,0.6),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
 	ylabel={0:ytitle[0],1:ytitle[1]});
 plot.EnableLatex(True); # for publication need fonts via texlive
