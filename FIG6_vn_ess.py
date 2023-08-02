@@ -106,8 +106,8 @@ for iobs in range(0,2):
 			syst12 = syst12[:4];
 			gr12 = (x,y,yerr);
 
-		data = plot.Add(index,gr,**dataTypePlotParams[0],label=dataDetail[0]);
-		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0]);
+		data = plot.Add(index,gr,**dataTypePlotParams[0],label=dataDetail[0],xshift=-0.02);
+		data12 = plot.Add(index,gr12,**dataTypePlotParams[1],label=dataDetail12[0],xshift=0.02);
 		plot.AddSyst(data,syst);
 		plot.AddSyst(data12,syst12);
 #			if( iobs==0 ):
