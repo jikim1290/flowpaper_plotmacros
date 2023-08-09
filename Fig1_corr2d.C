@@ -88,8 +88,8 @@ void FIG1_corr2d(){
  leg->SetTextSize(39);
  leg->SetTextFont(46);
 
- TLegend* leg2 = new TLegend(0.35,0.8,0.88,0.95);
- leg2->SetFillStyle(0);
+ TLegend* leg2 = new TLegend(0.35,0.83,0.88,0.98);
+ leg2->SetFillStyle(1001);
  leg2->SetLineWidth(0.0);
  leg2->SetTextSize(39);
  leg2->SetTextFont(46);
@@ -103,12 +103,12 @@ void FIG1_corr2d(){
 	hStyle[i]->Draw("surf1");
 	//hStyle[i]->SetTitle(description[i]);
 	leg->AddEntry( (TObject*)0, description[i], "");
-	leg->Draw();
+	
 	leg2->AddEntry( (TObject*)0, divided[i], "");
 	leg2->AddEntry( (TObject*)0, "1 < #it{p}_{T,trig} < 2 GeV/#it{c}", "");
 	leg2->AddEntry( (TObject*)0, "1 < #it{p}_{T,assoc} < 4 GeV/#it{c}", "");
 	leg2->Draw();
-
+leg->Draw();
 	c->SaveAs(Form("figures/FIG1_%s.pdf",savename[i]));
 	c->SaveAs(Form("figures/FIG1_%s.jpg",savename[i]));
  }
