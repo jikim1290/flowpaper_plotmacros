@@ -71,8 +71,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0,1],
 	panelLabelLoc=(0.07,0.73),panelLabelSize=11,panelLabelAlign="left",
-	tickLabelSize=10,
-	axisLabelSize=10,
+	tickLabelSize=9,
+	axisLabelSize=9,
 	legendPanel=2,
 	legendLoc=(0.40,0.6),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
 	ylabel={0:ytitle[0],1:ytitle[1]});

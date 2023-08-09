@@ -66,8 +66,8 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioPlot=True,
 	panelLabelLoc=(0.1,0.87),panelLabelSize=11,panelLabelAlign="left",
 	legendPanel=0,ylabelRatio="Data/Fit",
-	legendLoc=(0.28,0.65),legendSize=11,
-	axisLabelSize=16,xlabel=xtitle[0],ylabel=ytitle[0],fontsize=1);
+	legendLoc=(0.28,0.65),legendSize=12,
+	axisLabelSize=14,xlabel=xtitle[0],ylabel=ytitle[0],fontsize=1);
 
 
 
@@ -96,7 +96,7 @@ plot.GetPlot().text(0.57,0.79,toptitle,fontsize=11);
 plot.GetPlot().text(0.57,0.71,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$\n$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
 #plot.GetPlot().text(0.54,0.75,"$1 < p_\\mathrm{T,trig} < 2 \\,\\mathrm{GeV}/c$",fontsize=11);
 #plot.GetPlot().text(0.54,0.71,"$1 < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c$",fontsize=11);
-plot.GetPlot().text(0.2,0.515,"$1.6 < |\\Delta\\eta| < 1.8$",fontsize=11);
+plot.GetPlot().text(0.6,0.38,"$1.6 < |\\Delta\\eta| < 1.8$",fontsize=12);
 plot.GetRatioAxes(0).xaxis.set_ticks_position('both');
 plot.GetRatioAxes(0).yaxis.set_ticks_position('both');
 #plot.GetAxes(0).xticks(rotation=45)

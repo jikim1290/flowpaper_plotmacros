@@ -64,7 +64,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
 	legendLoc={0:(0.64,0.34),1:(0.5,0.16),2:(0.60,0.14)},
-	axisLabelSize=11,tickLabelSize=11,legendSize=8.5,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	axisLabelSize=12,tickLabelSize=12,legendSize=8.5,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
