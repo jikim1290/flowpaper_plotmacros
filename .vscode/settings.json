@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.bib": "bibtex",
+        "FIG1_corr2d.C": "cpp"
+    }
+}

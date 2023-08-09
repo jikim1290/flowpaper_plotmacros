@@ -18,12 +18,15 @@ void FIG1_corr2d(){
  hStyle[4] = (TH2D*)h2D_pPb_low;
  hStyle[5] = (TH2D*)h2D_pPb_sub;
 
+ //gStyle->SetMinimumZero(kFALSE); 
+ double zmax[6] = {1.3, 0.14,1.3,1.8,0.35,1.35};
+
  for(int i=0;i<6;i++){
 	hStyle[i]->GetXaxis()->SetTitle( hStyle[0]->GetXaxis()->GetTitle() );
 	hStyle[i]->GetYaxis()->SetTitle( hStyle[0]->GetYaxis()->GetTitle() );
 	hStyle[i]->GetZaxis()->SetTitle( hStyle[0]->GetZaxis()->GetTitle() );
-
-	int fontsize = 45;
+	hStyle[i]->SetMaximum(zmax[i]);
+	int fontsize = 46;
 	hStyle[i]->GetXaxis()->SetTitleFont(4);
 	hStyle[i]->GetXaxis()->SetLabelFont(fontsize);
 	hStyle[i]->GetYaxis()->SetTitleFont(fontsize);
@@ -31,7 +34,7 @@ void FIG1_corr2d(){
 	hStyle[i]->GetZaxis()->SetTitleFont(fontsize);
 	hStyle[i]->GetZaxis()->SetLabelFont(fontsize);
 
-	int titlesize = 34;
+	int titlesize = 40;
 	hStyle[i]->GetXaxis()->SetTitleSize(titlesize);
 	hStyle[i]->GetYaxis()->SetTitleSize(titlesize);
 	hStyle[i]->GetZaxis()->SetTitleSize(titlesize);
@@ -40,9 +43,9 @@ void FIG1_corr2d(){
 	hStyle[i]->GetZaxis()->SetLabelSize(titlesize);
 
 	hStyle[i]->GetZaxis()->SetNdivisions(505);	
-	hStyle[i]->GetZaxis()->SetTitleOffset(2.0);
-	hStyle[i]->GetXaxis()->SetTitleOffset(1.5);
-	hStyle[i]->GetYaxis()->SetTitleOffset(1.5);
+	hStyle[i]->GetZaxis()->SetTitleOffset(1.8);
+	hStyle[i]->GetXaxis()->SetTitleOffset(1.4);
+	hStyle[i]->GetYaxis()->SetTitleOffset(1.4);
 
  }
 
@@ -79,16 +82,16 @@ void FIG1_corr2d(){
  gStyle->SetOptStat(0);
  gPad->SetTicks();
 
- TLegend* leg = new TLegend(0.01,0.89,0.1,0.93);
+ TLegend* leg = new TLegend(0.01,0.925,0.1,0.93);
  leg->SetFillStyle(0);
  leg->SetLineWidth(0.0);
- leg->SetTextSize(30);
+ leg->SetTextSize(39);
  leg->SetTextFont(46);
 
- TLegend* leg2 = new TLegend(0.0001,0.01,0.08,0.15);
+ TLegend* leg2 = new TLegend(0.35,0.8,0.88,0.95);
  leg2->SetFillStyle(0);
  leg2->SetLineWidth(0.0);
- leg2->SetTextSize(28);
+ leg2->SetTextSize(39);
  leg2->SetTextFont(46);
 
 
