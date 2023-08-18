@@ -39,7 +39,7 @@ rlimits = [(0.5,1.6),(0.,4.5)];
 # add labels for each pad
 plables = [ "$n = 2$", "$n = 3$" ];
 
-xtitle = ["$N_\\mathrm{ch}(|\eta|<0.5)$",""];
+xtitle = ["$N_\\mathrm{ch}$ $(|\eta|<0.5)$",""];
 ytitle = ["$v_{2}$","$v_{3}$"];
 
 # Following two must be added
@@ -58,7 +58,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	panelPrivateRowBounds={1:(-0.01,0.07)},
 	majorTickMultiple=5,
 	systPatchWidth=0.02,
-	panelLabelLoc=(0.7,0.90),panelLabelSize=12,panelLabelAlign="left",
+	panelLabelLoc=(0.10,0.80),panelLabelSize=12,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
@@ -90,7 +90,7 @@ for i,s in enumerate(data):
 #plot.GetPlot().text(0.18,0.80,"ALICE",fontsize=12);
 plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=12);
 #plot.GetPlot().text(0.45,0.58,"$1.6<|\Delta\eta|<1.8$",fontsize=9);
-plot.GetPlot().text(0.35,0.47,"$1.6<|\Delta\eta|<1.8$",fontsize=10);
+plot.GetPlot().text(0.35,0.47,"$1.6<|\Delta\eta|<1.8$",fontsize=12);
 
 #-----------------------------------------------------------
 
