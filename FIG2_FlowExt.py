@@ -48,7 +48,7 @@ TypeName =["Signal (0--0.1\% V0M)", "Fit","$FY_{\\mathrm{LM}} + G$", "$G(1+2v_{2
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
 xtitle = ["$\\Delta\\varphi~(\\mathrm{rad})$"];
-ytitle = ["$\\frac{1}{N_{\\mathrm{trig}}}\\frac{\\mathrm{d}N^{\\mathrm{pair}}}{\\mathrm{d}\\Delta\\varphi}$"];
+ytitle = ["$\\frac{1}{N_{\\mathrm{trig}}}\\frac{\\mathrm{d}N_{\\mathrm{pair}}}{\\mathrm{d}\\Delta\\varphi}$"];
 
 # Following two must be added
 toptitle = "pp $\\sqrt{s}$ = 13 TeV"; # need to add on the top
