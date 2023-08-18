@@ -99,12 +99,12 @@ gubparam=["param0",
 		"param1"]
 for i,p in enumerate([0,1]):
 	d = np.loadtxt("data/GubsHyd/gubshyd_param{}.dat".format(p));
-	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],linecolor=color[i],color=color[i],plotType="theory",alpha=0.4,labelLegendId=2,label="GubsHyd, {}, pp 13 TeV".format(gubparam[p]));
+	plot.Add(0,(d[:,0],d[:,1]),linestyle=["--","-"][i],color=color[i],plotType="data",alpha=1.0,labelLegendId=2,label="GubsHyd, {}, pp 13 TeV".format(gubparam[p])); #This is purposefully "data" due to EB comment that no band should be used
 #GubsHyd pPb
 gubparamPb = "GubsHyd, $\\sigma_{r}$ = 0.72[fm]$, \\chi \\sigma_{\\epsilon}$ = 0.11, p--Pb 5.02 TeV";
 gubparamPb = "GubsHyd, param2, p--Pb 5.02 TeV";
 d = np.loadtxt("data/GubsHyd/gubshyd_pPb_param2.dat");
-plot.Add(0,(d[:,0],d[:,1]),linestyle="-",linecolor="deepskyblue",color="deepskyblue",plotType="theory",alpha=0.4,labelLegendId=2,label=gubparamPb);
+plot.Add(0,(d[:,0],d[:,1]),linestyle="-",color="deepskyblue",plotType="data",alpha=1.0,labelLegendId=2,label=gubparamPb); #This is purposefully "data" due to EB comment that no band should be used
 
 plotMatrix = np.empty((nrow,ncol),dtype=int);
 

@@ -44,7 +44,7 @@ plables = [ "", ""
 		 ];
 # model names : for histonames in ROOT file
 centrality =["ALICE Near side","PYTHIA 8 Tune 4C Near side",
-	"ALICE Away side($\\times$ 2), Template fit", "PYTHIA 8 Tune 4C Away side ($\\times$ 2)"];
+	"ALICE Away side ($\\times$ 2), Template fit", "PYTHIA 8 Tune 4C Away side ($\\times$ 2)"];
 
 #xtitle = ["$p_\\mathrm{T,trig(assoc)} (\\mathrm{GeV}/c)$"];
 xtitle = ["V0M Event classes",""];
