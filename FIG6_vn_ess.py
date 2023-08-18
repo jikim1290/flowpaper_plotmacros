@@ -51,11 +51,11 @@ histnamesModels = [
 	["v3_0_EPOS",  "v3_1_EPOS"], ];
 
 # add labels for each pad
-plables = [ "Leading Particle $|\\eta_{\\mathrm{LP}}|<0.9$","Jet, anti-$k_\\mathrm{T}$ \n $R=0.4$ $|\\eta_{\\mathrm{Jet}}|<0.4$" ,"",""];
+plables = [ "Leading Particle $|\\eta_{\\mathrm{LP}}|<0.9$","anti-$k_\\mathrm{T}$ charged-particle jet\n$R=0.4$\n$|\\eta_{\\mathrm{jet}}|<0.4$" ,"",""];
 # model names : for histonames in ROOT file
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
-xtitle = ["$p^{\\mathrm{LP}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$","$p^{\\mathrm{Jet}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$"];
+xtitle = ["$p^{\\mathrm{LP}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$","$p^{\\mathrm{jet}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$"];
 ytitle = ["$v_{2}$", "$v_{3}$"];
 
 # Following two must be added
@@ -74,7 +74,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	tickLabelSize=10,
 	axisLabelSize=10,
 	legendPanel=2,
-	legendLoc=(0.40,0.6),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
+	legendLoc=(0.37,0.71),legendSize=9,xlabel={0:xtitle[0],1:xtitle[1]},
 	ylabel={0:ytitle[0],1:ytitle[1]});
 plot.EnableLatex(True); # for publication need fonts via texlive
 
@@ -127,7 +127,7 @@ for iobs in range(0,2):
 plot.GetPlot().text(0.15,0.82,toptitle[0],fontsize=12);
 plot.GetPlot().text(0.38,0.82,toptitle[1],fontsize=12);
 #plot.GetPlot().text(0.16,0.78,dataDetail[0],fontsize=11);
-plot.GetPlot().text(0.18,0.39,dataDetail[1],fontsize=11);
+plot.GetPlot().text(0.16,0.43,dataDetail[1],fontsize=11);
 plot.GetPlot().text(0.44,0.54,PanelName[0],fontsize=12);
 plot.GetPlot().text(0.80,0.54,PanelName[1],fontsize=12);
 plot.GetPlot().text(0.44,0.14,PanelName[0],fontsize=12);
