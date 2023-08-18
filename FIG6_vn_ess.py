@@ -56,7 +56,7 @@ plables = [ "Leading Particle $|\\eta_{\\mathrm{LP}}|<0.9$","Jet, anti-$k_\\math
 modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
 xtitle = ["$p^{\\mathrm{LP}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$","$p^{\\mathrm{Jet}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$"];
-ytitle = ["$V_{2}$", "$V_{3}$"];
+ytitle = ["$v_{2}$", "$v_{3}$"];
 
 # Following two must be added
 toptitle = ["pp $\\sqrt{s}$ = 13 TeV","0--0.1$\%$"]; # need to add on the top
