@@ -54,7 +54,7 @@ modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #xtitle = ["$p^{\\mathrm{LP}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$","$p^{\\mathrm{Jet}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$"];
 #xtitle = ["$p_\\mathrm{T,trig(assoc)}\\,(\\mathrm{GeV}/c)$","$p_\\mathrm{T,trig(assoc)}\\,(\\mathrm{GeV}/c)$"];
 xtitle = ["$p_\\mathrm{T,trig}\\,(\\mathrm{GeV}/c)$","$p_\\mathrm{T,trig}\\,(\\mathrm{GeV}/c)$"];
-ytitle = ["$V_{n}$"];
+ytitle = ["$v_{n}$"];
 
 # Following two must be added
 toptitle = "pp $\\sqrt{s}$ = 13 TeV \n $0--0.1\%$"; # need to add on the top
@@ -69,7 +69,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
 	disableRatio=[0],
-	panelLabelLoc=(0.71,0.89),panelLabelSize=11,panelLabelAlign="left",
+	panelLabelLoc=(0.71,0.89),panelLabelSize=14,panelLabelAlign="left",
 	axisLabelSize=11,tickLabelSize=11,legendPanel=0,
 	legendLoc=(0.47,0.20),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
