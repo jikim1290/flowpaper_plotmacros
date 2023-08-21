@@ -69,9 +69,9 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
 	disableRatio=[0],
-	panelLabelLoc=(0.71,0.89),panelLabelSize=14,panelLabelAlign="left",
-	axisLabelSize=11,tickLabelSize=11,legendPanel=0,
-	legendLoc=(0.47,0.20),legendSize=11,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
+	panelLabelLoc=(0.71,0.89),panelLabelSize=13,panelLabelAlign="left",
+	axisLabelSize=13,tickLabelSize=13,legendPanel=0,
+	legendLoc=(0.47,0.20),legendSize=12,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
 plot.EnableLatex(True); # for publication need fonts via texlive
 
@@ -118,9 +118,9 @@ for i in range(0,nrow):
 
 f.Close();
 
-plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=14);
+plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=13);
 #plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
-plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=14);
+plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=13);
 #plot.GetPlot().text(0.16,0.17,dataDetail[1],fontsize=10);
 
 # this is need because of the input histo label setting..
