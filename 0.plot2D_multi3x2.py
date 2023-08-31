@@ -69,7 +69,7 @@ def create_pi_labels(a=0, b=2, step=0.5, ax=None, direction='x'):
 
 
 # define panel/xaxis limits/titles
-ChopNearSidePeak = False;
+ChopNearSidePeak = True;
 toptitle = "ALICE pp $\\sqrt{s}$ = 13 TeV"; # need to add on the top
 xtitle = "$\\Delta\\varphi (\\mathrm{rad})$"
 ytitle = "$\\Delta\\eta$"
@@ -165,7 +165,9 @@ for i in range(0,len(files)):
 	fig.text(0.4, 0.8, toptitle, fontsize=12, color="black")
 	if(ChopNearSidePeak):
 		fig.savefig("figures/Fig_2DCorrelations_ChopNearSidePeak.pdf")
+		fig.savefig("figures/Fig_2DCorrelations_ChopNearSidePeak.png")
 	else:
 		fig.savefig("figures/Fig_2DCorrelations.pdf")
+		fig.savefig("figures/Fig_2DCorrelations.png")
 	#fig.show()
 
