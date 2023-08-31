@@ -2,6 +2,7 @@ from matplotlib import cm
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+from PIL import Image
 #from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.ticker as ticker
 from fractions import Fraction
@@ -70,10 +71,10 @@ def create_pi_labels(a=0, b=2, step=0.5, ax=None, direction='x'):
 
 # define panel/xaxis limits/titles
 ChopNearSidePeak = True;
-toptitle = "ALICE pp $\\sqrt{s}$ = 13 TeV"; # need to add on the top
+toptitle = "pp $\\sqrt{s}$ = 13 TeV"; # need to add on the top
 xtitle = "$\\Delta\\varphi (\\mathrm{rad})$"
 ytitle = "$\\Delta\\eta$"
-ztitle = "$(1/N_\mathrm{trig})\mathrm{d}^2 N^\mathrm{pair}/\mathrm{d}\Delta\eta\mathrm{d}\Delta\varphi$"
+ztitle = "$(1/N_\mathrm{trig})\mathrm{d}^2 N^\mathrm{pair}/\mathrm{d}\Delta\eta\mathrm{d}\Delta\\varphi$"
 
 #	for (int ic = 0; ic < nbins_mult; ic++) {
 #		for (int iptt = 0; iptt < Nptt; iptt++) {
@@ -88,6 +89,8 @@ modelTypePlotParams = [
 	{'color':'#e580ff','alpha':1.0,'linestyle':'solid'},
 	{'color':'red','alpha':1.0,'linestyle':'solid'}
 ];
+
+im = Image.open('figures/4_Color_Logo_CB.png')
 
 # arg int
 SelDraw = [1, 4, 6, 8, 10, 11, 12,14]
@@ -126,7 +129,7 @@ for i in range(0,len(files)):
 		z,y,x = JPyPlotRatio.TH2ToNumpy(h2D);
 		y,x = np.meshgrid(y,x)
 		if(ChopNearSidePeak):
-			awaySideMax = z[x > 0.95*np.pi].max();
+			awaySideMax = z[x > 0.9*np.pi].max();
 			z[z > awaySideMax] = awaySideMax;
 		z[z <= 1e-6] = np.nan;
 		f.Close();
@@ -152,20 +155,24 @@ for i in range(0,len(files)):
 		#if(i==0):
 		#    fig.colorbar(surf, shrink=0.6, aspect=4,location='left')
 		ax.title.set_text("{}".format(dataTypeStr[ic]))
-		ax.view_init(45, 45)
+		ax.view_init(45, 140)
 		plt.subplots_adjust(
 		#                left=0.1,
 		#                bottom=0.1,
 		#                right=0.9,
 		#                top=0.9,
-					wspace=0.15,
+					wspace=0.18,
 					hspace=0.6);
 
 	ax.legend(loc = 'upper right', prop={'size': 6},bbox_to_anchor=(1.1, 1))    
-	fig.text(0.4, 0.8, toptitle, fontsize=12, color="black")
+	fig.text(0.48, 0.8, toptitle, fontsize=13, color="black")
+	fig.text(0.95, 0.35,ztitle, fontsize=11, rotation = 90,color="black")
+	im.thumbnail((64, 64), Image.ANTIALIAS) # resizes image in-place
+	fig.figimage(im, 350, 350, zorder=3,alpha=1.0) # pdf
+	#fig.figimage(im, 780, 730, zorder=3,alpha=1.0) # png
 	if(ChopNearSidePeak):
 		fig.savefig("figures/Fig_2DCorrelations_ChopNearSidePeak.pdf")
-		fig.savefig("figures/Fig_2DCorrelations_ChopNearSidePeak.png")
+		#fig.savefig("figures/Fig_2DCorrelations_ChopNearSidePeak.png")
 	else:
 		fig.savefig("figures/Fig_2DCorrelations.pdf")
 		fig.savefig("figures/Fig_2DCorrelations.png")
