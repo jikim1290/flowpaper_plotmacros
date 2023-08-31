@@ -10,6 +10,7 @@ dependent_variables:
 - header: {name: '$v_{2}$'}
   qualifiers:
   - {name: reaction, value: P P}
+  - {name: cmenergy, value: 13000, units: GeV}
   - {name: FORWARD MULTIPLICITY CLASS, units: PCT, value: 0-0.1 }
   - {name: '$p_\mathrm{T,assoc}$', units: GeV/c,  value: 1-4}
   - {name: stat, value: Statistical Uncertainty}
@@ -38,6 +39,7 @@ dependent_variables:
 - header: {name: '$v_{3}$'}
   qualifiers:
   - {name: reaction, value: P P}
+  - {name: cmenergy, value: 13000, units: GeV}
   - {name: FORWARD MULTIPLICITY CLASS, units: PCT, value: 0-0.1 }
   - {name: '$p_\mathrm{T,assoc}$', units: GeV/c,  value: 1-4}
   - {name: stat, value: Statistical Uncertainty}
@@ -66,6 +68,7 @@ dependent_variables:
 - header: {name: '$v_{2}$'}
   qualifiers:
   - {name: reaction, value: P PB}
+  - {name: cmenergy, value: 5020, units: GeV}
   - {name: FORWARD MULTIPLICITY CLASS, units: PCT, value: 0-20 }
   - {name: '$p_\mathrm{T,assoc}$', units: GeV/c,  value: 1-4}
   - {name: stat, value: Statistical Uncertainty}
@@ -94,6 +97,7 @@ dependent_variables:
 - header: {name: '$v_{3}$'}
   qualifiers:
   - {name: reaction, value: P PB}
+  - {name: cmenergy, value: 5020, units: GeV}
   - {name: FORWARD MULTIPLICITY CLASS, units: PCT, value: 0-20 }
   - {name: '$p_\mathrm{T,assoc}$', units: GeV/c,  value: 1-4}
   - {name: stat, value: Statistical Uncertainty}
