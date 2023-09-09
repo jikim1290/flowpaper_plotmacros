@@ -63,7 +63,7 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.64,0.34),1:(0.5,0.16),2:(0.60,0.14)},
+	legendLoc={0:(0.31,0.80),1:(0.5,0.16),2:(0.60,0.14)},
 	axisLabelSize=12,tickLabelSize=12,legendSize=8.5,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
@@ -79,7 +79,7 @@ for si,(s,color,label) in enumerate([
 	for i,n in enumerate(range(2,4)):
 		gr = fh.Get("gr_v{}_QC".format(n));
 		_,y,_,yerr = JPyPlotRatio.TGraphErrorsToNumpy(gr);
-		plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="dashdot",color=color,plotType="theory",alpha=0.4,label="T\\raisebox{-.5ex}{R}ENTo"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
+		#plot.Add(i,(pPb_hydro_mult_avg[1:],y[1:],yerr[1:]),linecolor=color,linestyle="dashdot",color=color,plotType="theory",alpha=0.4,label="T\\raisebox{-.5ex}{R}ENTo"+", {}, p--Pb 5.02 TeV".format(label),labelOrder=1,labelLegendId=1);
 	fh.Close();
 
 with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
@@ -128,7 +128,7 @@ for i,s in enumerate(data):
 		plot.AddSyst(plotsV2[s],grsyst);
 
 plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
-plot.GetPlot().text(0.33,0.755,"$1.6<|\Delta\eta|<1.8$\n$1<p_\\mathrm{T}<4\\,\\mathrm{GeV}/c$",fontsize=12);
+plot.GetPlot().text(0.56,0.7,"$1.6<|\Delta\eta|<1.8$\n$1<p_\\mathrm{T}<4\\,\\mathrm{GeV}/c$",fontsize=12);
 
 rc('font',**{'family':'serif','serif':['Helvetica']})
 #rc('font',**{'family':'serif','serif':['Times']})
@@ -143,7 +143,7 @@ plot.GetAxes(1).yaxis.tick_right();
 for a in plot.ax.flat[1:]: #hack
 	a.yaxis.set_ticks_position('both');
 
-plot.Save("figures/FIG7_v2Mult_allSystems_Hydro_reduced.pdf");
-plot.Save("figures/FIG7_v2Mult_allSystems_Hydro_reduced.png");
+plot.Save("figures/FIG7_v2Mult_allSystems_Hydro_CERNC.pdf");
+plot.Save("figures/FIG7_v2Mult_allSystems_Hydro_CERNC.png");
 plot.Show();
 
