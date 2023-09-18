@@ -56,15 +56,15 @@ plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
 	ratioBounds=rlimits,# for nrow
 	disableRatio=[0],
 	panelPrivateScale=[1],
-	panelPrivateRowBounds={1:(-0.015,0.10)},
+	panelPrivateRowBounds={1:(0.009,0.065)},
 	majorTickMultiple=10,
 	systPatchWidth=0.02,
 	panelLabelLoc=(0.85,0.85),panelLabelSize=16,panelLabelAlign="left",
 	#legendPanel={0:0,1:0,2:0},
 	legendPanel={0:0,1:1,2:0},
 	#legendLoc={0:(0.68,0.34),1:(0.49,0.5),2:(0.68,0.14)},
-	legendLoc={0:(0.31,0.80),1:(0.5,0.16),2:(0.60,0.14)},
-	axisLabelSize=12,tickLabelSize=12,legendSize=8.5,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
+	legendLoc={0:(0.34,0.80),1:(0.50,0.12),2:(0.54,0.15)},
+	axisLabelSize=14,tickLabelSize=12,legendSize=9.3,xlabel=xtitle[0],ylabel=ytitle,ylabelRight=ytitle[1]);
 
 plot.EnableLatex(True);
 
@@ -86,8 +86,8 @@ with open("data/hydroschenke/schenke_SmallSystem.pkl","rb") as f:
 	schenkeDict = pickle.load(f);
 for i,n in enumerate(range(2,4)):
 	for s,label,color in [
-		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, p--Pb 5.02 TeV","royalblue"),
-		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, pp 13 TeV","darkorange")]:
+		(('pp13TeV','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, pp 13 TeV","darkorange"),
+		(('pPb5020','v{}'.format(n),'1_4'),"IP-Glasma $\\eta/s=0.12$, $\\zeta/s(T)$, p--Pb 5.02 TeV","royalblue")]:
 		d = schenkeDict[s];
 		plot.Add(i,(d["mult"],d["y"],d["yerr"]),plotType="theory",linecolor=color,color=color,alpha=0.4,label=label,labelOrder=2,labelLegendId=1);
 
@@ -127,8 +127,8 @@ for i,s in enumerate(data):
 		plotsV2[s] = plot.Add(vi,(x,y,yerr),**plotParams[s]); # to replace with ATLAS converted Nch
 		plot.AddSyst(plotsV2[s],grsyst);
 
-plot.GetPlot().text(0.14,0.80,"ALICE",fontsize=14);
-plot.GetPlot().text(0.56,0.7,"$1.6<|\Delta\eta|<1.8$\n$1<p_\\mathrm{T}<4\\,\\mathrm{GeV}/c$",fontsize=12);
+plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=14);
+plot.GetPlot().text(0.54,0.7,"$1.6<|\Delta\eta|<1.8$\n$1<p_\\mathrm{T}<4\\,\\mathrm{GeV}/c$",fontsize=10);
 
 rc('font',**{'family':'serif','serif':['Helvetica']})
 #rc('font',**{'family':'serif','serif':['Times']})
