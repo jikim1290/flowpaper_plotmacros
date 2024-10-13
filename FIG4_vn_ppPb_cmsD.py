@@ -23,9 +23,6 @@ gr_nonPromptD_CMS = fCMSD.Get("Table 8/Hist1D_y1"); # pPb 8.16
 gr_promptD_pPbCMS2 = fCMSDpPb.Get("Table 5/Graph"); # pPb 8.16
 gr_k0_pPbCMS2 = fCMSDpPb.Get("Table 1/Graph"); # pPb 8.16
 dataTypePlotParams = [
-	{'plotType':'data','color':'r','fmt':'o','markersize':5.0},
-	{'plotType':'data','color':'g','fmt':'d','fillstyle':'none','markersize':5.0},
-	{'plotType':'data','color':'b','fmt':'D','fillstyle':'none','markersize':5.0},
 	    {'plotType':'data','color':'#0051a2','fmt':'d','fillstyle':'none','markersize':6.0},
         {'plotType':'data','color':'blue','fmt':'D','fillstyle':'none','markersize':5.5},
         {'plotType':'data','color':'#660080','fmt':'*','fillstyle':'none','markersize':6.0},
@@ -40,7 +37,7 @@ addpPb = True;
 # define panel/xaxis limits/titles
 nrow = 1;
 ncol = 1;
-xlimits = [(-0.1,8.8),(0.8,3.8)];
+xlimits = [(-0.1,8.1),(0.8,3.8)];
 ylimits = [(-0.09,0.35)];
 rlimits = [(0.3,1.9),(0.,4.5)];
 
@@ -63,8 +60,8 @@ modelStr = ["EPOS LHC"]; # "PYTHIA8 Monash2013"];#for legend
 #modelStr = ["PYTHIA8 String Shoving $g$ = 3","EPOS LHC"];
 #xtitle = ["$p^{\\mathrm{LP}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$","$p^{\\mathrm{Jet}}_\\mathrm{T,min}\\,(\\mathrm{GeV}/c)$"];
 #xtitle = ["$p_\\mathrm{T,trig(assoc)}\\,(\\mathrm{GeV}/c)$","$p_\\mathrm{T,trig(assoc)}\\,(\\mathrm{GeV}/c)$"];
-xtitle = ["$p_\\mathrm{T,trig}\\,(\\mathrm{GeV}/c)$","$p_\\mathrm{T,trig}\\,(\\mathrm{GeV}/c)$"];
-ytitle = ["$v_{n}$"];
+xtitle = ["$p_\\mathrm{T}\\,(\\mathrm{GeV}/c)$","$p_\\mathrm{T,trig}\\,(\\mathrm{GeV}/c)$"];
+ytitle = ["$v_{2}$"];
 
 # Following two must be added
 toptitle = "pp $\\sqrt{s}$ = 13 TeV \n $0--0.1\%$"; # need to add on the top
@@ -72,17 +69,18 @@ dataDetail = ["$1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\ma
 
 
 plot = JPyPlotRatio.JPyPlotRatio(panels=(nrow,ncol),
-	panelsize=(9,7),
+	panelsize=(8,6),
 	rowBounds=ylimits,  # for nrow
 	colBounds=xlimits,  # for ncol
-	panelLabel=plables,  # nrowxncol
+	#panelLabel=plables,  # nrowxncol
 	ratioBounds=rlimits,# for nrow
 #	ratioSystPlot=True,
+	systPatchWidth = 0.015,
 	disableRatio=[0],
-	panelLabelLoc=(0.71,0.89),panelLabelSize=13,panelLabelAlign="left",
+	panelLabelLoc=(0.71,0.81),panelLabelSize=13,panelLabelAlign="left",
 	axisLabelSize=13,tickLabelSize=13,
 	legendPanel={0:0,1:0,2:0},
-	legendLoc={0:(0.24,0.74),1:(0.65,0.16),2:(0.60,0.14)},
+	legendLoc={0:(0.25,0.78),1:(0.75,0.74),2:(0.60,0.14)},
 	legendSize=12,xlabel={0:xtitle[0],1:xtitle[1]},ylabel=ytitle[0]);
 
 #plot.EnableLatex(True); # for publication need fonts via texlive
@@ -99,7 +97,7 @@ for i in range(0,nrow):
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
 		gr = f.Get("{}".format(histnames[j]));
-		datapp = plot.Add(index,gr,**dataTypePlotParams[0],label="pp $\\sqrt{s} = 13$ TeV 0--0.1\%",labelLegendId=0);
+		datapp = plot.Add(index,gr,**dataTypePlotParams[0],label="pp $\\sqrt{s} = 13$ TeV",labelLegendId=0);
 		    #, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $"
 		grsyst = f.Get("{}".format(histnamesSyst[j]));
 		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
@@ -115,7 +113,7 @@ for i in range(0,nrow):
 		if(addpPb):
 			grpPb = fpPb.Get("{}".format(histpPb_stat[j]));
 			grpPb.Print();
-			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="p--Pb $\\sqrt{s_{\\rm NN}} = 5.02$ TeV 0--20\%",labelLegendId=0);
+			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="pPb $\\sqrt{s_{\\rm NN}} = 5.02$ TeV",labelLegendId=0);
 			grsystpPb = fpPb.Get("{}".format(histpPb_syst[j]));
 			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystpPb));
 			plot.AddSyst(dataPb,syst);
@@ -131,12 +129,13 @@ for i in range(0,nrow):
 data_promptD_CMS = plot.Add(0,gr_promptD_CMS,**dataTypePlotParams[3],label="Prompt $D^{0}$ pp $\\sqrt{s} = 13$ TeV",labelLegendId=1);
 data_NonpromptD_CMS = plot.Add(0,gr_nonPromptD_CMS,**dataTypePlotParams[4],label="Non-Prompt $D^{0}$, pPb 8.16 TeV",labelLegendId=1);
 data_promptD_CMS1 = plot.Add(0,gr_promptD_pPbCMS2,**dataTypePlotParams[5],label="Prompt $D^{0}$, pPb 8.16 TeV",labelLegendId=1);
-data_k0_CMS1 = plot.Add(0,gr_k0_pPbCMS2,**dataTypePlotParams[6],label="$k^{0}$, pPb 8.16 TeV",labelLegendId=1);
+data_k0_CMS1 = plot.Add(0,gr_k0_pPbCMS2,**dataTypePlotParams[6],label="$K^{0}_{Ss}$, pPb 8.16 TeV",labelLegendId=1);
 f.Close();
 
 plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=13);
+plot.GetPlot().text(0.53,0.81,"CMS",fontsize=13);
 #plot.GetPlot().text(0.15,0.77,"ALICE",fontsize=12);
-plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=13);
+#plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=13);
 #plot.GetPlot().text(0.16,0.17,dataDetail[1],fontsize=10);
 
 # this is need because of the input histo label setting..
@@ -145,10 +144,10 @@ plot.GetPlot().text(0.54,0.65,dataDetail[0],fontsize=13);
 plot.Plot();
 if(addpPb):
 	plot.Save("figures/FIG4_vn_pppPb_wDmeson.pdf");
-	plot.Save("figs/FIG4_vn_pppPb_wDmeson.png");
+	#plot.Save("figs/FIG4_vn_pppPb_wDmeson.png");
 else:
     plot.Save("figures/FIG4_vn_wDmeson.pdf")
-    plot.Save("figures/FIG4_vn_wDmeson.png");
+    #lot.Save("figures/FIG4_vn_wDmeson.png");
 
 plot.Show();
 
