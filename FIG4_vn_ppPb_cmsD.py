@@ -18,8 +18,8 @@ fpPb = ROOT.TFile("data/fout_vn_28jun2023.root","read");
 fCMSD = ROOT.TFile("CMSDmesons/CMS_Dmesons_pppPb_HEPData-ins1817310-v1-root.root","read");
 fCMSDpPb = ROOT.TFile("CMSDmesons/CMS_D0_pPb816_HEPData-ins1670168-v1-root.root","read");
 # table 1(prompt D) and 8(nonPrompt D) in the paper
-gr_promptD_CMS = fCMSD.Get("Table 1/Hist1D_y1"); # pp 13
-gr_nonPromptD_CMS = fCMSD.Get("Table 8/Hist1D_y1"); # pPb 8.16
+gr_promptD_CMS = fCMSD.Get("Table 1/Graph"); # pp 13
+gr_nonPromptD_CMS = fCMSD.Get("Table 8/Graph"); # pPb 8.16
 gr_promptD_pPbCMS2 = fCMSDpPb.Get("Table 5/Graph"); # pPb 8.16
 gr_k0_pPbCMS2 = fCMSDpPb.Get("Table 1/Graph"); # pPb 8.16
 dataTypePlotParams = [
@@ -129,7 +129,7 @@ for i in range(0,nrow):
 data_promptD_CMS = plot.Add(0,gr_promptD_CMS,**dataTypePlotParams[3],label="Prompt $D^{0}$ pp $\\sqrt{s} = 13$ TeV",labelLegendId=1);
 data_NonpromptD_CMS = plot.Add(0,gr_nonPromptD_CMS,**dataTypePlotParams[4],label="Non-Prompt $D^{0}$, pPb 8.16 TeV",labelLegendId=1);
 data_promptD_CMS1 = plot.Add(0,gr_promptD_pPbCMS2,**dataTypePlotParams[5],label="Prompt $D^{0}$, pPb 8.16 TeV",labelLegendId=1);
-data_k0_CMS1 = plot.Add(0,gr_k0_pPbCMS2,**dataTypePlotParams[6],label="$K^{0}_{Ss}$, pPb 8.16 TeV",labelLegendId=1);
+data_k0_CMS1 = plot.Add(0,gr_k0_pPbCMS2,**dataTypePlotParams[6],label="$K^{0}_{S}$, pPb 8.16 TeV",labelLegendId=1);
 f.Close();
 
 plot.GetPlot().text(0.15,0.80,"ALICE",fontsize=13);
