@@ -1,10 +1,11 @@
-
 #include "TGraphErrors.h"
 #include "TGraphAsymmErrors.h"
 #include "TMath.h"
 TGraphErrors *GetTGE(TGraphAsymmErrors *grData);
 void Trans(TString filename);
-
+// D.J Kim (djkim@jyu.fi)
+// This is mainly for HEPData to change TGraphAsymmErrors to TGraphErrors
+// ONLY those whose errors are symmetry. Warning is given if it is not symmetric
 void Trans(TString filename){
         TFile *f = new TFile( filename,"update" );
         TIter keyList(f->GetListOfKeys());
@@ -19,23 +20,9 @@ void Trans(TString filename){
          
             gr->Write();
         }
-        // while ((key = (TKey*)keyList())) {
-        //     cout << key->GetClassName() << endl;
-        //     TClass *cl = gROOT->GetClass(key->GetClassName());
-        //     cl->Print();
-        //     if (!cl->InheritsFrom("TGraphAsymmErrors")) continue;
-        //     cl->Print();
-        //     TGraphAsymmErrors *gras = (TGraphAsymmErrors*)key->ReadObj();
-        //     TGraphErrors *gr = GetTGE(gras);
-        //     if(gr == 0) continue;
-        //     //gr->Write();
-
-        // }
         f->Close();     
-
 }       
 
-// error must be corrected later
 TGraphErrors *GetTGE(TGraphAsymmErrors *grData){
     double x[300], y[300], exl[300], exh[300], eyl[300], eyh[300];
     
