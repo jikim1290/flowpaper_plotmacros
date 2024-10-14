@@ -97,7 +97,7 @@ for i in range(0,nrow):
 		plot.GetAxes(index).xaxis.set_ticks_position('both');
 		plot.GetAxes(index).yaxis.set_ticks_position('both');
 		gr = f.Get("{}".format(histnames[j]));
-		datapp = plot.Add(index,gr,**dataTypePlotParams[0],label="pp $\\sqrt{s} = 13$ TeV",labelLegendId=0);
+		datapp = plot.Add(index,gr,**dataTypePlotParams[0],label="$h^{\\pm}$ pp $\\sqrt{s} = 13$ TeV",labelLegendId=0);
 		    #, $1.6<|\\Delta\\eta|<1.8$ \n 1 $ < p_\\mathrm{T,assoc} < 4 \\,\\mathrm{GeV}/c $"
 		grsyst = f.Get("{}".format(histnamesSyst[j]));
 		_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsyst));
@@ -113,7 +113,7 @@ for i in range(0,nrow):
 		if(addpPb):
 			grpPb = fpPb.Get("{}".format(histpPb_stat[j]));
 			grpPb.Print();
-			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="pPb $\\sqrt{s_{\\rm NN}} = 5.02$ TeV",labelLegendId=0);
+			dataPb = plot.Add(index,grpPb,**dataTypePlotParams[2],label="$h^{\\pm}$, pPb $\\sqrt{s_{\\rm NN}} = 5.02$ TeV",labelLegendId=0);
 			grsystpPb = fpPb.Get("{}".format(histpPb_syst[j]));
 			_,_,_,syst = JPyPlotRatio.TGraphErrorsToNumpy(ROOT.TGraphErrors(grsystpPb));
 			plot.AddSyst(dataPb,syst);
